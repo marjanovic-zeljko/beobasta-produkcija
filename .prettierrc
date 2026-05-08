@@ -1,0 +1,10 @@
+{
+  "plugins": ["@shopify/prettier-plugin-liquid"],
+  "printWidth": 120,
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": false,
+  "liquidSingleQuote": true,
+  "htmlWhitespaceSensitivity": "css",
+  "indentSchema": true
+}

@@ -1,0 +1,28 @@
+# Shopify CLI
+.shopify/
+shopify.theme.toml
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+
+# AI
+claude/

@@ -1,0 +1,543 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --fc-bg: {{ section.settings.background_color }};
+    --fc-card-bg: {{ section.settings.card_background_color }};
+    --fc-card-radius: {{ section.settings.card_border_radius }}px;
+    --fc-card-padding: {{ section.settings.card_padding }}px;
+    --fc-max-width: {{ section.settings.content_max_width }}px;
+    --fc-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --fc-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --fc-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --fc-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --fc-cta-bg: {{ section.settings.cta_background_color }};
+    --fc-cta-color: {{ section.settings.cta_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .fc {
+    background-color: var(--fc-bg);
+    padding-top: var(--fc-pt-desktop);
+    padding-bottom: var(--fc-pb-desktop);
+  }
+
+  #shopify-section-{{ section.id }} .fc__inner {
+    max-width: calc(var(--fc-max-width) + var(--container-gutter) * 2);
+    margin-inline: auto;
+    padding-inline: var(--container-gutter);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  #shopify-section-{{ section.id }} .fc__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .fc__heading {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    font-size: var(--text-h3);
+    line-height: 1.1;
+    letter-spacing: 0;
+  }
+
+  #shopify-section-{{ section.id }} .fc__subheading {
+    margin: 0;
+    font-family: var(--text-font-family);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .fc__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .fc__card {
+    background-color: var(--fc-card-bg);
+    border-radius: var(--fc-card-radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .fc__card-content {
+    padding: var(--fc-card-padding);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .fc__card-title {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    font-size: var(--text-h5);
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .fc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .fc__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .fc__list-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 1px;
+    line-height: 0;
+  }
+
+  #shopify-section-{{ section.id }} .fc__list-text {
+    font-family: var(--text-font-family);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .fc__card-image-wrap {
+    width: 100%;
+    line-height: 0;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .fc__card-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .fc__cta {
+    background-color: var(--fc-cta-bg);
+    border-radius: var(--fc-card-radius);
+    padding: 24px 32px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .fc__cta-text {
+    margin: 0;
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    font-size: var(--text-h5);
+    line-height: 1.3;
+    color: var(--fc-cta-color);
+  }
+
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .fc {
+      padding-top: var(--fc-pt-mobile);
+      padding-bottom: var(--fc-pb-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .fc__inner {
+      gap: 32px;
+    }
+
+    #shopify-section-{{ section.id }} .fc__heading {
+      font-size: var(--text-h4);
+    }
+
+    #shopify-section-{{ section.id }} .fc__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .fc__cta {
+      padding: 20px 24px;
+    }
+  }
+</style>
+
+{%- assign card_sides = 'left,right' | split: ',' -%}
+
+<div class="fc">
+  <div class="fc__inner">
+
+    <div class="fc__top">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="fc__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="fc__subheading">{{ section.settings.text | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="fc__grid">
+      {%- for card_side in card_sides -%}
+        {%- if card_side == 'left' -%}
+          {%- assign card_title = section.settings.left_card_title -%}
+          {%- assign card_image = section.settings.left_card_image -%}
+        {%- else -%}
+          {%- assign card_title = section.settings.right_card_title -%}
+          {%- assign card_image = section.settings.right_card_image -%}
+        {%- endif -%}
+
+        <article class="fc__card fc__card--{{ card_side }}">
+          <div class="fc__card-content">
+            {%- if card_title != blank -%}
+              <h3 class="fc__card-title">{{ card_title }}</h3>
+            {%- endif -%}
+            <ul class="fc__list" role="list">
+              {%- for block in section.blocks -%}
+                {%- if block.settings.card_side == card_side -%}
+                  <li class="fc__list-item" {{ block.shopify_attributes }}>
+                    <span class="fc__list-icon" aria-hidden="true">
+                      {%- if block.settings.icon_type == 'approve' -%}
+                        <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7.6 21L5.7 17.8L2.1 17L2.45 13.3L0 10.5L2.45 7.7L2.1 4L5.7 3.2L7.6 0L11 1.45L14.4 0L16.3 3.2L19.9 4L19.55 7.7L22 10.5L19.55 13.3L19.9 17L16.3 17.8L14.4 21L11 19.55L7.6 21ZM9.95 14.05L15.6 8.4L14.2 6.95L9.95 11.2L7.8 9.1L6.4 10.5L9.95 14.05Z" fill="{%- if block.settings.icon_color != blank -%}{{ block.settings.icon_color }}{%- else -%}#0B950E{%- endif -%}"/>
+                        </svg>
+                      {%- else -%}
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.4 14L0 12.6L5.6 7L0 1.4L1.4 0L7 5.6L12.6 0L14 1.4L8.4 7L14 12.6L12.6 14L7 8.4L1.4 14Z" fill="{%- if block.settings.icon_color != blank -%}{{ block.settings.icon_color }}{%- else -%}#EF4E29{%- endif -%}"/>
+                        </svg>
+                      {%- endif -%}
+                    </span>
+                    <span class="fc__list-text">{{ block.settings.text }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- if card_image != blank -%}
+            <div class="fc__card-image-wrap">
+              {{
+                card_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'fc__card-image',
+                  widths: '400, 600, 800',
+                  sizes: '(min-width: 700px) 50vw, 100vw'
+              }}
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_text != blank -%}
+      <div class="fc__cta">
+        <p class="fc__cta-text">{{ section.settings.cta_text | newline_to_br }}</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Poređenje voća",
+  "class": "shopify-section--fruit-comparison",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sadržaj"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Naslov sekcije",
+      "default": "Gde nastaje razlika između našeg voća i onog iz radnje?"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Tekst ispod naslova",
+      "default": "Mi danas beremo, isti dan pakujemo i kod tebe je za najviše 24 sata.\nZato je naše sveže ubrano voće bolji izbor – jer ima ukus kojeg se sećaš iz detinjstva."
+    },
+    {
+      "type": "header",
+      "content": "Leva kartica"
+    },
+    {
+      "type": "text",
+      "id": "left_card_title",
+      "label": "Naslov leve kartice",
+      "default": "Sveže ubrano"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_card_image",
+      "label": "Slika leve kartice"
+    },
+    {
+      "type": "header",
+      "content": "Desna kartica"
+    },
+    {
+      "type": "text",
+      "id": "right_card_title",
+      "label": "Naslov desne kartice",
+      "default": "Voće iz marketa"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_card_image",
+      "label": "Slika desne kartice"
+    },
+    {
+      "type": "header",
+      "content": "CTA bar"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "Tekst CTA bara",
+      "default": "Voće koje kupuješ po marketima je često ubrano pre više od dve nedelje.\nZato nema onaj ukus koji pamtiš."
+    },
+    {
+      "type": "color",
+      "id": "cta_background_color",
+      "label": "Pozadina CTA bara",
+      "default": "#0B2545"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Boja teksta CTA bara",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Dizajn"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Pozadina sekcije",
+      "default": "#F5F0E8"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Pozadina kartice",
+      "default": "#FDFAF4"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maksimalna širina sadržaja",
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Zaobljeni uglovi kartica",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Unutrašnji razmak kartice",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Razmaci"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Gornji razmak – desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Donji razmak – desktop",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Gornji razmak – mobilni",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Donji razmak – mobilni",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "name": "Stavka liste",
+      "settings": [
+        {
+          "type": "select",
+          "id": "card_side",
+          "label": "Kartica",
+          "options": [
+            { "value": "left", "label": "Leva kartica" },
+            { "value": "right", "label": "Desna kartica" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Tekst",
+          "default": "Stavka liste"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Ikonica",
+          "options": [
+            { "value": "approve", "label": "Potvrda (zelena)" },
+            { "value": "x", "label": "X (crvena)" }
+          ],
+          "default": "approve"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Boja ikonice (opciono)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Poređenje voća",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Ubrano danas – kod tebe već sutra",
+            "icon_type": "approve"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Bere se potpuno zrelo – zato ima više ukusa",
+            "icon_type": "approve"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Minimalno skladištenje - skoro bez čekanja",
+            "icon_type": "approve"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Direktan transport – brza dostava",
+            "icon_type": "approve"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Bez posrednika – minimalno rukovanje voćem",
+            "icon_type": "approve"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Stoji danima – gubi ukus i svežinu",
+            "icon_type": "x"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Bere se ranije – nikad nije potpuno zrelo",
+            "icon_type": "x"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Prolazi kroz više skladišta - duži put do kupca",
+            "icon_type": "x"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Više transporta - veća šansa za oštećenje",
+            "icon_type": "x"
+          }
+        },
+        {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Više posrednika - više rukovanja voćem",
+            "icon_type": "x"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

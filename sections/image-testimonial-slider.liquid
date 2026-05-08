@@ -1,0 +1,483 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --imgslider-bg: {{ section.settings.background_color }};
+    --imgslider-pt-desktop: {{ section.settings.padding_top_desktop }}px;
+    --imgslider-pb-desktop: {{ section.settings.padding_bottom_desktop }}px;
+    --imgslider-pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --imgslider-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --imgslider-gap-desktop: {{ section.settings.slider_gap_desktop }}px;
+    --imgslider-gap-mobile: {{ section.settings.slider_gap_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider {
+    background-color: var(--imgslider-bg);
+    padding-top: var(--imgslider-pt-desktop);
+    padding-bottom: var(--imgslider-pb-desktop);
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__header {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    padding-inline: var(--container-gutter, 2rem);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__heading {
+    margin: 0 0 16px;
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    font-size: var(--text-h3);
+    line-height: 110%;
+    letter-spacing: 0;
+    color: #030303;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__description {
+    font-family: var(--text-font-family);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 130%;
+    letter-spacing: 0;
+    color: #030303;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__description p {
+    margin: 0;
+  }
+
+  /* Slider */
+  #shopify-section-{{ section.id }} .imgslider__viewport {
+    overflow: hidden;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__track {
+    display: flex;
+    align-items: flex-start;
+    column-gap: var(--imgslider-gap-desktop);
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__track--animated {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__slide {
+    flex-shrink: 0;
+    /* Width set by JS based on viewport and gap */
+  }
+
+  {% if section.settings.enable_zoom %}
+  #shopify-section-{{ section.id }} .imgslider__slide {
+    transform: scale(0.96);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__slide.is-active {
+    transform: scale(1);
+  }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .imgslider__slide-inner {
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 24px rgba(3, 3, 3, 0.10), 0 1px 4px rgba(3, 3, 3, 0.06);
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__slide-inner a {
+    display: block;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__image.placeholder {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Arrows */
+  #shopify-section-{{ section.id }} .imgslider__arrows {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(3, 3, 3, 0.2);
+    cursor: pointer;
+    color: #030303;
+    transition: border-color 0.25s ease, opacity 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__arrow:hover:not(:disabled) {
+    border-color: rgba(3, 3, 3, 0.4);
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__arrow svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .imgslider {
+      padding-top: var(--imgslider-pt-mobile);
+      padding-bottom: var(--imgslider-pb-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .imgslider__header {
+      margin-bottom: 32px;
+    }
+
+    #shopify-section-{{ section.id }} .imgslider__heading {
+      font-size: var(--text-h4);
+    }
+
+    #shopify-section-{{ section.id }} .imgslider__track {
+      column-gap: var(--imgslider-gap-mobile);
+    }
+  }
+</style>
+
+{%- assign total_slides = section.blocks.size -%}
+{%- assign initial_active = total_slides | minus: 1 | divided_by: 2 -%}
+{%- assign last_slide_index = total_slides | minus: 1 -%}
+
+<div class="imgslider">
+  {%- if section.settings.heading != blank or section.settings.description != blank -%}
+    <div class="imgslider__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="imgslider__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="imgslider__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="imgslider__slider" id="imgslider-{{ section.id }}">
+      <div class="imgslider__viewport">
+        <div class="imgslider__track">
+          {%- for block in section.blocks -%}
+            <div class="imgslider__slide{% if forloop.index0 == initial_active %} is-active{% endif %}" {{ block.shopify_attributes }}>
+              <div class="imgslider__slide-inner">
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">
+                {%- endif -%}
+
+                {%- if block.settings.image != blank -%}
+                  {%- assign slide_alt = block.settings.alt_text | default: block.settings.image.alt | escape -%}
+                  {{- block.settings.image | image_url: width: 1500 | image_tag:
+                    class: 'imgslider__image',
+                    loading: 'lazy',
+                    alt: slide_alt,
+                    widths: '500, 800, 1000, 1200, 1500',
+                    sizes: '(max-width: 699px) 80vw, 55vw'
+                  -}}
+                {%- else -%}
+                  {{- 'image' | placeholder_svg_tag: 'imgslider__image placeholder' -}}
+                {%- endif -%}
+
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.settings.show_arrows and section.blocks.size > 1 -%}
+        <div class="imgslider__arrows">
+          <button
+            type="button"
+            class="imgslider__arrow imgslider__arrow--prev"
+            aria-label="Prethodni slajd"
+            {%- if initial_active == 0 %} disabled{%- endif -%}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="imgslider__arrow imgslider__arrow--next"
+            aria-label="Sledeći slajd"
+            {%- if initial_active == last_slide_index %} disabled{%- endif -%}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var sliderEl = document.getElementById('imgslider-{{ section.id }}');
+    if (!sliderEl || sliderEl.dataset.initialized) return;
+    sliderEl.dataset.initialized = 'true';
+
+    var viewport = sliderEl.querySelector('.imgslider__viewport');
+    var track = sliderEl.querySelector('.imgslider__track');
+    var slides = Array.from(sliderEl.querySelectorAll('.imgslider__slide'));
+    var prevBtn = sliderEl.querySelector('.imgslider__arrow--prev');
+    var nextBtn = sliderEl.querySelector('.imgslider__arrow--next');
+    var activeIndex = {{ initial_active }};
+
+    function getGap() {
+      return parseFloat(getComputedStyle(track).columnGap) || 0;
+    }
+
+    function setSlideWidths() {
+      if (slides.length === 0) return;
+      var gap = getGap();
+      var vw = viewport.offsetWidth;
+      var isMobile = window.innerWidth <= 699;
+      var w;
+
+      if (slides.length === 1) {
+        w = vw;
+      } else if (isMobile) {
+        // Center 100% visible, sides ~10% each: 1.2W + 2G = vw
+        w = (vw - 2 * gap) / 1.2;
+      } else {
+        // Center 100% visible, sides ~80% each: 2.6W + 2G = vw
+        w = (vw - 2 * gap) / 2.6;
+      }
+
+      w = Math.max(Math.round(w), 0);
+      slides.forEach(function (s) { s.style.width = w + 'px'; });
+    }
+
+    function centerSlide(index) {
+      if (slides.length === 0) return;
+      var gap = getGap();
+      var w = slides[0].offsetWidth;
+      var vw = viewport.offsetWidth;
+      var offset = Math.round(vw / 2 - index * (w + gap) - w / 2);
+
+      track.style.transform = 'translateX(' + offset + 'px)';
+      activeIndex = index;
+
+      slides.forEach(function (s, i) {
+        s.classList.toggle('is-active', i === activeIndex);
+      });
+
+      if (prevBtn) prevBtn.disabled = activeIndex === 0;
+      if (nextBtn) nextBtn.disabled = activeIndex === slides.length - 1;
+    }
+
+    // Position without animation, then enable transition
+    setSlideWidths();
+    centerSlide(activeIndex);
+    setTimeout(function () { track.classList.add('imgslider__track--animated'); }, 50);
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        if (activeIndex > 0) centerSlide(activeIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        if (activeIndex < slides.length - 1) centerSlide(activeIndex + 1);
+      });
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        setSlideWidths();
+        centerSlide(activeIndex);
+      }, 100);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Klizač recenzija",
+  "class": "shopify-section--image-testimonial-slider",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sadržaj"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Naslov",
+      "default": "Šta kažu naši kupci"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Opis",
+      "default": "<p>Razliku osetiš odmah.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Klizač"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Prikaži strelice navigacije",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Animacija skaliranja aktivnog slajda",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Razmak između slajdova"
+    },
+    {
+      "type": "range",
+      "id": "slider_gap_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Razmak – desktop",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "slider_gap_mobile",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Razmak – mobilni",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Dizajn"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Pozadinska boja sekcije",
+      "default": "#F5F0E8"
+    },
+    {
+      "type": "header",
+      "content": "Razmaci sekcije – desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Gornji razmak",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Donji razmak",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Razmaci sekcije – mobilni"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Gornji razmak",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Donji razmak",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slajd",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slika"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt tekst slike"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link slike (opcionalno)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Klizač recenzija",
+      "category": "Media",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

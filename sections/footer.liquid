@@ -1,7 +1,22 @@
+{%- liquid
+  assign hide_paths = section.settings.hide_on_pages | split: ','
+  assign should_hide = false
+  for raw_path in hide_paths
+    assign trimmed_path = raw_path | strip
+    if trimmed_path != blank and request.path == trimmed_path
+      assign should_hide = true
+    endif
+  endfor
+-%}
+
 <style>
   #shopify-section-{{ section.id }} {
     --footer-content-justify-items: {% if section.settings.blocks.size <= 2 %}start{% else %}space-between{% endif %};
   }
+
+  {%- if should_hide -%}
+  #shopify-section-{{ section.id }} { display: none !important; }
+  {%- endif -%}
 </style>
 
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
@@ -163,6 +178,12 @@
   "tag": "footer",
   "max_blocks": 6,
   "settings": [
+    {
+      "type": "textarea",
+      "id": "hide_on_pages",
+      "label": "Sakrij footer na stranicama",
+      "info": "Unesi putanje odvojene zarezom. Primer: /pages/thank-you, /pages/order"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",

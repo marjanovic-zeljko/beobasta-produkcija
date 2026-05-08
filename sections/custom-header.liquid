@@ -1,0 +1,649 @@
+{%- liquid
+  assign bg_color = section.settings.bg_color
+  assign logo_image = section.settings.logo_image
+  assign cta_text = section.settings.cta_text
+  assign cta_target = section.settings.cta_target
+  assign sticky = section.settings.enable_sticky
+  assign pt_desktop = section.settings.padding_top_desktop
+  assign pb_desktop = section.settings.padding_bottom_desktop
+  assign pt_mobile = section.settings.padding_top_mobile
+  assign pb_mobile = section.settings.padding_bottom_mobile
+  assign hide_paths = section.settings.hide_on_pages | split: ','
+  assign should_hide = false
+  for raw_path in hide_paths
+    assign trimmed_path = raw_path | strip
+    if trimmed_path != blank and request.path == trimmed_path
+      assign should_hide = true
+    endif
+  endfor
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+  }
+
+  {%- if should_hide -%}
+  #shopify-section-{{ section.id }} { display: none !important; }
+  {%- endif -%}
+
+  .custom-header-{{ section.id }} {
+    background-color: {{ bg_color }};
+    width: 100%;
+    {% if sticky %}
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    {% endif %}
+  }
+
+  .custom-header-inner-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: {{ pt_desktop }}px;
+    padding-bottom: {{ pb_desktop }}px;
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Logo */
+  .custom-header-logo-{{ section.id }} {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .custom-header-logo-{{ section.id }} img,
+  .custom-header-logo-{{ section.id }} svg {
+    max-height: 70px;
+    width: auto;
+    display: block;
+  }
+
+  /* Nav */
+  .custom-header-nav-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-header-nav-{{ section.id }} li a {
+    font-family: var(--font-secondary, sans-serif);
+    font-weight: 400;
+    font-size: var(--text-main, 14px);
+    line-height: 130%;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #EFE5F1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .custom-header-nav-{{ section.id }} li a:hover {
+    opacity: 0.7;
+  }
+
+  /* CTA Button */
+  .custom-header-cta-{{ section.id }} {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .custom-header-cta-btn-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 349px;
+    height: 44px;
+    padding: var(--space-2, 8px) var(--space-5, 20px);
+    border-radius: 30px;
+    border: 1px solid #DDB957;
+    background: #DDB957;
+    color: #000;
+    font-family: var(--font-primary, sans-serif);
+    font-weight: 600;
+    font-size: var(--text-main, 14px);
+    line-height: 110%;
+    letter-spacing: 0.16em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .custom-header-cta-btn-{{ section.id }}:hover {
+    background: transparent;
+    color: #DDB957;
+  }
+
+  /* Hamburger */
+  .custom-header-hamburger-{{ section.id }} {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Mobile menu */
+  .custom-header-mobile-menu-{{ section.id }} {
+    display: none;
+    flex-direction: column;
+    background-color: {{ bg_color }};
+    padding: 24px 24px 32px;
+    gap: 24px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+
+  .custom-header-mobile-menu-{{ section.id }}.is-open {
+    display: flex;
+    max-height: 600px;
+    padding: 24px 24px 32px;
+  }
+
+  .custom-header-mobile-nav-{{ section.id }} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .custom-header-mobile-nav-{{ section.id }} li a {
+    font-family: var(--font-secondary, sans-serif);
+    font-weight: 400;
+    font-size: var(--text-main, 14px);
+    line-height: 130%;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #EFE5F1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    display: block;
+  }
+
+  .custom-header-mobile-nav-{{ section.id }} li a:hover {
+    opacity: 0.7;
+  }
+
+  .custom-header-mobile-cta-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    padding: var(--space-2, 8px) var(--space-5, 20px);
+    border-radius: 30px;
+    border: 1px solid #DDB957;
+    background: #DDB957;
+    color: #000;
+    font-family: var(--font-primary, sans-serif);
+    font-weight: 600;
+    font-size: var(--text-main, 14px);
+    line-height: 110%;
+    letter-spacing: 0.16em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .custom-header-mobile-cta-{{ section.id }}:hover {
+    background: transparent;
+    color: #DDB957;
+  }
+
+  /* Tablet */
+  @media screen and (max-width: 1100px) {
+    .custom-header-inner-{{ section.id }} {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .custom-header-nav-{{ section.id }} {
+      gap: 24px;
+    }
+
+    .custom-header-cta-btn-{{ section.id }} {
+      width: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 768px) {
+    .custom-header-inner-{{ section.id }} {
+      padding-top: {{ pt_mobile }}px;
+      padding-bottom: {{ pb_mobile }}px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .custom-header-nav-{{ section.id }},
+    .custom-header-cta-{{ section.id }} {
+      display: none;
+    }
+
+    .custom-header-hamburger-{{ section.id }} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .custom-header-logo-{{ section.id }} img,
+    .custom-header-logo-{{ section.id }} svg {
+      max-height: unset;
+      max-width: 63px;
+    }
+  }
+</style>
+
+<header
+  class="custom-header-{{ section.id }}"
+  role="banner"
+  aria-label="{{ 'sections.header.title' | t | default: 'Site header' }}"
+>
+  <div class="custom-header-inner-{{ section.id }}">
+
+    {%- comment -%} LOGO {%- endcomment -%}
+    <div
+      class="custom-header-logo-{{ section.id }}"
+      role="button"
+      tabindex="0"
+      aria-label="Scroll to top"
+      onclick="document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });"
+      onkeydown="if(event.key==='Enter'||event.key===' '){document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });}"
+    >
+      {%- if logo_image != blank -%}
+        {{
+          logo_image
+          | image_url: width: 340
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: shop.name
+        }}
+      {%- else -%}
+        <svg width="85" height="70" viewBox="0 0 85 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="{{ shop.name }}">
+          <path d="M18.2434 44.015V24.8901H30.5213V28.1661H21.8434V32.731H29.7584V36.007H21.8434V40.7331H30.6822V44.0091H18.2375L18.2434 44.015Z" fill="#EFE5F1"/>
+          <path d="M34.4421 36.7453V32.1565C34.4421 27.2396 37.4997 24.5066 42.3035 24.5066C47.1075 24.5066 50.1648 27.2396 50.1648 32.1565V36.7453C50.1648 41.6623 47.1075 44.3952 42.3035 44.3952C37.4997 44.3952 34.4421 41.6623 34.4421 36.7453ZM46.4937 36.8527V32.0432C46.4937 29.4176 44.9082 27.7289 42.2379 27.7289C39.5678 27.7289 37.9824 29.4236 37.9824 32.0432V36.8527C37.9824 39.4783 39.5678 41.167 42.2379 41.167C44.9082 41.167 46.4937 39.4723 46.4937 36.8527Z" fill="#EFE5F1"/>
+          <path d="M1.01398 69.5V50.3755H8.36876C11.8614 50.3755 14.156 52.2312 14.156 55.2089V55.4831C14.156 58.1329 12.4097 59.2007 11.2356 59.5528V60.0422C12.4335 60.3702 14.2633 61.4326 14.2633 64.1656V64.4399C14.2633 67.6385 11.8912 69.4942 8.47604 69.4942H1.01398V69.5ZM4.6556 58.246H7.98729C9.48924 58.246 10.5502 57.4524 10.5502 56.0857V55.8115C10.5502 54.4448 9.51308 53.6511 7.98729 53.6511H4.6556V58.2402V58.246ZM4.6556 66.224H8.04093C9.59652 66.224 10.6634 65.4303 10.6634 64.0104V63.7357C10.6634 62.3158 9.62636 61.5221 8.04093 61.5221H4.6556V66.2181V66.224Z" fill="#EFE5F1"/>
+          <path d="M1.01398 44.015V24.8901H8.36876C11.8614 24.8901 14.156 26.746 14.156 29.7236V29.9981C14.156 32.6475 12.4097 33.7156 11.2356 34.0677V34.557C12.4335 34.8852 14.2633 35.9474 14.2633 38.6804V38.9548C14.2633 42.1532 11.8912 44.0091 8.47604 44.0091H1.01398V44.015ZM4.6556 32.7609H7.98729C9.48924 32.7609 10.5502 31.9672 10.5502 30.6008V30.3262C10.5502 28.9598 9.51308 28.1661 7.98729 28.1661H4.6556V32.7549V32.7609ZM4.6556 40.739H8.04093C9.59652 40.739 10.6634 39.9454 10.6634 38.5252V38.2507C10.6634 36.8305 9.62636 36.0369 8.04093 36.0369H4.6556V40.7331V40.739Z" fill="#EFE5F1"/>
+          <path d="M16.7522 69.4768L21.7706 50.3518H28.0466L33.065 69.4768H29.3518L28.3148 65.2698H21.4904L20.4534 69.4768H16.7402H16.7522ZM22.3487 61.9342H27.4804L25.1619 52.6191H24.6731L22.3547 61.9342H22.3487Z" fill="#EFE5F1"/>
+          <path d="M35.5949 63.2952V62.5311H39.1412V63.2952C39.1412 65.5925 40.6431 66.7382 43.0987 66.7382C45.5542 66.7382 46.7822 65.6461 46.7822 64.1126C46.7822 62.579 45.3873 61.9822 42.9318 61.4333L42.306 61.2959C38.3485 60.4186 36.03 59.0823 36.03 55.5853C36.03 52.0886 38.6763 50.012 42.7709 50.012C46.8654 50.012 49.8396 52.0886 49.8396 56.242V57.0593H46.2933V56.242C46.2933 54.058 44.9583 53.1807 42.7709 53.1807C40.5835 53.1807 39.5763 54.058 39.5763 55.4779C39.5763 56.8983 40.6431 57.5846 42.9318 58.0735L43.5576 58.2109C47.6224 59.0882 50.3223 60.5086 50.3223 64.0052C50.3223 67.5018 47.5092 69.9069 43.0927 69.9069C38.6763 69.9069 35.589 67.4481 35.589 63.2952H35.5949ZM40.6551 50.7698L37.5439 47.2195H41.1974L42.5325 49.0215H43.0212L44.3563 47.2195H48.0156L44.9046 50.7698H40.6491H40.6551Z" fill="#EFE5F1"/>
+          <path d="M58.0948 69.4942V53.6511H52.5282V50.3755H67.2614V53.6511H61.6948V69.4942H58.0948Z" fill="#EFE5F1"/>
+          <path d="M82.1073 37.6716L76.636 45.2621H80.0991L85.5167 37.6716H82.1073Z" fill="#EFE5F1"/>
+          <path d="M59.832 37.6716L54.3665 45.2621H57.8291L63.2472 37.6716H59.832Z" fill="#EFE5F1"/>
+          <path d="M59.832 24.9138L54.3665 32.5041H57.8291L63.2472 24.9138H59.832Z" fill="#EFE5F1"/>
+          <path d="M70.215 37.6716L75.6805 45.2621H72.2232L66.7997 37.6716H70.215Z" fill="#EFE5F1"/>
+          <path d="M82.1073 24.9138L76.636 32.5041H80.0991L85.5167 24.9138H82.1073Z" fill="#EFE5F1"/>
+          <path d="M70.215 24.9138L75.6805 32.5041H72.2232L66.7997 24.9138H70.215Z" fill="#EFE5F1"/>
+          <path d="M82.1055 12.2451L76.6342 19.8354H80.0968L85.5145 12.2451H82.1055Z" fill="#EFE5F1"/>
+          <path d="M70.215 12.2451L75.6805 19.8354H72.2236L66.7997 12.2451H70.215Z" fill="#EFE5F1"/>
+          <path d="M59.8275 12.239L54.3624 19.8293H57.8251L63.2427 12.239H59.8275Z" fill="#EFE5F1"/>
+          <path d="M47.9431 12.239L53.4086 19.8293H49.9518L44.528 12.239H47.9431Z" fill="#EFE5F1"/>
+          <path d="M37.5672 12.239L32.1017 19.8293H35.5646L40.9823 12.239H37.5672Z" fill="#EFE5F1"/>
+          <path d="M25.6827 12.239L31.1481 19.8293H27.6853L22.2675 12.239H25.6827Z" fill="#EFE5F1"/>
+          <path d="M15.3226 12.2451L9.85718 19.8354H13.314L18.7378 12.2451H15.3226Z" fill="#EFE5F1"/>
+          <path d="M3.43809 12.2451L8.90349 19.8354H5.44068L0.0229492 12.2451H3.43809Z" fill="#EFE5F1"/>
+          <path d="M59.8351 -0.428955L54.3696 7.16131H57.8322L63.2498 -0.428955H59.8351Z" fill="#EFE5F1"/>
+          <path d="M47.9503 -0.428955L53.4158 7.16131H49.959L44.5352 -0.428955H47.9503Z" fill="#EFE5F1"/>
+          <path d="M37.6076 -0.447266L32.1422 7.14301H35.599L41.0227 -0.447266H37.6076Z" fill="#EFE5F1"/>
+          <path d="M25.7231 -0.447266L31.1885 7.14301H27.7257L22.3079 -0.447266H25.7231Z" fill="#EFE5F1"/>
+          <path d="M15.2996 -0.424561L9.83423 7.16572H13.297L18.7148 -0.424561H15.2996Z" fill="#EFE5F1"/>
+          <path d="M3.41514 -0.424561L8.88058 7.16572H5.42372L0 -0.424561H3.41514Z" fill="#EFE5F1"/>
+          <path d="M82.1073 -0.423584L76.636 7.16668H80.0991L85.5167 -0.423584H82.1073Z" fill="#EFE5F1"/>
+          <path d="M70.215 -0.423584L75.6805 7.16668H72.2232L66.7997 -0.423584H70.215Z" fill="#EFE5F1"/>
+          <path d="M67.9391 69.4836L72.9577 50.3586H79.2334L84.252 69.4836H80.5388L79.5018 65.277H72.6777L71.6402 69.4836H67.9271H67.9391ZM73.5357 61.941H78.6675L76.3488 52.6264H75.8602L73.5415 61.941H73.5357Z" fill="#EFE5F1"/>
+        </svg>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} DESKTOP NAV {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <nav aria-label="Primary navigation">
+        <ul class="custom-header-nav-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'nav_item' -%}
+              <li {{ block.shopify_attributes }}>
+                <a
+                  href="#{{ block.settings.section_id | strip | handleize }}"
+                  data-smooth-scroll
+                  aria-label="{{ block.settings.label }}"
+                >
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    {%- comment -%} DESKTOP CTA {%- endcomment -%}
+    <div class="custom-header-cta-{{ section.id }}">
+      {%- if cta_text != blank -%}
+        <a
+          href="#{{ cta_target | strip | handleize }}"
+          class="custom-header-cta-btn-{{ section.id }}"
+          data-smooth-scroll
+          aria-label="{{ cta_text }}"
+        >
+          {{ cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} HAMBURGER {%- endcomment -%}
+    <button
+      class="custom-header-hamburger-{{ section.id }}"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="custom-header-mobile-menu-{{ section.id }}"
+      id="custom-header-hamburger-{{ section.id }}"
+    >
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16Z" fill="#DDB957"/>
+        <path d="M7 22V20H25V22H7ZM7 17V15H25V17H7ZM7 12V10H25V12H7Z" fill="black"/>
+      </svg>
+    </button>
+
+  </div>
+
+  {%- comment -%} MOBILE MENU {%- endcomment -%}
+  <div
+    class="custom-header-mobile-menu-{{ section.id }}"
+    id="custom-header-mobile-menu-{{ section.id }}"
+    role="dialog"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+  >
+    {%- if section.blocks.size > 0 -%}
+      <nav aria-label="Mobile primary navigation">
+        <ul class="custom-header-mobile-nav-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'nav_item' -%}
+              <li {{ block.shopify_attributes }}>
+                <a
+                  href="#{{ block.settings.section_id | strip | handleize }}"
+                  data-smooth-scroll
+                  data-close-mobile-menu="{{ section.id }}"
+                  aria-label="{{ block.settings.label }}"
+                >
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    {%- if cta_text != blank -%}
+      <a
+        href="#{{ cta_target | strip | handleize }}"
+        class="custom-header-mobile-cta-{{ section.id }}"
+        data-smooth-scroll
+        data-close-mobile-menu="{{ section.id }}"
+        aria-label="{{ cta_text }}"
+      >
+        {{ cta_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</header>
+
+<script>
+(function() {
+  var sectionId = {{ section.id | json }};
+  var hamburger = document.getElementById('custom-header-hamburger-' + sectionId);
+  var mobileMenu = document.getElementById('custom-header-mobile-menu-' + sectionId);
+
+  if (!hamburger || !mobileMenu) return;
+
+  function openMenu() {
+    mobileMenu.classList.add('is-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+  }
+
+  hamburger.addEventListener('click', function() {
+    if (mobileMenu.classList.contains('is-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  hamburger.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      hamburger.click();
+    }
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('[data-close-mobile-menu="' + sectionId + '"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+
+  // Smooth scroll for all data-smooth-scroll links in this section
+  document.querySelectorAll('#shopify-section-' + sectionId + ' [data-smooth-scroll]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var href = link.getAttribute('href');
+      if (!href || href === '#') return;
+
+      var targetId = href.replace(/^#/, '');
+      var target = document.getElementById(targetId);
+
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Close menu on outside click
+  document.addEventListener('click', function(e) {
+    if (
+      mobileMenu.classList.contains('is-open') &&
+      !mobileMenu.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+      closeMenu();
+      hamburger.focus();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Header",
+  "tag": "div",
+  "class": "custom-header-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "hide_on_pages",
+      "label": "Sakrij header na stranicama",
+      "info": "Unesi putanje odvojene zarezom. Primer: /pages/thank-you, /pages/order"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#252347"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Sticky header",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "CTA Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "PORUČI SVEŽE UBRANO VOĆE"
+    },
+    {
+      "type": "text",
+      "id": "cta_target",
+      "label": "Button section ID (without #)",
+      "default": "order"
+    },
+    {
+      "type": "header",
+      "content": "Desktop spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Mobile spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Navigation item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link text",
+          "default": "Navigation item"
+        },
+        {
+          "type": "text",
+          "id": "section_id",
+          "label": "Target section ID (without #)",
+          "default": "section-id"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Header",
+      "blocks": [
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "RAZLIKA U KVALITETU",
+            "section_id": "razlika-u-kvalitetu"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "SVEŽE VOĆE",
+            "section_id": "sveze-voce"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "PREPORUKE",
+            "section_id": "preporuke"
+          }
+        },
+        {
+          "type": "nav_item",
+          "settings": {
+            "label": "ČESTA PITANJA",
+            "section_id": "cesta-pitanja"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

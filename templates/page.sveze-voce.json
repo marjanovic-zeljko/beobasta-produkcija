@@ -11,10 +11,80 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "hero_banner_cBnFBe": {
+      "type": "hero-banner",
+      "blocks": {
+        "subheading_rnwEVa": {
+          "type": "subheading",
+          "settings": {
+            "text": "Zato ima ukus koji u marketu ne možeš da nađeš."
+          }
+        },
+        "heading_qQzxfp": {
+          "type": "heading",
+          "settings": {
+            "text": "DANAS UBRANO NA KOSMAJU. ZA 24 SATA NA TVOJOJ ADRESI U BEOGRADU."
+          }
+        },
+        "text_MaAAxV": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Sveže, ručno ubrano voće sa naših plantaža na kosmajskim proplancima.</p><p>Dokazano analizama - bez ostataka pesticida.</p><p>Znaš šta jedeš - i ti i deca.</p>"
+          }
+        },
+        "button_LgAnee": {
+          "type": "button",
+          "settings": {
+            "label": "PORUČI SVEŽE UBRANO VOĆE",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_rnwEVa",
+        "heading_qQzxfp",
+        "text_MaAAxV",
+        "button_LgAnee"
+      ],
+      "name": "Hero Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/3a8de14aed0c3c4a9a6a82b4412340e978c2a557.png",
+        "desktop_image_position": "center center",
+        "mobile_image_position": "center center",
+        "desktop_height": 700,
+        "mobile_height": 550,
+        "overlay_color": "#000000",
+        "overlay_opacity": 51,
+        "content_max_width": 580,
+        "desktop_content_valign": "flex-end",
+        "mobile_content_valign": "flex-end",
+        "desktop_content_align": "left",
+        "mobile_content_align": "left",
+        "heading_color": "#FFFFFF",
+        "subheading_color": "#FFFFFF",
+        "text_color": "#FFFFFF",
+        "button_bg_color": "#DDB957",
+        "button_text_color": "#1A1A1A",
+        "button_hover_bg_color": "#C4A23E",
+        "button_hover_text_color": "#1A1A1A",
+        "desktop_padding_top": 60,
+        "desktop_padding_bottom": 60,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40,
+        "desktop_text_gap": 20,
+        "mobile_text_gap": 16
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "hero_banner_cBnFBe"
   ]
 }

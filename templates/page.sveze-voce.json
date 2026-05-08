@@ -392,22 +392,16 @@
     "hero_banner_pijUjm": {
       "type": "hero-banner",
       "blocks": {
-        "subheading_deFNby": {
-          "type": "subheading",
-          "settings": {
-            "text": "Zato ima ukus koji u marketu ne možeš da nađeš."
-          }
-        },
         "heading_cBkBbk": {
           "type": "heading",
           "settings": {
-            "text": "DANAS UBRANO NA KOSMAJU. ZA 24 SATA NA TVOJOJ ADRESI U BEOGRADU."
+            "text": "Tamo negde u prirodi Kosmaja, vredne ruke beru voće danas i odmah ga pakuju."
           }
         },
         "text_kTdYMw": {
           "type": "text",
           "settings": {
-            "content": "<p>Sveže, ručno ubrano voće sa naših plantaža na kosmajskim proplancima.</p><p>Dokazano analizama - bez ostataka pesticida.</p><p>Znaš šta jedeš - i ti i deca.</p>"
+            "content": "<p>Ti i tvoja deca za 24 sata jedete voće maksimalnog ukusa, optimalne zrelosti i bez ostataka pesticida. Ako želiš da znaš šta jedeš i da to ima pravi ukus, poruči voće ubrano danas.</p>"
           }
         },
         "button_wf88Ag": {
@@ -419,20 +413,19 @@
         }
       },
       "block_order": [
-        "subheading_deFNby",
         "heading_cBkBbk",
         "text_kTdYMw",
         "button_wf88Ag"
       ],
       "name": "Hero Banner",
       "settings": {
-        "desktop_image": "shopify://shop_images/3a8de14aed0c3c4a9a6a82b4412340e978c2a557.png",
+        "desktop_image": "shopify://shop_images/9e9730c4a8bb2cc265f408a7773325e9ce60e4e0.png",
         "desktop_image_position": "center center",
         "mobile_image_position": "center center",
-        "desktop_height": 700,
-        "mobile_height": 550,
+        "desktop_height": 480,
+        "mobile_height": 470,
         "overlay_color": "#000000",
-        "overlay_opacity": 51,
+        "overlay_opacity": 66,
         "content_max_width": 580,
         "desktop_content_valign": "flex-end",
         "mobile_content_valign": "flex-end",

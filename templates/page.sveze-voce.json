@@ -58,7 +58,7 @@
       ],
       "name": "Custom Header",
       "settings": {
-        "hide_on_pages": "/pages/sveze-voce",
+        "hide_on_pages": "",
         "bg_color": "#2f346e",
         "enable_sticky": true,
         "cta_text": "PORUČI SVEŽE UBRANO VOĆE",

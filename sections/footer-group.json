@@ -35,9 +35,7 @@
           "type": "newsletter",
           "settings": {
             "title": "Newsletter",
-            "content": "<p>Prijavite se na naš newsletter da biste primali ekskluzivne ponude.</p>",
-            "button_background": "",
-            "button_text_color": ""
+            "content": "<p>Prijavite se na naš newsletter da biste primali ekskluzivne ponude.</p>"
           }
         },
         "links": {
@@ -64,6 +62,7 @@
         "links_nFmfgA"
       ],
       "settings": {
+        "hide_on_pages": "/pages/sveze-voce",
         "color_scheme": "scheme-ae558915-5869-4116-9f90-5c719a5836eb",
         "separate_section_with_border": false,
         "show_social_media": true,

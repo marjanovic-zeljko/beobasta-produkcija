@@ -72,16 +72,16 @@
     "hero_banner_cBnFBe": {
       "type": "hero-banner",
       "blocks": {
-        "subheading_rnwEVa": {
-          "type": "subheading",
-          "settings": {
-            "text": "Zato ima ukus koji u marketu ne možeš da nađeš."
-          }
-        },
         "heading_qQzxfp": {
           "type": "heading",
           "settings": {
             "text": "DANAS UBRANO NA KOSMAJU. ZA 24 SATA NA TVOJOJ ADRESI U BEOGRADU."
+          }
+        },
+        "subheading_rnwEVa": {
+          "type": "subheading",
+          "settings": {
+            "text": "Zato ima ukus koji u marketu ne možeš da nađeš."
           }
         },
         "text_MaAAxV": {
@@ -99,8 +99,8 @@
         }
       },
       "block_order": [
-        "subheading_rnwEVa",
         "heading_qQzxfp",
+        "subheading_rnwEVa",
         "text_MaAAxV",
         "button_LgAnee"
       ],
@@ -293,8 +293,8 @@
       ],
       "name": "Klizač recenzija",
       "settings": {
-        "heading": "Šta kažu naši kupci",
-        "description": "<p>Razliku osetiš odmah.</p>",
+        "heading": "Voće koje je danas na grani – sutra je kod tebe na adresi",
+        "description": "<p>Razliku osetiš odmah.<br/>Evo šta kažu ljudi koji su jednom probali.</p>",
         "show_arrows": true,
         "enable_zoom": true,
         "slider_gap_desktop": 24,
@@ -312,32 +312,56 @@
         "faq_item_66jFDN": {
           "type": "faq_item",
           "settings": {
-            "question": "Kako se vrši dostava?",
-            "answer": "<p>Naša dostava je brza i pouzdana. Voće se bere isti dan i isporučuje u roku od 24 sata.</p>",
+            "question": "Kada mi stiže voće koje poručim?",
+            "answer": "<p>Kada berba krene, voće stiže na tvoju adresu za najviše 24 sata od trenutka branja.Zrenje i berba zavise od vremenskih prilika i temperature vazduha.Ukoliko pada kiša, branje nije moguće i tada s tobom dogovaramo tačan datum i vreme dostave.</p>",
             "open_by_default": true
           }
         },
         "faq_item_rzV96d": {
           "type": "faq_item",
           "settings": {
-            "question": "Da li radite vikendom?",
-            "answer": "<p>Da, dostavljamo i subotom i nedeljom. Porudžbine primamo svaki dan.</p>",
+            "question": "Koliko voće može da traje i kako se pravilno čuva?",
+            "answer": "<p>Najbolje je konzumirati odmah ili pojesti u najkraćem roku, jer tada ima pun ukus.Ako se ipak odlučiš za čuvanje, možeš ga zamrznuti.</p>",
             "open_by_default": false
           }
         },
         "faq_item_8DCE3e": {
           "type": "faq_item",
           "settings": {
-            "question": "Kako mogu da platim?",
-            "answer": "<p>Prihvatamo plaćanje gotovinom pri dostavi, kao i kartičnim plaćanjem online.</p>",
+            "question": "Gde mogu da proverim da je voće zaista bez ostataka pesticida?",
+            "answer": "<p>Ovde preuzmi PDF dokument u kojem se nalazi zvanično laboratorijsko ispitivanje koje potvrđuje da je voće potpuno bezbedno za konzumiranje.</p>",
             "open_by_default": false
           }
         },
         "faq_item_3L9X8R": {
           "type": "faq_item",
           "settings": {
-            "question": "Mogu li da promenim ili otkažem porudžbinu?",
-            "answer": "<p>Porudžbinu možete promeniti ili otkazati najkasnije sat vremena pre isporuke kontaktiranjem naše podrške.</p>",
+            "question": "Kako da poručim i platim?",
+            "answer": "<p>Poručivanje se vrši dodavanjem proizvoda u korpu. Dodavanje možeš ponavljati sve dok ne poručiš sve što želiš.Sadržaj korpe možeš proveriti na vrhu stranice.Ako ti je potrebna pomoć, možeš nas kontaktirati na broj 0640000077 svakim radnim danom od 9-17h.Plaćanje se vrši pouzećem nakon isporuke.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_item_VTQGMk": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Gde se sve vrši dostava?",
+            "answer": "<p>Dostavu vršimo na teritoriji Beograda u opštinama Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun i Zvezdara.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_item_g84EYQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koja je cena dostave?",
+            "answer": "<p>Dostava za Beograd:Porudžbine do 2500 din: x dinPorudžbine od 2500 do 6000 din: x dinPorudžbine preko 6000 din: besplatno</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_item_FAEdRj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kako ide proces reklamacije ukoliko dobijem voće koje ne dogovara opisu?",
+            "answer": "<p>Ukoliko ustanoviš da proizvod ne zadovoljava kriterijume kvaliteta (ima vidljive nedostatke i promene), možeš nam uputiti Zahtev za reklamaciju putem elektronske pošte na kontakt@beobasta.rs ili telefonskim putem na 0640000077.Utvrdićemo da li je reklamacija osnovana i u zakonskom roku doneti odluku kojom se odobrava ili odbija.Ukoliko ustanovimo da je reklamacija opravdana, zamenićemo proizvod za isti bez nedostataka.Ukoliko ne možemo da zamenimo proizvod jer ga više nema na lageru, možeš preuzeti drugi proizvod u istoj vrednosti ili skuplji proizvod uz doplatu ili možeš tražiti povraćaj novca.Ukoliko reklamacija nije opravdana, proizvod koji je reklamiran ti vraćamo uz Odluku o reklamaciji.</p>",
             "open_by_default": false
           }
         }
@@ -346,14 +370,17 @@
         "faq_item_66jFDN",
         "faq_item_rzV96d",
         "faq_item_8DCE3e",
-        "faq_item_3L9X8R"
+        "faq_item_3L9X8R",
+        "faq_item_VTQGMk",
+        "faq_item_g84EYQ",
+        "faq_item_FAEdRj"
       ],
       "name": "FAQ dvostubac",
       "settings": {
-        "heading": "Često postavljana pitanja",
-        "description": "<p>Ovde možete pronaći odgovore na najčešće postavljana pitanja o našim proizvodima i usluzi.</p>",
-        "cta_label": "",
-        "cta_link": "",
+        "heading": "Tu smo da rešimo sve tvoje dileme. Ovo su odgovori na najčešća pitanja.",
+        "description": "<p>I dalje imas pitanja? Nikakav problem, kontaktiraj nas bilo kad i dobices odgovor u sto kracem vremenskom periodu.</p>",
+        "cta_label": "Kontaktiraj nas",
+        "cta_link": "shopify://pages/kako-kupiti-1",
         "background_color": "#F5F0E8",
         "content_max_width": 1280,
         "padding_top_desktop": 80,

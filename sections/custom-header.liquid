@@ -3,6 +3,17 @@
   assign logo_image = section.settings.logo_image
   assign cta_text = section.settings.cta_text
   assign cta_target = section.settings.cta_target
+  assign cta_anchor = ''
+  assign cta_trim = cta_target | strip
+  if cta_trim != blank
+    if cta_trim contains 'shopify-section'
+      assign cta_anchor = cta_trim
+    elsif cta_trim contains 'template--'
+      assign cta_anchor = 'shopify-section-' | append: cta_trim
+    else
+      assign cta_anchor = cta_trim | handleize
+    endif
+  endif
   assign sticky = section.settings.enable_sticky
   assign pt_desktop = section.settings.padding_top_desktop
   assign pb_desktop = section.settings.padding_bottom_desktop
@@ -329,9 +340,19 @@
         <ul class="custom-header-nav-{{ section.id }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'nav_item' -%}
+              {%- liquid
+                assign nav_raw = block.settings.section_id | strip
+                if nav_raw contains 'shopify-section'
+                  assign nav_anchor = nav_raw
+                elsif nav_raw contains 'template--'
+                  assign nav_anchor = 'shopify-section-' | append: nav_raw
+                else
+                  assign nav_anchor = nav_raw | handleize
+                endif
+              -%}
               <li {{ block.shopify_attributes }}>
                 <a
-                  href="#{{ block.settings.section_id | strip | handleize }}"
+                  href="#{{ nav_anchor }}"
                   data-smooth-scroll
                   aria-label="{{ block.settings.label }}"
                 >
@@ -346,9 +367,9 @@
 
     {%- comment -%} DESKTOP CTA {%- endcomment -%}
     <div class="custom-header-cta-{{ section.id }}">
-      {%- if cta_text != blank -%}
+      {%- if cta_text != blank and cta_anchor != blank -%}
         <a
-          href="#{{ cta_target | strip | handleize }}"
+          href="#{{ cta_anchor }}"
           class="custom-header-cta-btn-{{ section.id }}"
           data-smooth-scroll
           aria-label="{{ cta_text }}"
@@ -387,9 +408,19 @@
         <ul class="custom-header-mobile-nav-{{ section.id }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'nav_item' -%}
+              {%- liquid
+                assign nav_raw_m = block.settings.section_id | strip
+                if nav_raw_m contains 'shopify-section'
+                  assign nav_anchor_m = nav_raw_m
+                elsif nav_raw_m contains 'template--'
+                  assign nav_anchor_m = 'shopify-section-' | append: nav_raw_m
+                else
+                  assign nav_anchor_m = nav_raw_m | handleize
+                endif
+              -%}
               <li {{ block.shopify_attributes }}>
                 <a
-                  href="#{{ block.settings.section_id | strip | handleize }}"
+                  href="#{{ nav_anchor_m }}"
                   data-smooth-scroll
                   data-close-mobile-menu="{{ section.id }}"
                   aria-label="{{ block.settings.label }}"
@@ -403,9 +434,9 @@
       </nav>
     {%- endif -%}
 
-    {%- if cta_text != blank -%}
+    {%- if cta_text != blank and cta_anchor != blank -%}
       <a
-        href="#{{ cta_target | strip | handleize }}"
+        href="#{{ cta_anchor }}"
         class="custom-header-mobile-cta-{{ section.id }}"
         data-smooth-scroll
         data-close-mobile-menu="{{ section.id }}"
@@ -538,7 +569,8 @@
     {
       "type": "text",
       "id": "cta_target",
-      "label": "Button section ID (without #)",
+      "label": "Button scroll target (without #)",
+      "info": "Kratki slug (npr. order) ili pun id iz DevTools (npr. shopify-section-template--…). Ako uneseš samo template--…, biće dodat prefiks shopify-section-.",
       "default": "order"
     },
     {
@@ -605,6 +637,7 @@
           "type": "text",
           "id": "section_id",
           "label": "Target section ID (without #)",
+          "info": "Kratki slug (handle) koji odgovara id na stranici, ili pun id spoljašnjeg wrappera sekcije (shopify-section-… iz pregledača). Za puni Shopify id koristi ovaj unos bez dodatne obrade u temi.",
           "default": "section-id"
         }
       ]

@@ -62,7 +62,7 @@
         "bg_color": "#2f346e",
         "enable_sticky": true,
         "cta_text": "PORUČI SVEŽE UBRANO VOĆE",
-        "cta_target": "order",
+        "cta_target": "shopify-section-template--22290069258484__hero_banner_pijUjm",
         "padding_top_desktop": 16,
         "padding_bottom_desktop": 16,
         "padding_top_mobile": 12,

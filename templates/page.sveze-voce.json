@@ -18,6 +18,57 @@
         "page_width": "xs"
       }
     },
+    "custom_header_UFitye": {
+      "type": "custom-header",
+      "blocks": {
+        "nav_item_zhGHVC": {
+          "type": "nav_item",
+          "settings": {
+            "label": "RAZLIKA U KVALITETU",
+            "section_id": "razlika-u-kvalitetu"
+          }
+        },
+        "nav_item_9M74qi": {
+          "type": "nav_item",
+          "settings": {
+            "label": "SVEŽE VOĆE",
+            "section_id": "sveze-voce"
+          }
+        },
+        "nav_item_zkLG4j": {
+          "type": "nav_item",
+          "settings": {
+            "label": "PREPORUKE",
+            "section_id": "preporuke"
+          }
+        },
+        "nav_item_tQm7Jw": {
+          "type": "nav_item",
+          "settings": {
+            "label": "ČESTA PITANJA",
+            "section_id": "cesta-pitanja"
+          }
+        }
+      },
+      "block_order": [
+        "nav_item_zhGHVC",
+        "nav_item_9M74qi",
+        "nav_item_zkLG4j",
+        "nav_item_tQm7Jw"
+      ],
+      "name": "Custom Header",
+      "settings": {
+        "hide_on_pages": "",
+        "bg_color": "#2f346e",
+        "enable_sticky": true,
+        "cta_text": "PORUČI SVEŽE UBRANO VOĆE",
+        "cta_target": "order",
+        "padding_top_desktop": 16,
+        "padding_bottom_desktop": 16,
+        "padding_top_mobile": 12,
+        "padding_bottom_mobile": 12
+      }
+    },
     "hero_banner_cBnFBe": {
       "type": "hero-banner",
       "blocks": {
@@ -81,10 +132,322 @@
         "desktop_text_gap": 20,
         "mobile_text_gap": 16
       }
+    },
+    "fruit_comparison_m9mG89": {
+      "type": "fruit-comparison",
+      "blocks": {
+        "list_item_7cTKiA": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Ubrano danas – kod tebe već sutra",
+            "icon_type": "approve",
+            "icon_color": ""
+          }
+        },
+        "list_item_pppV9L": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Bere se potpuno zrelo – zato ima više ukusa",
+            "icon_type": "approve",
+            "icon_color": ""
+          }
+        },
+        "list_item_rJU9nJ": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Minimalno skladištenje - skoro bez čekanja",
+            "icon_type": "approve",
+            "icon_color": ""
+          }
+        },
+        "list_item_BhVjrC": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Direktan transport – brza dostava",
+            "icon_type": "approve",
+            "icon_color": ""
+          }
+        },
+        "list_item_ebiaqE": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "left",
+            "text": "Bez posrednika – minimalno rukovanje voćem",
+            "icon_type": "approve",
+            "icon_color": ""
+          }
+        },
+        "list_item_dV7Mrk": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Stoji danima – gubi ukus i svežinu",
+            "icon_type": "x",
+            "icon_color": ""
+          }
+        },
+        "list_item_49tKMb": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Bere se ranije – nikad nije potpuno zrelo",
+            "icon_type": "x",
+            "icon_color": ""
+          }
+        },
+        "list_item_TWLMnF": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Prolazi kroz više skladišta - duži put do kupca",
+            "icon_type": "x",
+            "icon_color": ""
+          }
+        },
+        "list_item_NMcz9Q": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Više transporta - veća šansa za oštećenje",
+            "icon_type": "x",
+            "icon_color": ""
+          }
+        },
+        "list_item_hVcPiF": {
+          "type": "list_item",
+          "settings": {
+            "card_side": "right",
+            "text": "Više posrednika - više rukovanja voćem",
+            "icon_type": "x",
+            "icon_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "list_item_7cTKiA",
+        "list_item_pppV9L",
+        "list_item_rJU9nJ",
+        "list_item_BhVjrC",
+        "list_item_ebiaqE",
+        "list_item_dV7Mrk",
+        "list_item_49tKMb",
+        "list_item_TWLMnF",
+        "list_item_NMcz9Q",
+        "list_item_hVcPiF"
+      ],
+      "name": "Poređenje voća",
+      "settings": {
+        "heading": "Gde nastaje razlika između našeg voća i onog iz radnje?",
+        "text": "Mi danas beremo, isti dan pakujemo i kod tebe je za najviše 24 sata.\nZato je naše sveže ubrano voće bolji izbor – jer ima ukus kojeg se sećaš iz detinjstva.",
+        "left_card_title": "Sveže ubrano",
+        "left_card_image": "shopify://shop_images/Frame_12_3.png",
+        "right_card_title": "Voće iz marketa",
+        "right_card_image": "shopify://shop_images/Frame_12_2.png",
+        "cta_text": "Voće koje kupuješ po marketima je često ubrano pre više od dve nedelje.\nZato nema onaj ukus koji pamtiš.",
+        "cta_background_color": "#0B2545",
+        "cta_text_color": "#FFFFFF",
+        "background_color": "#F5F0E8",
+        "card_background_color": "#FDFAF4",
+        "content_max_width": 1280,
+        "card_border_radius": 16,
+        "card_padding": 24,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "image_testimonial_slider_n7B7Bj": {
+      "type": "image-testimonial-slider",
+      "blocks": {
+        "slide_899VjR": {
+          "type": "slide",
+          "settings": {
+            "alt_text": "",
+            "link": ""
+          }
+        },
+        "slide_FKKdhN": {
+          "type": "slide",
+          "settings": {
+            "alt_text": "",
+            "link": ""
+          }
+        },
+        "slide_PmbraX": {
+          "type": "slide",
+          "settings": {
+            "alt_text": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_899VjR",
+        "slide_FKKdhN",
+        "slide_PmbraX"
+      ],
+      "name": "Klizač recenzija",
+      "settings": {
+        "heading": "Šta kažu naši kupci",
+        "description": "<p>Razliku osetiš odmah.</p>",
+        "show_arrows": true,
+        "enable_zoom": true,
+        "slider_gap_desktop": 24,
+        "slider_gap_mobile": 12,
+        "background_color": "#F5F0E8",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "faq_two_column_ppfhXw": {
+      "type": "faq-two-column",
+      "blocks": {
+        "faq_item_66jFDN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kako se vrši dostava?",
+            "answer": "<p>Naša dostava je brza i pouzdana. Voće se bere isti dan i isporučuje u roku od 24 sata.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_item_rzV96d": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Da li radite vikendom?",
+            "answer": "<p>Da, dostavljamo i subotom i nedeljom. Porudžbine primamo svaki dan.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_item_8DCE3e": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kako mogu da platim?",
+            "answer": "<p>Prihvatamo plaćanje gotovinom pri dostavi, kao i kartičnim plaćanjem online.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_item_3L9X8R": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Mogu li da promenim ili otkažem porudžbinu?",
+            "answer": "<p>Porudžbinu možete promeniti ili otkazati najkasnije sat vremena pre isporuke kontaktiranjem naše podrške.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_66jFDN",
+        "faq_item_rzV96d",
+        "faq_item_8DCE3e",
+        "faq_item_3L9X8R"
+      ],
+      "name": "FAQ dvostubac",
+      "settings": {
+        "heading": "Često postavljana pitanja",
+        "description": "<p>Ovde možete pronaći odgovore na najčešće postavljana pitanja o našim proizvodima i usluzi.</p>",
+        "cta_label": "",
+        "cta_link": "",
+        "background_color": "#F5F0E8",
+        "content_max_width": 1280,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "hero_banner_pijUjm": {
+      "type": "hero-banner",
+      "blocks": {
+        "subheading_deFNby": {
+          "type": "subheading",
+          "settings": {
+            "text": "Zato ima ukus koji u marketu ne možeš da nađeš."
+          }
+        },
+        "heading_cBkBbk": {
+          "type": "heading",
+          "settings": {
+            "text": "DANAS UBRANO NA KOSMAJU. ZA 24 SATA NA TVOJOJ ADRESI U BEOGRADU."
+          }
+        },
+        "text_kTdYMw": {
+          "type": "text",
+          "settings": {
+            "content": "<p>Sveže, ručno ubrano voće sa naših plantaža na kosmajskim proplancima.</p><p>Dokazano analizama - bez ostataka pesticida.</p><p>Znaš šta jedeš - i ti i deca.</p>"
+          }
+        },
+        "button_wf88Ag": {
+          "type": "button",
+          "settings": {
+            "label": "PORUČI SVEŽE UBRANO VOĆE",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_deFNby",
+        "heading_cBkBbk",
+        "text_kTdYMw",
+        "button_wf88Ag"
+      ],
+      "name": "Hero Banner",
+      "settings": {
+        "desktop_image": "shopify://shop_images/3a8de14aed0c3c4a9a6a82b4412340e978c2a557.png",
+        "desktop_image_position": "center center",
+        "mobile_image_position": "center center",
+        "desktop_height": 700,
+        "mobile_height": 550,
+        "overlay_color": "#000000",
+        "overlay_opacity": 51,
+        "content_max_width": 580,
+        "desktop_content_valign": "flex-end",
+        "mobile_content_valign": "flex-end",
+        "desktop_content_align": "left",
+        "mobile_content_align": "left",
+        "heading_color": "#FFFFFF",
+        "subheading_color": "#FFFFFF",
+        "text_color": "#FFFFFF",
+        "button_bg_color": "#DDB957",
+        "button_text_color": "#1A1A1A",
+        "button_hover_bg_color": "#C4A23E",
+        "button_hover_text_color": "#1A1A1A",
+        "desktop_padding_top": 60,
+        "desktop_padding_bottom": 60,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 40,
+        "desktop_text_gap": 20,
+        "mobile_text_gap": 16
+      }
+    },
+    "custom_footer_eATzBF": {
+      "type": "custom-footer",
+      "name": "Custom Footer",
+      "settings": {
+        "hide_on_pages": "",
+        "bg_color": "#2f346e",
+        "copyright_text": "© 2026 - BEOBAŠTA - SVA PRAVA ZADRŽANA",
+        "padding_top_desktop": 20,
+        "padding_bottom_desktop": 20,
+        "padding_top_mobile": 16,
+        "padding_bottom_mobile": 16
+      }
     }
   },
   "order": [
     "main",
-    "hero_banner_cBnFBe"
+    "custom_header_UFitye",
+    "hero_banner_cBnFBe",
+    "fruit_comparison_m9mG89",
+    "image_testimonial_slider_n7B7Bj",
+    "faq_two_column_ppfhXw",
+    "hero_banner_pijUjm",
+    "custom_footer_eATzBF"
   ]
 }

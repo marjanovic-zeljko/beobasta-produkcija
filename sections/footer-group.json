@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "quick_order_list_Kx4f7f": {
+      "type": "quick-order-list",
+      "disabled": true,
+      "name": "t:sections.quick_order_list.name",
+      "settings": {
+        "color_scheme": "",
+        "show_only_to_b2b_customers": false,
+        "hide_on_mobile": false,
+        "separate_section_with_border": true,
+        "subheading": "",
+        "title": "Brzi pregled korpe",
+        "show_image": true,
+        "show_sku": true,
+        "additional_products": [],
+        "collapse_additional_products": true
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "content": "<p>Prijavite se na naš newsletter da biste primali ekskluzivne ponude.</p>",
+            "button_background": "",
+            "button_text_color": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer-menu-copy",
+            "show_menu_title": true,
+            "menu_title": "Korisni linkovi"
+          }
+        },
+        "links_nFmfgA": {
+          "type": "links",
+          "disabled": true,
+          "settings": {
+            "menu": "footer-menu-copy",
+            "show_menu_title": true,
+            "menu_title": "."
+          }
+        }
+      },
+      "block_order": [
+        "newsletter",
+        "links",
+        "links_nFmfgA"
+      ],
+      "settings": {
+        "color_scheme": "scheme-ae558915-5869-4116-9f90-5c719a5836eb",
+        "separate_section_with_border": false,
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "quick_order_list_Kx4f7f",
+    "footer"
+  ]
+}

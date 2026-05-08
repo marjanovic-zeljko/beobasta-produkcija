@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-search",
+      "settings": {
+        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
+        "show_sort_by": false,
+        "products_per_page": 24,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "show_filters": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false,
+        "show_category": true,
+        "show_excerpt": true,
+        "show_read_more": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

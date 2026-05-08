@@ -1,0 +1,181 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Kako mogu da naručim proizvode putem vašeg sajta?</strong>",
+            "answer": "<p>Kupovina na Beobašta veb prodavnici je jednostavna. Izaberite proizvode ili pakete i dodajte ih u korpu. To možete ponavljati sve dok ne odaberete sve što želite.</p><p>Kada završite, otvorite korpu na vrhu stranice. Tu možete promeniti količine ili ukloniti proizvode. Ako imate napomenu za adresu ili dostavu, kliknite na polje za napomenu na dnu korpe.</p><p>Nakon toga kliknite na Nastavi sa porudžbinom, unesite podatke i potvrdite kupovinu. Na mejl ćete dobiti potvrdu o prijemu porudžbine.</p>"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Koje metode plaćanja su dostupne?</strong>",
+            "answer": "<p>Plaćanje se trenutno vrši isključivo pouzećem, što znači da iznos porudžbine plaćate kuriru kada vam paket stigne. </p><p>Ukoliko vam više odgovara uplata unapred na račun, i to je moguće. Nakon što napravite porudžbinu, možete nas kontaktirati mejlom na <strong>kontakt@beobasta.rs</strong> ili putem društvenih mreža i poslaćemo vam sve potrebne podatke za uplatu.</p><p>Napomena: Plaćanje karticom prilikom dostave trenutno nije dostupno. Online plaćanje karticama je u pripremi, pa je za sada najjednostavniji način plaćanja gotovina prilikom preuzimanja.</p>"
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>U koje gradove vršite dostavu?</strong>",
+            "answer": "<p>Dostavu vršimo na teritoriji cele Srbije, a način dostave zavisi od lokacije i vrste proizvoda. Postoje dva tipa dostave:</p><p><strong>1. Lična dostava (našim vozilima)</strong></p><p>Našom dostavom pokrivamo sledeće gradove i u njima isporučujemo i smrznute i nesmrznute proizvode.</p><p>Beograd</p><p>(Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun, Zvezdara)</p><p>Novi Sad</p><p>(Sremska Kamenica, Petrovaradin, Futog)</p><p>Ostala mesta:</p><ul><li>Stari Banovci</li><li>Novi Banovci</li><li>Stara Pazova</li><li>Nova Pazova</li><li>Inđija</li><li>Pančevo</li><li>Mladenovac</li></ul><p>Koji proizvodi idu ličnom dostavom?</p><p>Svi smrznuti proizvodi (smrznuto voće i povrće, domaće smrznute pite, sladoledi, smrznuti matični sokovi, hleb Čistač, sezonsko sveže voće i povrće)</p><p>Svi nesmrznuti proizvodi (sokovi, džemovi, sirupi, zimnica, paketi proizvoda itd.)</p><p>Drugim rečima: ako ste u ovim gradovima, sve proizvode dobijate našom direktnom dostavom.</p><p><strong>2. Kurirska dostava (Bex)</strong></p><p>Kurirskom službom šaljemo sve nesmrznute proizvode na bilo koju adresu u Srbiji koja nije obuhvaćena našom ličnom dostavom.</p><p><strong>Važno:</strong></p><p>Smrznute proizvode ne šaljemo kurirskom službom, već su dostupni samo u gradovima iz gornje liste.</p>"
+          }
+        },
+        "question_RNrFLb": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Koliko traje dostava od momenta naručivanja?</strong>",
+            "answer": "<p>Vreme isporuke zavisi od lokacije i načina dostave.</p><p><strong>Beograd i mesta koja pokrivamo našom dostavom:<br/></strong>Porudžbine obično stižu u roku od 3 dana od naručivanja.</p><p><strong>Ostali gradovi i mesta (kurirska dostava):<br/></strong>Rok isporuke je do 7 dana, u zavisnosti od preuzimanja pošiljke od strane kurirske službe.</p><p>Za sezonske sveže proizvode rok može biti nešto duži, u zavisnosti od dana berbe, ali isporuka se uvek obavlja u najkraćem mogućem roku.</p>"
+          }
+        },
+        "question_QTWUxJ": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Da li dostavljate i vikendom?</strong>",
+            "answer": "<p>Da, dostavljamo i subotom i nedeljom. Naša dostavna služba radi svih sedam dana u nedelji, pa isporuka može stići i tokom vikenda, u zavisnosti od rute dostave.</p><p>Ako želite da porudžbinu primite baš vikendom ili samo radnim danima, to možete napisati u polju za napomenu prilikom naručivanja. Trudićemo se da ispoštujemo vašu želju.</p>"
+          }
+        },
+        "question_4HxibF": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Kako ću znati kada će moja porudžbina stići?</strong>",
+            "answer": "<p>O statusu porudžbine obaveštavamo vas blagovremeno. </p><p>Dan pre isporuke dobićete SMS sa informacijom o terminu dostave i mogućnošću da termin potvrdite ili odložite ako vam ne odgovara. Nakon vaše potvrde planiramo rutu kako bismo bili sigurni da ste kod kuće kada pošiljka stiže.</p><p>Ako ne odgovorite na SMS, naš tim će vas kontaktirati telefonom.</p><p>Odmah nakon naručivanja dobijate i email potvrdu sa detaljima i brojem porudžbine. Taj broj možete koristiti ako želite da proverite status kod korisničke podrške.</p>"
+          }
+        },
+        "question_rd6pbe": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Da li mogu lično da preuzmem svoju porudžbinu?</strong>",
+            "answer": "<p>Da, moguće je lično preuzimanje uz prethodni dogovor. Preuzimanje se obavlja na jednoj od naših lokacija u Sopotu i Nemenikućama.</p><p><strong>Plantaža Nemenikuće:</strong> Kapetana Dragica 15a, 11450 Sopot</p><p><strong>Magacin Sopot:</strong> Milosava Vlajića 104, 11450 Sopot</p><p>Pre svakog dolaska potrebno je da nas kontaktirate putem društvenih mreža ili na mejl <strong>kontakt@beobasta.rs</strong> kako bismo potvrdili termin i pripremili porudžbinu.</p>"
+          }
+        },
+        "question_JVFdfa": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Kako se vrši dostava smrznutih proizvoda?</strong>",
+            "answer": "<p>Smrznute proizvode dostavljamo <strong>isključivo našom dostavom</strong> na sledećim lokacijama:</p><p>Beograd</p><p>(opštine: Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun, Zvezdara)</p><p>Novi Sad</p><p>(uključujući Sremsku Kamenicu, Petrovaradin, Futog)</p><p>Stari i Novi Banovci</p><p>Stara i Nova Pazova</p><p>Inđija</p><p>Pančevo</p><p>Mladenovac</p>"
+          }
+        },
+        "question_iTy3q4": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Šta da radim ako naiđem na poteškoće prilikom poručivanja?</strong>",
+            "answer": "<p>Ako naiđete na bilo kakav problem tokom poručivanja (adresa, korpa, kupon, tehnička greška), možete nam se javiti na mejl <strong>kontakt@beobasta.rs</strong> ili putem poruke na Facebooku ili Instagramu. Odgovaramo brzo i pomoći ćemo vam da dovršite narudžbinu.</p>"
+          }
+        },
+        "question_RDTjtb": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Imate li fizičku prodavnicu ili je kupovina moguća samo online?</strong>",
+            "answer": "<p>Beobašta trenutno nema svoju maloprodajnu radnju. Naše proizvode možete pronaći u odabranim prodavnicama zdrave hrane u Beogradu i drugim gradovima širom Srbije.</p><p>Pun spisak prodajnih mesta dostupan je ovde:<br/><a href=\"https://shop.beobasta.rs/gde-kupiti/\"><span style=\"text-decoration:underline\"><strong>https://shop.beobasta.rs/gde-kupiti/</strong></span></a></p><p>Naravno, ceo asortiman uvek možete poručiti online putem našeg sajta.</p>"
+          }
+        },
+        "question_HmELKT": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Šta ako proizvod stigne oštećen ili nisam zadovoljan porudžbinom?</strong>",
+            "answer": "<p>Ako vam proizvod stigne oštećen ili neispravan, javite nam se na mejl <strong>kontakt@beobasta.rs</strong> ili na društvenim mrežama. Samo nam napišite šta je problem i mi ćemo preuzeti dalje.</p><p>Reklamacije rešavamo tako što proizvod zamenimo, vratimo novac ili ponudimo drugo odgovarajuće rešenje.</p><p>Preporučujemo da paket proverite odmah po prijemu, kako biste što pre prijavili eventualni problem.</p>"
+          }
+        },
+        "question_tjgGnY": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Da li nudite pakete proizvoda za poručivanje?</strong>",
+            "answer": "<p>Da, u ponudi imamo različite pakete proizvoda koji omogućavaju uštedu i jednostavniji izbor. Sve aktuelne pakete možete videti ovde:</p><p><strong>https://shop.beobasta.rs/kategorija-proizvoda/paketi-proizvoda/</strong></p>"
+          }
+        },
+        "question_9MbJy3": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Da li vaši proizvodi sadrže dodati šećer ili konzervanse?</strong>",
+            "answer": "<p>Trudimo se da izbegavamo dodate šećere i konzervanse kad god je to moguće i da proizvodi budu što prirodniji.</p><p>Ukoliko neki proizvod sadrži dodat šećer ili konzervans, to je jasno naznačeno u njegovom opisu na sajtu i na deklaraciji. Sve sastojke možete uvek proveriti pre kupovine.</p>"
+          }
+        },
+        "question_KTgx9x": {
+          "type": "question",
+          "settings": {
+            "question": "<strong>Da li je voće koje nudite organsko?</strong>",
+            "answer": "<p>Naše voće nije sertifikovano kao organsko, ali je potpuno bezbedno za konzumaciju. Redovno ga testiramo u stručnim laboratorijama i analize potvrđuju da nema ostataka pesticida.</p><p>To znači da je voće sigurno za decu i odrasle, kao i za svakodnevnu upotrebu. U uzgoju se pridržavamo principa bezbedne poljoprivrede i vodimo računa o kvalitetu, čistoći i kontroli svakog zasada.</p><p>Ako želite da vidite rezultate analiza, možete nam pisati na <strong>kontakt@beobasta.rs</strong> i rado ćemo vam poslati dokumentaciju.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question_RNrFLb",
+        "question_QTWUxJ",
+        "question_4HxibF",
+        "question_rd6pbe",
+        "question_JVFdfa",
+        "question_iTy3q4",
+        "question_RDTjtb",
+        "question_HmELKT",
+        "question_tjgGnY",
+        "question_9MbJy3",
+        "question_KTgx9x"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "Potrebna vam je pomoć?",
+        "title": "Najčešće postavljena pitanja",
+        "content": ""
+      }
+    },
+    "rich_text_qbLb3f": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_Yt99Vx": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_QqmCmE": {
+          "type": "heading",
+          "settings": {
+            "text": "niste pronašli odgovor na svoje pitanje?",
+            "heading_tag": "h2"
+          }
+        },
+        "richtext_7nPVUn": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Ako niste pronašli odgovor na svoje pitanje, slobodno nam se javite. Tu smo da pomognemo oko bilo kakve nedoumice ili porudžbine.<br/><br/>Možete nas kontaktirati na <a><strong>kontakt@beobasta.rs</strong></a> ili putem poruke na Instagramu i Facebooku.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Yt99Vx",
+        "heading_QqmCmE",
+        "richtext_7nPVUn"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "start",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "faq",
+    "rich_text_qbLb3f"
+  ]
+}

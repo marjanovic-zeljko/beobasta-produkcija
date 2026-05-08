@@ -1,0 +1,145 @@
+{%- comment -%}
+  Blog članci vezani za proizvod – metafield custom.related_article (lista ili jedan article_reference).
+{%- endcomment -%}
+{%- if product != blank -%}
+  {%- assign related_articles = product.metafields.custom.related_article.value -%}
+  {%- if related_articles != blank -%}
+    {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+    {%- assign related_carousel_id = 'related-blog-articles-' | append: section.id -%}
+    <style>
+      #shopify-section-{{ section.id }} .related-blog-articles .blog-post-list--carousel {
+        --blog-post-list-card-width: min(380px, 38vw);
+        grid: auto / auto-flow var(--blog-post-list-card-width);
+      }
+
+      @media screen and (max-width: 999px) {
+        #shopify-section-{{ section.id }} .related-blog-articles .blog-post-list--carousel {
+          --blog-post-list-card-width: 40vw;
+        }
+      }
+
+      @media screen and (max-width: 699px) {
+        #shopify-section-{{ section.id }} .related-blog-articles .blog-post-list--carousel {
+          --blog-post-list-card-width: 74vw;
+        }
+      }
+    </style>
+
+    <div class="related-blog-articles section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+      <div class="container container--lg">
+        <div class="section-stack">
+          {%- render 'section-header',
+            heading: section.settings.heading,
+            content: section.settings.content,
+            text_alignment: section.settings.heading_alignment -%}
+
+          <div class="floating-controls-container floating-controls-container--inside floating-controls-container--on-hover">
+            <carousel-prev-button class="floating-controls-container__control" aria-controls="{{ related_carousel_id }}">
+              <button type="button" class="prev-next-button prev-next-button--prev circle-button hover:animate-icon-inline" disabled>
+                <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+                {%- render 'icon' with 'arrow-left', direction_aware: true -%}
+              </button>
+            </carousel-prev-button>
+
+            {%- if settings.stagger_blog_posts_apparition -%}
+              <blog-posts class="block w-full min-w-0" reveal-on-scroll="true">
+            {%- endif -%}
+            <scroll-carousel id="{{ related_carousel_id }}" group-cells allow-drag class="blog-post-list blog-post-list--carousel scroll-area bleed md:unbleed">
+              {%- capture related_sizes -%}(max-width: 699px) 95vw, (max-width: 1149px) calc(100vw / 2), calc((80rem - (5rem * 2)) / 3){%- endcapture -%}
+
+              {%- assign related_articles_loop_count = 0 -%}
+              {%- for article in related_articles -%}
+                {%- assign related_articles_loop_count = related_articles_loop_count | plus: 1 -%}
+                {%- render 'blog-post-card',
+                    article: article,
+                    blog: article.blog,
+                    show_category: true,
+                    show_date: false,
+                    show_excerpt: true,
+                    show_read_more: true,
+                    sizes: related_sizes,
+                    position: forloop.index -%}
+              {%- endfor -%}
+              {%- if related_articles_loop_count == 0 -%}
+                {%- assign article = related_articles -%}
+                {%- render 'blog-post-card',
+                    article: article,
+                    blog: article.blog,
+                    show_category: true,
+                    show_date: false,
+                    show_excerpt: true,
+                    show_read_more: true,
+                    sizes: related_sizes,
+                    position: 1 -%}
+              {%- endif -%}
+            </scroll-carousel>
+            {%- if settings.stagger_blog_posts_apparition -%}
+              </blog-posts>
+            {%- endif -%}
+
+            <carousel-next-button class="floating-controls-container__control" aria-controls="{{ related_carousel_id }}">
+              <button type="button" class="prev-next-button prev-next-button--next circle-button hover:animate-icon-inline">
+                <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+                {%- render 'icon' with 'arrow-right', direction_aware: true -%}
+              </button>
+            </carousel-next-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Related blog articles",
+  "tag": "section",
+  "class": "shopify-section--related-blog-articles",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Uses product metafield custom.related_article. Empty without product or metafield."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:global.text.heading",
+      "default": "Saznajte više"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:global.text.content",
+      "default": "<p></p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:global.text.alignment",
+      "options": [
+        { "value": "start", "label": "t:global.position.left" },
+        { "value": "center", "label": "t:global.position.center" },
+        { "value": "end", "label": "t:global.position.right" }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related blog articles"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,156 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "liquid_8pDLUq": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% assign is_frozen = product.metafields.custom.is_frozen %}\n\n{% if is_frozen == true or is_frozen == 'true' or is_frozen.value == true %}\n<a href=\"https://beobasta.rs/pages/nacin-placanja-i-troskovi-transporta\">\n  <div class=\"product-frozen-badge\">\n    <img \n      src=\"https://cdn.shopify.com/s/files/1/0735/6897/7140/files/bb_napomena-02.png?v=1769018977\"\n      alt=\"Frozen product\"\n      loading=\"lazy\"\n    >\n  </div>\n</a>\n{% endif %}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "disabled": true,
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": false,
+            "show_below_gallery": true
+          }
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {
+            "title": "Pairs well with",
+            "products_count": 2,
+            "show_below_gallery": true,
+            "stack_products": false,
+            "show_quick_buy": true
+          }
+        },
+        "accordion_9KBGqn": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Nutritivna vrednost",
+            "content": "{{ product.metafields.custom.nutritivne_vrednosti | metafield_tag }}",
+            "liquid": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "quantity_selector",
+        "liquid_8pDLUq",
+        "buy_buttons",
+        "payment_terms",
+        "separator",
+        "description",
+        "complementary_products",
+        "accordion_9KBGqn"
+      ],
+      "custom_css": [
+        "@media (max-width: 999px) {h1 {font-size: 24px; } .justify-items-start {justify-items: center; } .quantity-selector {border-radius: 40px; margin-bottom: -10px; border: solid gray 1px; }}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
+        "container_size": "lg",
+        "product_info_size": 40,
+        "show_sticky_add_to_cart": true,
+        "center_basic_info": true,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "desktop_media_grid_gap": 30,
+        "mobile_controls": "dots",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "related-blog-articles": {
+      "type": "related-blog-articles",
+      "settings": {
+        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
+        "separate_section_with_border": true,
+        "heading": "Saznajte više",
+        "content": "<p></p>",
+        "heading_alignment": "center"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "PROBAJ JOŠ",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-blog-articles",
+    "related-products"
+  ]
+}

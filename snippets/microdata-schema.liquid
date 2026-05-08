@@ -1,0 +1,219 @@
+{%- comment -%}
+This snippet structures the micro-data using JSON-LD specification. Starting from Prestige 10, we are using
+the structured_data built-in filter to ensure that Shopify can keep it up to date without requiring theme upgrade. If
+you believe some information for products are missing, please reach Shopify support directly, as it is no longer
+managed at the theme level.
+{%- endcomment -%}
+
+{%- if request.page_type == 'product' -%}
+  <script type="application/ld+json">
+  {% assign schema_country_code = localization.country.iso_code | default: shop.address.country_code | default: 'US' %}
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    {% if product_image_url %}
+    "image": [ {{ product_image_url | json }} ],
+    {% endif %}
+    "description": {{ product.description | strip_html | strip | json }},
+    {% if product.selected_or_first_available_variant.sku != blank %}
+    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    {% endif %}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": {{ schema_country_code | json }},
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
+      "url": {{ request.origin | append: '/pages/refund-policy' | json }}
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": {{ shop.currency | json }},
+      "offerCount": {{ product.variants.size }},
+      {% assign prices = product.variants | map: 'price' %}
+      {% assign min_price = prices | sort | first %}
+      {% assign max_price = prices | sort | last %}
+      "lowPrice": {{ min_price | divided_by: 100.0 | json }},
+      "highPrice": {{ max_price | divided_by: 100.0 | json }},
+      "offers": [
+        {%- for variant in product.variants -%}
+        {
+          "@type": "Offer",
+          {% if variant.sku != blank %}"sku": {{ variant.sku | json }},{% endif %}
+          {%- if variant.barcode and variant.barcode.size == 8 -%}"gtin8": {{ variant.barcode | json }},{% endif -%}
+          {%- if variant.barcode and variant.barcode.size == 12 -%}"gtin12": {{ variant.barcode | json }},{% endif -%}
+          {%- if variant.barcode and variant.barcode.size == 13 -%}"gtin13": {{ variant.barcode | json }},{% endif -%}
+          {%- if variant.barcode and variant.barcode.size == 14 -%}"gtin14": {{ variant.barcode | json }},{% endif -%}
+          "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price": {{ variant.price | divided_by: 100.0 | append: '' | json }},
+          "priceCurrency": {{ shop.currency | json }},
+          "url": {% if product.has_only_default_variant %}{{ request.origin | append: product.url | json }}{% else %}{{ request.origin | append: variant.url | json }}{% endif %},
+          "itemCondition": "https://schema.org/NewCondition",
+  
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": {{ shop.currency | json }}
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": {{ schema_country_code | json }}
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 2,
+                "unitCode": "DAY"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 2,
+                "maxValue": 5,
+                "unitCode": "DAY"
+              }
+            }
+          },
+  
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": {{ schema_country_code | json }},
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 30,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
+            "url": {{ request.origin | append: '/pages/refund-policy' | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  }
+  </script>
+{%- elsif request.page_type == 'article' -%}
+  <script type="application/ld+json">
+    {{- article | structured_data -}}
+  </script>
+{%- endif -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ 'general.home' | t | json }},
+        "item": "{{ shop.url }}"
+      }
+
+      {%- if request.page_type == 'product' -%}
+        {%- if collection -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": "{{ shop.url }}{{ collection.url }}"
+          }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ product.title | json }},
+            "item": "{{ shop.url }}{{ product.url }}"
+          }
+        {%- else -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ product.title | json }},
+            "item": "{{ shop.url }}{{ product.url }}"
+          }
+        {%- endif -%}
+      {%- elsif request.page_type == 'collection' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": "{{ shop.url }}{{ collection.url }}"
+          }
+      {%- elsif request.page_type == 'blog' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": "{{ shop.url }}{{ blog.url }}"
+          }
+      {%- elsif request.page_type == 'article' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ blog.title | json }},
+            "item": "{{ shop.url }}{{ blog.url }}"
+          }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ blog.title | json }},
+            "item": "{{ shop.url }}{{ article.url }}"
+          }
+      {%- elsif request.page_type == 'page' -%}
+        ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | json }},
+            "item": "{{ shop.url }}{{ page.url }}"
+          }
+      {%- endif -%}
+    ]
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {%- assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" -%}
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | append: page.url | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      {%- if shop.brand.logo -%}
+        "logo": {{ shop.brand.logo | image_url: width: shop.brand.logo.width | prepend: "https:" | json }},
+      {%- endif -%}
+      {%- if shop.brand.short_description -%}
+        "description": {{ shop.brand.short_description | json }},
+      {%- endif -%}
+      {%- if shop.brand.slogan -%}
+        "slogan": {{ shop.brand.slogan | json }},
+      {%- endif -%}
+      {%- if shop.brand.metafields.social_links.size > 0 -%}
+        "sameAs": [
+          {%- for social_link in shop.brand.metafields.social_links -%}
+            {{- social_link.last.value | json -}}{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ],
+      {%- endif -%}
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  ]
+  </script>
+{%- endif -%}

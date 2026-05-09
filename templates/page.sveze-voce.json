@@ -31,7 +31,7 @@
         "nav_item_9M74qi": {
           "type": "nav_item",
           "settings": {
-            "label": "SVEŽE VOĆE",
+            "label": "SVEŽE UBRANO",
             "section_id": "shopify-section-template--22290069258484__fruit_comparison_m9mG89"
           }
         },
@@ -94,7 +94,9 @@
           "type": "button",
           "settings": {
             "label": "PORUČI SVEŽE UBRANO VOĆE",
-            "link": ""
+            "button_link_type": "url",
+            "link": "",
+            "scroll_target": ""
           }
         }
       },
@@ -261,6 +263,69 @@
         "padding_bottom_mobile": 48
       }
     },
+    "featured_collections_tWcCcW": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_bjb7hh": {
+          "type": "collection",
+          "settings": {
+            "collection": "sveze-voce-i-povrce",
+            "products_count": 10,
+            "title": "",
+            "link_url": "shopify://collections/sveze-voce-i-povrce",
+            "link_text": "POGLEDAJ SVE"
+          }
+        }
+      },
+      "block_order": [
+        "collection_bjb7hh"
+      ],
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "IZABERI ONO ŠTO JE DANAS UBRANO"
+      }
+    },
+    "featured_collections_PeJCTz": {
+      "type": "featured-collections",
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "IZABERI ONO ŠTO JE UBRANO DANAS"
+      }
+    },
+    "collection_list_4A3zJh": {
+      "type": "collection-list",
+      "name": "t:sections.collection_list.presets.collection_list.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image_size": "auto",
+        "show_text_outside": false,
+        "space_items": true,
+        "stack_collections": true,
+        "collections_per_row_desktop": 3,
+        "stack_collections_mobile": true,
+        "collections_per_row_mobile": "1",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    },
     "image_testimonial_slider_n7B7Bj": {
       "type": "image-testimonial-slider",
       "blocks": {
@@ -411,7 +476,9 @@
           "type": "button",
           "settings": {
             "label": "PORUČI SVEŽE UBRANO VOĆE",
-            "link": ""
+            "button_link_type": "url",
+            "link": "",
+            "scroll_target": ""
           }
         }
       },
@@ -468,6 +535,9 @@
     "custom_header_UFitye",
     "hero_banner_cBnFBe",
     "fruit_comparison_m9mG89",
+    "featured_collections_tWcCcW",
+    "featured_collections_PeJCTz",
+    "collection_list_4A3zJh",
     "image_testimonial_slider_n7B7Bj",
     "faq_two_column_ppfhXw",
     "hero_banner_pijUjm",

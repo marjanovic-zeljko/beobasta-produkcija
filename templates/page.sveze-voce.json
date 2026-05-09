@@ -160,7 +160,7 @@
           "type": "list_item",
           "settings": {
             "card_side": "left",
-            "text": "Minimalno skladištenje - skoro bez čekanja",
+            "text": "Minimalno skladištenje – skoro bez čekanja",
             "icon_type": "approve",
             "icon_color": ""
           }
@@ -214,7 +214,7 @@
           "type": "list_item",
           "settings": {
             "card_side": "right",
-            "text": "Više transporta - veća šansa za oštećenje",
+            "text": "Više transporta – veća šansa za oštećenje",
             "icon_type": "x",
             "icon_color": ""
           }
@@ -223,7 +223,7 @@
           "type": "list_item",
           "settings": {
             "card_side": "right",
-            "text": "Više posrednika - više rukovanja voćem",
+            "text": "Više posrednika – više rukovanja voćem",
             "icon_type": "x",
             "icon_color": ""
           }

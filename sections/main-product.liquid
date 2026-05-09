@@ -107,7 +107,12 @@
   </div>
 </div>
 
-{%- if section.settings.show_sticky_add_to_cart and product.available -%}
+{%- assign is_bundle = false -%}
+{% if product.tags contains 'pdp-bundle' %}
+  {%- assign is_bundle = true -%}
+{%- endif -%}
+
+{%- if section.settings.show_sticky_add_to_cart and product.available and is_bundle == false -%}
   <product-rerender id="{{ product_form_id }}-sticky-bar" observe-form="{{ product_form_id }}">
     <product-sticky-bar form="{{ product_form_id }}" class="product-sticky-bar">
       <div class="product-sticky-bar__info sm-max:hidden">

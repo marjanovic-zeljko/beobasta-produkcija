@@ -17,12 +17,18 @@ Supported variables
 * payment_button_background: the background of the dynamic payment button
 * payment_button_background: the color of the dynamic payment button
 * form_id: if specified, define the form ID linked to this input
+* On the product PDP, if the product has tag "pdp-bundle", default buy / dynamic checkout buttons are omitted (bundle app UI).
 {%- endcomment -%}
 
 {%- if product != blank -%}
   {%- liquid
     assign variant_picker_block = section.blocks | where: 'type', 'variant_picker' | first
     assign recipient_feature_active = false
+    assign suppress_buy_buttons_bundle_pdp = false
+
+    if request.page_type == 'product' and product.tags contains 'pdp-bundle'
+      assign suppress_buy_buttons_bundle_pdp = true
+    endif
 
     if product.gift_card? and show_gift_card_recipient
       assign recipient_feature_active = true
@@ -45,8 +51,12 @@ Supported variables
         <input type="hidden" name="properties[__is_frozen]" value="true">
       {%- endif -%}
 
-      {% liquid
+      {%- liquid
         assign button_disabled = false
+        assign render_buy_controls_stack = false
+        if recipient_feature_active or suppress_buy_buttons_bundle_pdp == false
+          assign render_buy_controls_stack = true
+        endif
 
         if product.selected_or_first_available_variant == nil
           assign button_disabled = true
@@ -63,6 +73,7 @@ Supported variables
         endif
       %}
 
+      {%- if render_buy_controls_stack -%}
       <div class="v-stack gap-4">
         {%- if recipient_feature_active -%}
           <gift-card-recipient class="gift-card-recipient v-stack gap-3">
@@ -90,36 +101,39 @@ Supported variables
           </gift-card-recipient>
         {%- endif -%}
 
-        <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %}" form="{{ form_id }}">
-          {%- if product.selected_or_first_available_variant.available == false or show_payment_button and atc_button_background == blank and atc_button_text_color == blank -%}
-            {%- assign atc_button_style = 'outline' -%}
-          {%- else -%}
-            {%- assign atc_button_style = 'solid' -%}
-          {%- endif -%}
+        {%- unless suppress_buy_buttons_bundle_pdp -%}
+          <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %}" form="{{ form_id }}">
+            {%- if product.selected_or_first_available_variant.available == false or show_payment_button and atc_button_background == blank and atc_button_text_color == blank -%}
+              {%- assign atc_button_style = 'outline' -%}
+            {%- else -%}
+              {%- assign atc_button_style = 'solid' -%}
+            {%- endif -%}
 
-          {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, background: atc_button_background, text_color: atc_button_text_color, stretch: true -%}
+            {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, background: atc_button_background, text_color: atc_button_text_color, stretch: true -%}
 
-          {%- if show_payment_button -%}
-            {{- form | payment_button -}}
+            {%- if show_payment_button -%}
+              {{- form | payment_button -}}
 
-            <style>
-              #{{ form_id }} .shopify-payment-button {
-                {%- if payment_button_background != blank and payment_button_background != 'rgba(0,0,0,0)' -%}
-                  --button-background: {{ payment_button_background.rgb }};
-                {%- endif -%}
+              <style>
+                #{{ form_id }} .shopify-payment-button {
+                  {%- if payment_button_background != blank and payment_button_background != 'rgba(0,0,0,0)' -%}
+                    --button-background: {{ payment_button_background.rgb }};
+                  {%- endif -%}
 
-                {%- if payment_button_text_color != blank and payment_button_text_color != 'rgba(0,0,0,0)' -%}
-                  --button-text-color: {{ payment_button_text_color.rgb }};
-                {%- endif -%}
+                  {%- if payment_button_text_color != blank and payment_button_text_color != 'rgba(0,0,0,0)' -%}
+                    --button-text-color: {{ payment_button_text_color.rgb }};
+                  {%- endif -%}
 
-                {%- unless product.selected_or_first_available_variant.available -%}
-                  display: none;
-                {%- endunless -%}
-              }
-            </style>
-          {%- endif -%}
-        </buy-buttons>
+                  {%- unless product.selected_or_first_available_variant.available -%}
+                    display: none;
+                  {%- endunless -%}
+                }
+              </style>
+            {%- endif -%}
+          </buy-buttons>
+        {%- endunless -%}
       </div>
+      {%- endif -%}
     {%- endform -%}
   </product-form>
 {%- else -%}

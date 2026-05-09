@@ -8154,3 +8154,7 @@ ul {
 .blog-slider-section .swiper-pagination {
   bottom: 8px;
 }
+
+div[data-rbrselector="addToCart"] {
+  display: none;
+}

@@ -27,7 +27,7 @@ Supported variables
     assign suppress_buy_buttons_bundle_pdp = false
 
     if request.page_type == 'product' and product.tags contains 'pdp-bundle'
-      assign suppress_buy_buttons_bundle_pdp = true
+      assign suppress_buy_buttons_bundle_pdp = false
     endif
 
     if product.gift_card? and show_gift_card_recipient

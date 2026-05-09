@@ -109,7 +109,7 @@
 
 {%- assign is_bundle = false -%}
 {% if product.tags contains 'pdp-bundle' %}
-  {%- assign is_bundle = true -%}
+  {%- assign is_bundle = false -%}
 {%- endif -%}
 
 {%- if section.settings.show_sticky_add_to_cart and product.available and is_bundle == false -%}

@@ -389,7 +389,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Koliko voće može da traje i kako se pravilno čuva?",
-            "answer": "<p>Najbolje je konzumirati odmah ili pojesti u najkraćem roku, jer tada ima pun ukus.Ako se ipak odlučiš za čuvanje, možeš ga zamrznuti.</p>",
+            "answer": "<p>Najbolje je konzumirati odmah ili pojesti u najkraćem roku, jer tada ima pun ukus. Ako se ipak odlučiš za čuvanje, možeš ga zamrznuti.</p>",
             "open_by_default": false
           }
         },
@@ -428,7 +428,7 @@
         "faq_item_FAEdRj": {
           "type": "faq_item",
           "settings": {
-            "question": "Kako ide proces reklamacije ukoliko dobijem voće koje ne dogovara opisu?",
+            "question": "Da li mogu ostvariti pravo na reklamaciju ukoliko dobijem voće koje ne dogovara opisu?",
             "answer": "<p>Ukoliko ustanoviš da proizvod ne zadovoljava kriterijume kvaliteta (ima vidljive nedostatke i promene), možeš nam uputiti Zahtev za reklamaciju putem elektronske pošte na kontakt@beobasta.rs. <br/><br/>Utvrdićemo da li je reklamacija osnovana i u zakonskom roku doneti odluku kojom se odobrava ili odbija. Ukoliko ustanovimo da je reklamacija opravdana, zamenićemo proizvod za isti bez nedostataka. <br/><br/>Ukoliko ne možemo da zamenimo proizvod jer ga više nema na lageru, možeš preuzeti drugi proizvod u istoj vrednosti ili skuplji proizvod uz doplatu ili možeš tražiti povraćaj novca.</p>",
             "open_by_default": false
           }
@@ -446,9 +446,9 @@
       "name": "FAQ dvostubac",
       "settings": {
         "heading": "Tu smo da rešimo sve tvoje dileme. Ovo su odgovori na najčešća pitanja.",
-        "description": "<p>I dalje imas pitanja? Nikakav problem, kontaktiraj nas bilo kad i dobices odgovor u sto kracem vremenskom periodu.</p>",
+        "description": "<p>I dalje imas pitanja? Nikakav problem, kontaktiraj nas bilo kad i dobićes odgovor u što kraćem vremenskom periodu.</p>",
         "cta_label": "Kontaktiraj nas",
-        "cta_link": "shopify://pages/kako-kupiti-1",
+        "cta_link": "shopify://pages/najcesce-pitanja",
         "background_color": "#f5f0e8",
         "content_max_width": 1280,
         "padding_top_desktop": 80,

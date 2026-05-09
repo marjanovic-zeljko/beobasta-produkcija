@@ -106,7 +106,7 @@
       "unavailable_button": "Nedostupno",
       "choose_options": "Choose options",
       "added_to_cart": "Dodato u korpu!",
-      "sold_out_badge": "Rasprodato",
+      "sold_out_badge": "Trenutno nedostupno",
       "on_sale_badge": "Na popustu",
       "discount_badge_html": "Uštedi {{ savings }}",
       "sku": "SKU:",

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "404": {
     "general": {
@@ -93,7 +102,7 @@
       "view_details": "Vidi detalje",
       "add_to_cart_button": "Dodaj u korpu",
       "pre_order_button": "Pre-order",
-      "sold_out_button": "Rasprodato",
+      "sold_out_button": "Trenutno nedostupno",
       "unavailable_button": "Nedostupno",
       "choose_options": "Choose options",
       "added_to_cart": "Dodato u korpu!",

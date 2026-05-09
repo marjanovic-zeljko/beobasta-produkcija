@@ -518,6 +518,7 @@
     },
     "custom_footer_eATzBF": {
       "type": "custom-footer",
+      "disabled": true,
       "name": "Custom Footer",
       "settings": {
         "hide_on_pages": "",

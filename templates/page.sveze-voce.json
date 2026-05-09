@@ -21,17 +21,10 @@
     "custom_header_UFitye": {
       "type": "custom-header",
       "blocks": {
-        "nav_item_zhGHVC": {
-          "type": "nav_item",
-          "settings": {
-            "label": "RAZLIKA U KVALITETU",
-            "section_id": "shopify-section-template--22290069258484__hero_banner_cBnFBe"
-          }
-        },
         "nav_item_9M74qi": {
           "type": "nav_item",
           "settings": {
-            "label": "SVEŽE UBRANO",
+            "label": "RAZLIKA U KVALITETU",
             "section_id": "shopify-section-template--22290069258484__fruit_comparison_m9mG89"
           }
         },
@@ -51,7 +44,6 @@
         }
       },
       "block_order": [
-        "nav_item_zhGHVC",
         "nav_item_9M74qi",
         "nav_item_zkLG4j",
         "nav_item_tQm7Jw"
@@ -61,7 +53,7 @@
         "hide_on_pages": "",
         "bg_color": "#2f346e",
         "enable_sticky": true,
-        "cta_text": "PORUČI SVEŽE UBRANO VOĆE",
+        "cta_text": "",
         "cta_target": "shopify-section-template--22290069258484__hero_banner_pijUjm",
         "padding_top_desktop": 16,
         "padding_bottom_desktop": 16,

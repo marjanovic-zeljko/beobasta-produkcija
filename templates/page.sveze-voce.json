@@ -381,7 +381,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Kada mi stiže voće koje poručim?",
-            "answer": "<p>Kada berba krene, voće stiže na tvoju adresu za najviše 24 sata od trenutka branja.Zrenje i berba zavise od vremenskih prilika i temperature vazduha.Ukoliko pada kiša, branje nije moguće i tada s tobom dogovaramo tačan datum i vreme dostave.</p>",
+            "answer": "<p>Kada berba krene, voće stiže na tvoju adresu za najviše 24 sata od trenutka branja. Zrenje i berba zavise od vremenskih prilika i temperature vazduha.Ukoliko pada kiša, branje nije moguće i tada s tobom dogovaramo tačan datum i vreme dostave.</p>",
             "open_by_default": true
           }
         },
@@ -397,7 +397,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Gde mogu da proverim da je voće zaista bez ostataka pesticida?",
-            "answer": "<p>Ovde preuzmi PDF dokument u kojem se nalazi zvanično laboratorijsko ispitivanje koje potvrđuje da je voće potpuno bezbedno za konzumiranje.</p>",
+            "answer": "<p>Kada se završi laboratorijski ispitivanje, dokumenti će javno biti dostupni na ovom mestu.</p>",
             "open_by_default": false
           }
         },
@@ -405,7 +405,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Kako da poručim i platim?",
-            "answer": "<p>Poručivanje se vrši dodavanjem proizvoda u korpu. Dodavanje možeš ponavljati sve dok ne poručiš sve što želiš.Sadržaj korpe možeš proveriti na vrhu stranice.Ako ti je potrebna pomoć, možeš nas kontaktirati na broj 0640000077 svakim radnim danom od 9-17h.Plaćanje se vrši pouzećem nakon isporuke.</p>",
+            "answer": "<p>Poručivanje se vrši dodavanjem proizvoda u korpu. Dodavanje možeš ponavljati sve dok ne poručiš sve što želiš. Sadržaj korpe možeš proveriti na vrhu stranice. Ako ti je potrebna pomoć, možeš nas kontaktirati putem društvenih mreža ili e-maila. Plaćanje se vrši pouzećem nakon isporuke.</p>",
             "open_by_default": false
           }
         },
@@ -413,7 +413,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Gde se sve vrši dostava?",
-            "answer": "<p>Dostavu vršimo na teritoriji Beograda u opštinama Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun i Zvezdara.</p>",
+            "answer": "<p>Dostava za Beograd (za opštine: Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun i Zvezdara), Novi Sad (uključujući Sremsku Kamenicu, Petrovaradin, Futog), Stare i Nove Banovce, Staru i Novu Pazovu, Inđiju, Pančevo i Mladenovac.<br/><br/></p>",
             "open_by_default": false
           }
         },
@@ -421,7 +421,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Koja je cena dostave?",
-            "answer": "<p>Dostava za Beograd:Porudžbine do 2500 din: x dinPorudžbine od 2500 do 6000 din: x dinPorudžbine preko 6000 din: besplatno</p>",
+            "answer": "<p>Cene dostave i više informacija o transportu možeš pogledati ovde.</p>",
             "open_by_default": false
           }
         },
@@ -429,7 +429,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Kako ide proces reklamacije ukoliko dobijem voće koje ne dogovara opisu?",
-            "answer": "<p>Ukoliko ustanoviš da proizvod ne zadovoljava kriterijume kvaliteta (ima vidljive nedostatke i promene), možeš nam uputiti Zahtev za reklamaciju putem elektronske pošte na kontakt@beobasta.rs ili telefonskim putem na 0640000077.Utvrdićemo da li je reklamacija osnovana i u zakonskom roku doneti odluku kojom se odobrava ili odbija.Ukoliko ustanovimo da je reklamacija opravdana, zamenićemo proizvod za isti bez nedostataka.Ukoliko ne možemo da zamenimo proizvod jer ga više nema na lageru, možeš preuzeti drugi proizvod u istoj vrednosti ili skuplji proizvod uz doplatu ili možeš tražiti povraćaj novca.Ukoliko reklamacija nije opravdana, proizvod koji je reklamiran ti vraćamo uz Odluku o reklamaciji.</p>",
+            "answer": "<p>Ukoliko ustanoviš da proizvod ne zadovoljava kriterijume kvaliteta (ima vidljive nedostatke i promene), možeš nam uputiti Zahtev za reklamaciju putem elektronske pošte na kontakt@beobasta.rs. <br/><br/>Utvrdićemo da li je reklamacija osnovana i u zakonskom roku doneti odluku kojom se odobrava ili odbija. Ukoliko ustanovimo da je reklamacija opravdana, zamenićemo proizvod za isti bez nedostataka. <br/><br/>Ukoliko ne možemo da zamenimo proizvod jer ga više nema na lageru, možeš preuzeti drugi proizvod u istoj vrednosti ili skuplji proizvod uz doplatu ili možeš tražiti povraćaj novca.</p>",
             "open_by_default": false
           }
         }

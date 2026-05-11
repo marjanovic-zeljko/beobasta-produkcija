@@ -12,6 +12,7 @@
     --fc-cta-bg: {{ section.settings.cta_background_color }};
     --fc-cta-color: {{ section.settings.cta_text_color }};
     --fc-text-align: {{ section.settings.text_alignment }};
+    --fc-cta-text-align: {{ section.settings.cta_text_alignment }};
   }
 
   #shopify-section-{{ section.id }} .fc {
@@ -139,7 +140,13 @@
     background-color: var(--fc-cta-bg);
     border-radius: var(--fc-card-radius);
     padding: 24px 32px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .fc__cta-content {
+    width: fit-content;
+    text-align: var(--fc-cta-text-align);
   }
 
   #shopify-section-{{ section.id }} .fc__cta-text {
@@ -246,7 +253,9 @@
 
     {%- if section.settings.cta_text != blank -%}
       <div class="fc__cta">
-        <p class="fc__cta-text">{{ section.settings.cta_text | newline_to_br }}</p>
+        <div class="fc__cta-content">
+          <p class="fc__cta-text">{{ section.settings.cta_text | newline_to_br }}</p>
+        </div>
       </div>
     {%- endif -%}
 
@@ -341,6 +350,18 @@
       "id": "cta_text_color",
       "label": "Boja teksta CTA bara",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "select",
+      "id": "cta_text_alignment",
+      "label": "Poravnanje teksta CTA bara",
+      "options": [
+        { "value": "left", "label": "Levo" },
+        { "value": "center", "label": "Centar" },
+        { "value": "right", "label": "Desno" }
+      ],
+      "default": "center",
+      "info": "Tekst će biti poravnat unutar centriranog okvira"
     },
     {
       "type": "header",

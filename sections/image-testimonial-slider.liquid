@@ -7,6 +7,7 @@
     --imgslider-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
     --imgslider-gap-desktop: {{ section.settings.slider_gap_desktop }}px;
     --imgslider-gap-mobile: {{ section.settings.slider_gap_mobile }}px;
+    --imgslider-text-align: {{ section.settings.text_alignment }};
   }
 
   #shopify-section-{{ section.id }} .imgslider {
@@ -20,7 +21,13 @@
     max-width: 720px;
     margin: 0 auto 48px;
     padding-inline: var(--container-gutter, 2rem);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .imgslider__header-content {
+    width: fit-content;
+    text-align: var(--imgslider-text-align);
   }
 
   #shopify-section-{{ section.id }} .imgslider__heading {
@@ -167,12 +174,14 @@
 <div class="imgslider">
   {%- if section.settings.heading != blank or section.settings.description != blank -%}
     <div class="imgslider__header">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="imgslider__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}
-        <div class="imgslider__description">{{ section.settings.description }}</div>
-      {%- endif -%}
+      <div class="imgslider__header-content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="imgslider__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="imgslider__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
     </div>
   {%- endif -%}
 
@@ -345,6 +354,18 @@
       "id": "description",
       "label": "Opis",
       "default": "<p>Razliku osetiš odmah.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Poravnanje teksta",
+      "options": [
+        { "value": "left", "label": "Levo" },
+        { "value": "center", "label": "Centar" },
+        { "value": "right", "label": "Desno" }
+      ],
+      "default": "center",
+      "info": "Tekst će biti poravnat unutar centriranog okvira"
     },
     {
       "type": "header",

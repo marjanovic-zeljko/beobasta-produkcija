@@ -6,6 +6,24 @@ may have important consequence on the section itself.
 ------------------------------------------------------------------------------------------------------------------------
 {%- endcomment -%}
 
+<style>
+  {%- for block in section.blocks -%}
+    {%- if block.settings.highlight_text_color != blank -%}
+      #slide-{{ block.id }} .prose .h1 em,
+      #slide-{{ block.id }} .prose .h1 i {
+        font-style: normal !important;
+        color: {{ block.settings.highlight_text_color }};
+      }
+
+      #slide-{{ block.id }} .prose .h6 em,
+      #slide-{{ block.id }} .prose .h6 i {
+        font-style: normal !important;
+        color: {{ block.settings.highlight_text_color }};
+      }
+    {%- endif -%}
+  {%- endfor -%}
+</style>
+
 {%- if section.blocks.size > 0 -%}
   {%- assign carousel_id = 'carousel-' | append: section.id -%}
 
@@ -91,7 +109,7 @@ may have important consequence on the section itself.
             endif
           %}
 
-          <div class="slideshow__slide-content {% if is_boxed %}slideshow__slide-content--boxed{% endif %} {% if has_border %}slideshow__slide-content--with-border{% endif %} {% if has_inside_offset %}slideshow__slide-content--with-border-offset{% endif %} {{ block.settings.mobile_text_position }} {{ block.settings.desktop_text_position }}" style="{% render 'surface', background: block.settings.background, background_opacity: block.settings.background_opacity, text_color: block.settings.text_color, border_color: block.settings.border_color %}">
+          <div id="slide-{{ block.id }}" class="slideshow__slide-content {% if is_boxed %}slideshow__slide-content--boxed{% endif %} {% if has_border %}slideshow__slide-content--with-border{% endif %} {% if has_inside_offset %}slideshow__slide-content--with-border-offset{% endif %} {{ block.settings.mobile_text_position }} {{ block.settings.desktop_text_position }}" style="{% render 'surface', background: block.settings.background, background_opacity: block.settings.background_opacity, text_color: block.settings.text_color, border_color: block.settings.border_color %}">
             <div class="prose">
               {%- if block.settings.subheading != blank -%}
                 <p class="h6">{{ block.settings.subheading }}</p>
@@ -533,6 +551,12 @@ may have important consequence on the section itself.
         },
         {
           "type": "color",
+          "id": "highlight_text_color",
+          "label": "Highlighted text color",
+          "info": "Color for text marked as italic in the heading. The text will appear in this color without italic styling."
+        },
+        {
+          "type": "color",
           "id": "border_color",
           "label": "t:global.colors.border"
         },
@@ -795,6 +819,12 @@ may have important consequence on the section itself.
           "id": "text_color",
           "label": "t:global.colors.text",
           "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "highlight_text_color",
+          "label": "Highlighted text color",
+          "info": "Color for text marked as italic in the heading. The text will appear in this color without italic styling."
         },
         {
           "type": "color",

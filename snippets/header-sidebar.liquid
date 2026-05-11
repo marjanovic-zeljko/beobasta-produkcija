@@ -54,12 +54,12 @@ therefore using a different structure for the Shadow DOM template
         {%- for link in menu.links -%}
           <li>
             {%- if link.links.size > 0 -%}
-              <button type="button" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %}{% if link.title == 'Detoks' %} color-green{% endif %}" aria-controls="header-panel-{{ forloop.index }} {{ link.title }}" aria-expanded="false">
+              <button type="button" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %}{% if link.title == 'Detoks' %} color-green{% elsif link.title == 'Sveže ubrano' %} color-red{% endif %}" aria-controls="header-panel-{{ forloop.index }} {{ link.title }}" aria-expanded="false">
                 {{- link.title -}}
                 {%- render 'icon' with 'chevron-right', width: 12, direction_aware: true -%}
               </button>
             {%- else -%}
-              <a href="{{ link.url }}" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if link.title == 'Detoks' %} color-green{% endif %}">
+              <a href="{{ link.url }}" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if link.title == 'Detoks' %} color-green{% elsif link.title == 'Sveže ubrano' %} color-red{% endif %}">
                 {{- link.title -}}
               </a>
             {%- endif -%}
@@ -129,7 +129,7 @@ therefore using a different structure for the Shadow DOM template
                     {%- if sub_link.links.size > 0 -%}
                       <accordion-disclosure>
                         <details class="accordion__disclosure group" {% if open_second_level_menus %}open{% endif %}>
-                          <summary class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if sub_link.title == 'Detoks' %} color-green{% endif %}">
+                          <summary class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if sub_link.title == 'Detoks' %} color-green{% elsif sub_link.title == 'Sveže ubrano' %} color-red{% endif %}">
                             {{- sub_link.title -}}
                             <span class="animated-plus group-expanded:rotate" aria-hidden="true"></span>
                           </summary>
@@ -142,7 +142,7 @@ therefore using a different structure for the Shadow DOM template
                         </details>
                       </accordion-disclosure>
                     {%- else -%}
-                      <a href="{{ sub_link.url }}" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if sub_link.title == 'Detoks' %} color-green{% endif %}">
+                      <a href="{{ sub_link.url }}" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}h6{% endif %} {% if sub_link.title == 'Detoks' %} color-green{% elsif sub_link.title == 'Sveže ubrano' %} color-red{% endif %}">
                         {{- sub_link.title -}}
                       </a>
                     {%- endif -%}
@@ -197,6 +197,12 @@ therefore using a different structure for the Shadow DOM template
   }
 
   [data-title="Detoks"] a { 
+    font-weight: bold;
+  }
+
+  .color-red {
+    color: white;
+    background-color: red;
     font-weight: bold;
   }
 

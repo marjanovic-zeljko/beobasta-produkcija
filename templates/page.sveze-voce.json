@@ -88,7 +88,7 @@
           "settings": {
             "label": "PORUČI SVEŽE UBRANO VOĆE",
             "button_link_type": "url",
-            "link": "",
+            "link": "#shopify-section-template--22290069258484__featured_collections_tWcCcW",
             "scroll_target": ""
           }
         }
@@ -238,6 +238,7 @@
       "settings": {
         "heading": "Gde nastaje razlika između našeg voća i onog iz radnje?",
         "text": "Mi danas beremo, isti dan pakujemo i kod tebe je za najviše 24 sata.\nZato je naše sveže ubrano voće bolji izbor – jer ima ukus kojeg se sećaš iz detinjstva.",
+        "text_alignment": "left",
         "left_card_title": "Sveže ubrano",
         "left_card_image": "shopify://shop_images/Frame_12_3.png",
         "right_card_title": "Voće iz marketa",
@@ -245,6 +246,7 @@
         "cta_text": "Voće koje kupuješ po marketima je često ubrano pre više od dve nedelje.\nZato nema onaj ukus koji pamtiš.",
         "cta_background_color": "#2f346e",
         "cta_text_color": "#ffffff",
+        "cta_text_alignment": "left",
         "background_color": "#f5f0e8",
         "card_background_color": "#fdfaf4",
         "content_max_width": 1280,
@@ -356,6 +358,7 @@
       "settings": {
         "heading": "Voće koje je danas na grani – sutra je kod tebe na adresi",
         "description": "<p>Razliku osetiš odmah.<br/>Evo šta kažu ljudi koji su jednom probali.</p>",
+        "text_alignment": "left",
         "show_arrows": true,
         "enable_zoom": true,
         "slider_gap_desktop": 24,
@@ -470,7 +473,7 @@
           "settings": {
             "label": "PORUČI SVEŽE UBRANO VOĆE",
             "button_link_type": "url",
-            "link": "",
+            "link": "#shopify-section-template--22290069258484__featured_collections_tWcCcW",
             "scroll_target": ""
           }
         }

@@ -11,6 +11,7 @@
     --fc-pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
     --fc-cta-bg: {{ section.settings.cta_background_color }};
     --fc-cta-color: {{ section.settings.cta_text_color }};
+    --fc-text-align: {{ section.settings.text_alignment }};
   }
 
   #shopify-section-{{ section.id }} .fc {
@@ -32,8 +33,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .fc__top-content {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    text-align: center;
+    width: fit-content;
+    text-align: var(--fc-text-align);
   }
 
   #shopify-section-{{ section.id }} .fc__heading {
@@ -174,12 +181,14 @@
   <div class="fc__inner">
 
     <div class="fc__top">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="fc__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <p class="fc__subheading">{{ section.settings.text | newline_to_br }}</p>
-      {%- endif -%}
+      <div class="fc__top-content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fc__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="fc__subheading">{{ section.settings.text | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
     </div>
 
     <div class="fc__grid">
@@ -268,6 +277,18 @@
       "id": "text",
       "label": "Tekst ispod naslova",
       "default": "Mi danas beremo, isti dan pakujemo i kod tebe je za najviše 24 sata.\nZato je naše sveže ubrano voće bolji izbor – jer ima ukus kojeg se sećaš iz detinjstva."
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Poravnanje teksta",
+      "options": [
+        { "value": "left", "label": "Levo" },
+        { "value": "center", "label": "Centar" },
+        { "value": "right", "label": "Desno" }
+      ],
+      "default": "center",
+      "info": "Tekst će biti poravnat unutar centriranog okvira"
     },
     {
       "type": "header",

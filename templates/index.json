@@ -113,14 +113,14 @@
             "link_text": "POGLEDAJ SVE"
           }
         },
-        "collection_Y7XTVU": {
+        "collection_YdQLrb": {
           "type": "collection",
           "settings": {
-            "collection": "zimnica",
-            "products_count": 4,
+            "collection": "sveze-voce-i-povrce",
+            "products_count": 8,
             "title": "",
-            "link_url": "shopify://collections/zimnica",
-            "link_text": "ISTRAŽI SVE"
+            "link_url": "",
+            "link_text": "View all"
           }
         },
         "collection-2": {
@@ -136,7 +136,7 @@
       },
       "block_order": [
         "collection_xrQKJy",
-        "collection_Y7XTVU",
+        "collection_YdQLrb",
         "collection-2"
       ],
       "settings": {

@@ -402,7 +402,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Kako da poručim i platim?",
-            "answer": "<p>Poručivanje se vrši dodavanjem proizvoda u korpu. Dodavanje možeš ponavljati sve dok ne poručiš sve što želiš. Sadržaj korpe možeš proveriti na vrhu stranice. Ako ti je potrebna pomoć, možeš nas kontaktirati putem društvenih mreža ili e-maila. Plaćanje se vrši pouzećem nakon isporuke.</p>",
+            "answer": "<p>Poručivanje se vrši dodavanjem proizvoda u korpu. Dodavanje možeš ponavljati sve dok ne poručiš sve što želiš. Ako ti je potrebna pomoć, možeš nas kontaktirati putem društvenih mreža ili e-maila. Plaćanje se vrši pouzećem nakon isporuke.</p>",
             "open_by_default": false
           }
         },

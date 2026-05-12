@@ -3177,6 +3177,19 @@ tr[onclick]:hover {
   column-gap: 1rem;
 }
 
+.badge--discount {
+  align-items: center;
+  background: var(--color-on-sale, #e02b2b);
+  border-radius: 2em;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 9px 17px;
+  white-space: nowrap;
+}
+
 .localization-selectors {
   flex-wrap: wrap;
   justify-content: center;

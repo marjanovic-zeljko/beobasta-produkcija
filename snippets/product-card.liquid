@@ -51,6 +51,11 @@ Supported variables
       break
     endif
   endfor
+
+  assign show_price_validity_badge = false
+  if request.page_type == 'page' and page != blank and page.handle == 'sveze-ubrano'
+    assign show_price_validity_badge = true
+  endif
 -%}
 
 <style>
@@ -227,7 +232,7 @@ Supported variables
             {%- endif -%}
 
             {%- if show_prices -%}
-              {%- render 'price-list', product: product, context: 'card' -%}
+              {%- render 'price-list', product: product, context: 'card', show_price_validity_badge: show_price_validity_badge -%}
             {%- endif -%}
 
             {%- capture view_details_id -%}product-view-details-{{ section.id }}-{{ block.id }}-{{ quick_buy_context }}-{{ product.id }}{%- endcapture -%}

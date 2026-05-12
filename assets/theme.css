@@ -3170,6 +3170,7 @@ tr[onclick]:hover {
   align-items: baseline;
   column-gap: .5rem;
   display: flex;
+  align-items: center;
 }
 
 .price-list--product {

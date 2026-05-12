@@ -394,7 +394,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Gde mogu da proverim da je voće zaista bez ostataka pesticida?",
-            "answer": "<p>Kada se završi laboratorijski ispitivanje, dokumenti će javno biti dostupni na ovom mestu.</p>",
+            "answer": "<p>Kada se završi laboratorijsko ispitivanje, dokumenti će javno biti dostupni na stranicama proizvoda (u opisu).</p>",
             "open_by_default": false
           }
         },

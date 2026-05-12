@@ -155,12 +155,7 @@ Supported variables
           {%- when 'price' -%}
             {%- if product.selected_or_first_available_variant != nil -%}
               <div class="v-stack">
-                {%- render 'price-list',
-                  product: product,
-                  variant: product.selected_or_first_available_variant,
-                  context: 'product',
-                  show_price_validity_badge: context == 'main_product'
-                -%}
+                {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, context: 'product' -%}
 
                 {%- if block.settings.show_taxes_notice -%}
                   <p class="text-sm text-subdued">

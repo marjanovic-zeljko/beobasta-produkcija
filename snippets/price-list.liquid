@@ -14,7 +14,7 @@ Supported variables
 * line_item: if provided, then the price from this line item are rendered (used on cart or order)
 * hide_unit_price: if set to true unit prices are hidden (mostly useful for size constrained elements)
 * context: can be "product", "line_item" or "card". This controls how the prices are displayed (using the correct sizes)
-* show_price_validity_badge: if true (main product page only), shows product metafield custom.cena_vazi_za next to the price
+* show_price_validity_badge: if true with context "card", shows product metafield custom.cena_vazi_za next to the price (used on /pages/sveze-ubrano only)
 {%- endcomment -%}
 
 {%- liquid
@@ -39,21 +39,6 @@ Supported variables
   endcase
 -%}
 
-<style>
-  .badge--discount {
-    display: inline-flex;
-    align-items: center;
-    background: var(--color-on-sale, #e02b2b);
-    color: #fff;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    line-height: 1;
-    padding: 9px 17px;
-    border-radius: 2em;
-    white-space: nowrap;
-  }
-</style>
-
 <price-list class="price-list {% if context == 'product' %}price-list--product{% endif %}">
   {%- if variant != blank -%}
     {%- comment -%}
@@ -70,10 +55,6 @@ Supported variables
         {{- variant.price | money -}}
       {%- endif -%}
     </sale-price>
-
-    {%- if show_price_validity_badge and product != blank and product.metafields.custom.cena_vazi_za != blank -%}
-      <span class="badge--discount">{{ product.metafields.custom.cena_vazi_za.value }}</span>
-    {%- endif -%}
 
     {%- if variant.compare_at_price > variant.price -%}
       <compare-at-price class="{{ compare_at_price_classes }}">
@@ -159,6 +140,10 @@ Supported variables
         <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
         {{- variant_price -}}
       </sale-price>
+    {%- endif -%}
+
+    {%- if show_price_validity_badge and context == 'card' and product.metafields.custom.cena_vazi_za != blank -%}
+      <span class="badge--discount">{{ product.metafields.custom.cena_vazi_za.value }}</span>
     {%- endif -%}
 
     {%- if variant.price < variant.compare_at_price -%}

@@ -409,7 +409,7 @@
         "faq_item_VTQGMk": {
           "type": "faq_item",
           "settings": {
-            "question": "Gde se sve vrši dostava?",
+            "question": "Gde je sve moguća dostava?",
             "answer": "<p>Dostava za Beograd (za opštine: Čukarica, Novi Beograd, Rakovica, Palilula, Savski venac, Stari grad, Surčin, Voždovac, Vračar, Zemun i Zvezdara), Novi Sad (uključujući Sremsku Kamenicu, Petrovaradin, Futog), Stare i Nove Banovce, Staru i Novu Pazovu, Inđiju, Pančevo i Mladenovac.<br/><br/></p>",
             "open_by_default": false
           }
@@ -418,7 +418,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Koja je cena dostave?",
-            "answer": "<p>Cene dostave i više informacija o transportu možeš pogledati ovde.</p>",
+            "answer": "<p>Cene dostave i više informacija o transportu možeš pogledati <a href=\"https://beobasta.rs/pages/nacin-placanja-i-troskovi-transporta\" title=\"https://beobasta.rs/pages/nacin-placanja-i-troskovi-transporta\"><strong>ovde</strong></a>.</p>",
             "open_by_default": false
           }
         },

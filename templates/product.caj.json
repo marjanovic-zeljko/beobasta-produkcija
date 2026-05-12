@@ -42,6 +42,7 @@
         },
         "liquid_8pDLUq": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% assign is_frozen = product.metafields.custom.is_frozen %}\n\n{% if is_frozen == true or is_frozen == 'true' or is_frozen.value == true %}\n<a href=\"https://beobasta.rs/pages/nacin-placanja-i-troskovi-transporta\">\n  <div class=\"product-frozen-badge\">\n    <img \n      src=\"https://cdn.shopify.com/s/files/1/0735/6897/7140/files/bb_napomena-02.png?v=1769018977\"\n      alt=\"Frozen product\"\n      loading=\"lazy\"\n    >\n  </div>\n</a>\n{% endif %}"
           }

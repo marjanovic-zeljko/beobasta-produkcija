@@ -27,6 +27,12 @@
     "announcement_bar_Repe8b": {
       "type": "announcement-bar",
       "blocks": {
+        "message_TtbBKU": {
+          "type": "message",
+          "settings": {
+            "text": "🫐 <a href=\"https://beobasta.rs/collections/hladno-cedeni-sokovi\" title=\"https://beobasta.rs/collections/hladno-cedeni-sokovi\"><strong>Sokovi od bobičastog voća na sniženju od čak 20%</strong></a>"
+          }
+        },
         "message_XxtWTN": {
           "type": "message",
           "settings": {
@@ -48,6 +54,7 @@
         }
       },
       "block_order": [
+        "message_TtbBKU",
         "message_XxtWTN",
         "message_WzNUdj",
         "message_4cTUg8"

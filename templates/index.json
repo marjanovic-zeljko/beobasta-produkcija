@@ -100,6 +100,43 @@
         "button_2_style": "solid"
       }
     },
+    "multiple_media_with_text_jcJDGy": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image_QzceCx": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Sok_od_celera_2.jpg",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_QzceCx"
+      ],
+      "name": "t:sections.multiple_media_with_text.presets.multiple_media_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "after_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "<em>POPUST traje do 20. maja!</em>",
+        "title": "<strong>🔥 AKCIJA! SOK OD CELERA JE SNIŽEN ČAK 30%</strong>",
+        "content": "<p>Sок od celera nije trend koji prolazi. To je rutina koja se zadržava jer rezultati govore sami za sebe.<br/><br/>✅ Hidrira organizam<br/>✅ Prepun antioksidanasa<br/>✅ Ubrzava metabolizam<br/></p>",
+        "button_1_text": "pogledaj pakete",
+        "button_1_link": "shopify://products/smrznuti-maticni-sok-od-celera",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
     "featured-collections-1": {
       "type": "featured-collections",
       "blocks": {
@@ -757,6 +794,7 @@
   "order": [
     "slideshow",
     "multiple_media_with_text_FGce7Q",
+    "multiple_media_with_text_jcJDGy",
     "featured-collections-1",
     "featured_collections_HQ4pK6",
     "collection_list_h6JBbN",

@@ -27,16 +27,16 @@
     "announcement_bar_Repe8b": {
       "type": "announcement-bar",
       "blocks": {
+        "message_XxtWTN": {
+          "type": "message",
+          "settings": {
+            "text": "<strong>🍓 </strong><a href=\"https://beobasta.rs/pages/sveze-ubrano\" title=\"https://beobasta.rs/pages/sveze-ubrano\"><strong>SEZONA SVEŽE UBRANOG JE POČELA!</strong></a>"
+          }
+        },
         "message_TtbBKU": {
           "type": "message",
           "settings": {
             "text": "🫐 <a href=\"https://beobasta.rs/collections/hladno-cedeni-sokovi\" title=\"https://beobasta.rs/collections/hladno-cedeni-sokovi\"><strong>Sokovi od bobičastog voća na sniženju od čak 20%</strong></a>"
-          }
-        },
-        "message_XxtWTN": {
-          "type": "message",
-          "settings": {
-            "text": "<strong>🍓 </strong><a href=\"https://beobasta.rs/pages/sveze-ubrano\" title=\"https://beobasta.rs/pages/sveze-ubrano\"><strong>REZERVACIJA SVEŽE UBRANIH JAGODA JE POČELA!</strong></a>"
           }
         },
         "message_WzNUdj": {
@@ -54,8 +54,8 @@
         }
       },
       "block_order": [
-        "message_TtbBKU",
         "message_XxtWTN",
+        "message_TtbBKU",
         "message_WzNUdj",
         "message_4cTUg8"
       ],

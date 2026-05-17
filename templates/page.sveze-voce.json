@@ -324,37 +324,36 @@
     "image_testimonial_slider_n7B7Bj": {
       "type": "image-testimonial-slider",
       "blocks": {
-        "slide_899VjR": {
+        "slide_AMDNHt": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_at_May_08_19-14-31.png",
+            "image": "shopify://shop_images/Prvi_utisci_o_jagodama_su_stigli_i_vasi_komentari_govore_sve_Jagode_gajimo_na_Kosmaju_dale_3.jpg",
             "alt_text": "",
             "link": ""
           }
         },
-        "slide_FKKdhN": {
+        "slide_CKmzN7": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_at_May_08_19-13-18.png",
+            "image": "shopify://shop_images/Prvi_utisci_o_jagodama_su_stigli_i_vasi_komentari_govore_sve_Jagode_gajimo_na_Kosmaju_dale_2.jpg",
             "alt_text": "",
             "link": ""
           }
         },
-        "slide_PmbraX": {
+        "slide_fihBKr": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Screenshot_at_May_08_19-14-31.png",
+            "image": "shopify://shop_images/Prvi_utisci_o_jagodama_su_stigli_i_vasi_komentari_govore_sve_Jagode_gajimo_na_Kosmaju_dale_1.jpg",
             "alt_text": "",
             "link": ""
           }
         }
       },
       "block_order": [
-        "slide_899VjR",
-        "slide_FKKdhN",
-        "slide_PmbraX"
+        "slide_AMDNHt",
+        "slide_CKmzN7",
+        "slide_fihBKr"
       ],
-      "disabled": true,
       "name": "Klizač recenzija",
       "settings": {
         "heading": "Voće koje je danas na grani – sutra je kod tebe na adresi",

@@ -393,7 +393,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Gde mogu da proverim da je voće zaista bez ostataka pesticida?",
-            "answer": "<p>Kada se završi laboratorijsko ispitivanje, dokumenti će javno biti dostupni na stranicama proizvoda (u opisu).</p>",
+            "answer": "<p>Izveštaj za jagode je dostupan na <a href=\"https://cdn.shopify.com/s/files/1/0735/6897/7140/files/jagode-izvestaj.pdf?v=1779114822\" title=\"https://cdn.shopify.com/s/files/1/0735/6897/7140/files/jagode-izvestaj.pdf?v=1779114822\">ovom linku</a>, a trešnje su poslate na analizu i čekaju se rezultati.</p>",
             "open_by_default": false
           }
         },

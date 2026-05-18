@@ -53,8 +53,14 @@ Supported variables
   endfor
 
   assign show_price_validity_badge = false
-  if request.page_type == 'page' and page != blank and page.handle == 'sveze-ubrano'
-    assign show_price_validity_badge = true
+  if request.page_type == 'page' and page != blank
+    if  page.handle == 'sveze-ubrano'
+      assign show_price_validity_badge = true
+    endif
+  elsif request.page_type == 'collection' and collection != blank
+    if  collection.handle == 'sveze-voce-i-povrce'
+      assign show_price_validity_badge = true
+    endif
   endif
 -%}
 

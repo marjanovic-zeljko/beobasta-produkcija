@@ -39,6 +39,11 @@ Supported variables
       assign max_quantity = max_quantity | default: 999999 | at_most: variant.quantity_rule.max
     endif
 
+    # Ensure max is never less than current quantity for cart items (prevents invalid HTML state when inventory depleted after item was added to cart)
+    if line_item != blank and max_quantity != blank
+      assign max_quantity = max_quantity | at_least: line_item.quantity
+    endif
+
     if line_item != blank
       assign quantity_value = line_item.quantity
     else
@@ -57,14 +62,53 @@ Supported variables
       {%- render 'icon' with 'minus', width: 10 -%}
     </button>
   {%- else -%}
-    <a href="{{ routes.cart_change_url }}?id={{ line_item.key }}&quantity={{ line_item.quantity | minus: line_item.variant.quantity_rule.increment }}" class="quantity-selector__button">
-      <span class="sr-only">{{ 'product.quantity.decrease_quantity' | t }}</span>
-      {%- render 'icon' with 'minus', width: 10 -%}
-    </a>
+    {%- liquid
+      # Get minimum quantity from product metafield, default to 1
+      assign min_quantity_raw = line_item.product.metafields.custom.minimalna_kolicina | default: 1
+      assign min_quantity = min_quantity_raw | times: 1
+      assign current_quantity = line_item.quantity | times: 1
+      assign is_at_minimum = false
+
+      if current_quantity <= min_quantity
+        assign is_at_minimum = true
+      endif
+    -%}
+
+    {%- if is_at_minimum -%}
+      <button type="button" class="quantity-selector__button" disabled data-tooltip="{{ 'cart.quantity.minimum_quantity' | t: count: min_quantity | escape }}">
+        <span class="sr-only">{{ 'product.quantity.decrease_quantity' | t }}</span>
+        {%- render 'icon' with 'minus', width: 10 -%}
+      </button>
+    {%- else -%}
+      <a href="{{ routes.cart_change_url }}?id={{ line_item.key }}&quantity={{ line_item.quantity | minus: line_item.variant.quantity_rule.increment }}" class="quantity-selector__button">
+        <span class="sr-only">{{ 'product.quantity.decrease_quantity' | t }}</span>
+        {%- render 'icon' with 'minus', width: 10 -%}
+      </a>
+    {%- endif -%}
   {%- endif -%}
 
+  {%- liquid
+    # Set input min attribute - use metafield minimum for cart items, variant rule for product page
+    if line_item != blank
+      assign input_min = line_item.product.metafields.custom.minimalna_kolicina | default: 1 | times: 1
+    else
+      assign input_min = variant.quantity_rule.min
+    endif
+  -%}
+
   <quantity-input class="quantity-selector__input-wrapper">
-    <input class="quantity-selector__input {% if size == 'sm' %}text-sm{% endif %}" type="number" value="{{ quantity_value }}" name="{% if line_item != blank %}updates[]{% else %}quantity{% endif %}" inputmode="numeric" step="{{ variant.quantity_rule.increment }}" min="{{ variant.quantity_rule.min }}" {% if max_quantity != blank %}max="{{ max_quantity }}"{% endif %} {% if form %}form="{{ form }}"{% endif %} {% if line_item != blank %}data-line-key="{{ line_item.key }}"{% endif %} aria-label="{{ 'product.quantity.change_quantity' | t | escape }}">
+    {%- liquid
+      # For cart items: only output max if it's >= current quantity (prevent invalid HTML state)
+      assign should_output_max = true
+      if line_item != blank and max_quantity != blank
+        assign max_qty_check = max_quantity | times: 1
+        assign curr_qty_check = quantity_value | times: 1
+        if max_qty_check < curr_qty_check
+          assign should_output_max = false
+        endif
+      endif
+    -%}
+    <input class="quantity-selector__input {% if size == 'sm' %}text-sm{% endif %}" type="number" value="{{ quantity_value }}" name="{% if line_item != blank %}updates[]{% else %}quantity{% endif %}" inputmode="numeric" step="{{ variant.quantity_rule.increment }}" min="{{ input_min }}" {% if max_quantity != blank and should_output_max %}max="{{ max_quantity }}"{% endif %} {% if form %}form="{{ form }}"{% endif %} {% if line_item != blank %}data-line-key="{{ line_item.key }}"{% endif %} aria-label="{{ 'product.quantity.change_quantity' | t | escape }}" onchange="if(parseInt(this.value) < parseInt(this.min)) this.value = this.min;">
 
     {%- if show_spinner -%}
       <svg class="quantity-selector__spinner" width="14" height="14" fill="none" viewBox="0 0 14 14">
@@ -74,15 +118,33 @@ Supported variables
     {%- endif -%}
   </quantity-input>
 
-  {%- if line_item == blank or max_quantity != blank and line_item.quantity >= max_quantity -%}
-    <button type="button" class="quantity-selector__button" {% if line_item != blank %}disabled data-tooltip="{{ 'product.quantity.cannot_add_more' | t | escape }}"{% endif %}>
+  {%- if line_item == blank -%}
+    <button type="button" class="quantity-selector__button">
       <span class="sr-only">{{ 'product.quantity.increase_quantity' | t }}</span>
       {%- render 'icon' with 'plus', width: 10 -%}
     </button>
   {%- else -%}
-    <a href="{{ routes.cart_change_url }}?id={{ line_item.key }}&quantity={{ line_item.quantity | plus: line_item.variant.quantity_rule.increment }}" class="quantity-selector__button">
-      <span class="sr-only">{{ 'product.quantity.increase_quantity' | t }}</span>
-      {%- render 'icon' with 'plus', width: 10 -%}
-    </a>
+    {%- liquid
+      assign is_at_maximum = false
+      if max_quantity != blank
+        assign current_qty = line_item.quantity | times: 1
+        assign max_qty = max_quantity | times: 1
+        if current_qty >= max_qty
+          assign is_at_maximum = true
+        endif
+      endif
+    -%}
+
+    {%- if is_at_maximum -%}
+      <button type="button" class="quantity-selector__button" disabled data-tooltip="{{ 'product.quantity.cannot_add_more' | t | escape }}">
+        <span class="sr-only">{{ 'product.quantity.increase_quantity' | t }}</span>
+        {%- render 'icon' with 'plus', width: 10 -%}
+      </button>
+    {%- else -%}
+      <a href="{{ routes.cart_change_url }}?id={{ line_item.key }}&quantity={{ line_item.quantity | plus: line_item.variant.quantity_rule.increment }}" class="quantity-selector__button">
+        <span class="sr-only">{{ 'product.quantity.increase_quantity' | t }}</span>
+        {%- render 'icon' with 'plus', width: 10 -%}
+      </a>
+    {%- endif -%}
   {%- endif -%}
 </quantity-selector>

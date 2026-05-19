@@ -382,6 +382,9 @@
       "remove": "Ukloni",
       "remove_with_title": "Ukloni {{ title }}"
     },
+    "quantity": {
+      "minimum_quantity": "Minimalna količina: {{ count }}"
+    },
     "free_shipping_bar": {
       "limit_unreached_html": "Dodaj još {{ remaining_amount }} i ostvari besplatnu isporuku!",
       "limit_reached_html": "Čestitamo! 🎉 Ostvario si besplatnu dostavu ako je tvoja adresa u zoni dostave našim vozilima."

@@ -114,6 +114,7 @@
       "block_order": [
         "image_QzceCx"
       ],
+      "disabled": true,
       "name": "t:sections.multiple_media_with_text.presets.multiple_media_with_text.name",
       "settings": {
         "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",

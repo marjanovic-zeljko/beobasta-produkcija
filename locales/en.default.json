@@ -231,10 +231,10 @@
     }
   },
   "blog_post": {
-    "article": "Article:",
-    "share": "Share",
-    "prev": "Prev",
-    "next": "Next"
+    "article": "Članak:",
+    "share": "Podeli",
+    "prev": "Prethodni",
+    "next": "Sledeći"
   },
   "contact": {
     "form": {

@@ -25,7 +25,7 @@
       "go_to_item": "Idi na proizvod {{ index }}",
       "item_nth_of_count": "Proizvod {{ index }} of {{ count }}",
       "navigate_to_next_section": "Idi na sledeću sekciju",
-      "drag": "Drag",
+      "drag": "Prevuci",
       "close": "Zatvori",
       "next": "Sledeće",
       "previous": "Prethodno",
@@ -60,7 +60,7 @@
       "email": "E-mail",
       "subscribe": "Prijavi se",
       "notify_me": "Notify me",
-      "subscribed_successfully": "You have been subscribed to our newsletter."
+      "subscribed_successfully": "Uspešno si se prijavio na naš newsletter."
     },
     "localization": {
       "country": "Država",

@@ -205,12 +205,12 @@
     "general": {
       "empty_blog": "This blog does not contain any articles yet.",
       "back_to_home": "Nazad na početnu",
-      "view": "View",
-      "all_posts": "All posts",
-      "read_more": "Read more"
+      "view": "Pogledaj",
+      "all_posts": "Svi tekstovi",
+      "read_more": "Pročitaj više"
     },
     "post": {
-      "written_by": "Written by {{ author }}",
+      "written_by": "Napisao {{ author }}",
       "visit_author_website": "Visit author's website",
       "share": "Podeli",
       "tags": "Tags"

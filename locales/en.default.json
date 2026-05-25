@@ -395,7 +395,7 @@
       "province": "Province",
       "zip": "Zip code",
       "estimate": "Estimate",
-      "no_results": "Sorry, we do not ship to your address.",
+      "no_results": "Ne dostavljamo do navedene adrese. Ako misliš da je u pitanju greška, kontaktiraj nas na e-mail.",
       "one_result": "There is one shipping rate for your address:",
       "multiple_results": "There are several shipping rates for your address:",
       "error": "One or more error occurred while retrieving shipping rates:"

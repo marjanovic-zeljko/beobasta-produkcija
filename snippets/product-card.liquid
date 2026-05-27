@@ -257,6 +257,18 @@ Supported variables
                     <input type="hidden" name="on_success" value="force_open_drawer">
                     <input type="hidden" name="quantity" value="1">
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                    {%- liquid
+                      assign is_frozen = product.metafields.custom.is_frozen
+                      assign is_frozen_active = false
+                      if is_frozen == true or is_frozen == 'true' or is_frozen.value == true
+                        assign is_frozen_active = true
+                      endif
+                    -%}
+                    {%- if is_frozen_active -%}
+                      <input type="hidden" name="properties[__is_frozen]" value="true">
+                    {%- endif -%}
+
                     <button type="submit" class="button--add-to-cart">
                       <svg class="arr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"/></svg>
                       <span class="circle"></span>

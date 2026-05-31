@@ -13,7 +13,7 @@ Supported variables
 * show_quantity_selector: if set to true, the quantity selector is displayed (useful for instance of mini-cart)
 {%- endcomment -%}
 
-<line-item class="line-item">
+<line-item class="line-item line-item--{{ line_item.product.handle }}">
   {%- if line_item.image != blank -%}
     {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 70px, 120px', widths: '70,120,140,210,240,360', class: 'line-item__media' -}}
   {%- endif -%}

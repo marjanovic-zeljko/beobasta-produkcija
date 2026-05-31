@@ -8172,3 +8172,12 @@ ul {
 div[data-rbrselector="addToCart"] {
   display: none;
 }
+
+line-item.line-item.line-item--sveze-ubrane-tresnje,
+line-item.line-item.line-item--sveze-ubrane-jagode {
+
+  compare-at-price,
+  .discount-badge {
+    display: none;
+  }
+}

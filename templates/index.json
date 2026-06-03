@@ -63,43 +63,6 @@
         "controls_color": "#ffffff"
       }
     },
-    "multiple_media_with_text_FGce7Q": {
-      "type": "multiple-media-with-text",
-      "blocks": {
-        "image_rLPQdp": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/sparglesajt.png",
-            "rotation": 0
-          }
-        }
-      },
-      "block_order": [
-        "image_rLPQdp"
-      ],
-      "name": "t:sections.multiple_media_with_text.presets.multiple_media_with_text.name",
-      "settings": {
-        "color_scheme": "scheme-60d13a64-6bd3-4f4d-b8b2-9aad63d06512",
-        "reveal_on_scroll": true,
-        "separate_section_with_border": true,
-        "media_position_desktop": "after_text",
-        "media_position_mobile": "before_text",
-        "media_layout": "overlap",
-        "media_alignment": "center",
-        "media_alignment_offset": 0,
-        "media_mobile_alignment_offset": 0,
-        "text_alignment": "center",
-        "subheading": "<em>ISPORUKA U ROKU OD 24 SATA NAKON BRANJA</em>",
-        "title": "<strong>SVEŽE UBRANE ŠPARGLE</strong>",
-        "content": "<p>Već 4. godinu<strong> </strong>zaredom gajimo šparglu na Kosmaju - daleko od gradske gužve i zagađenja. Ne tretiramo je nikakvim hemijskim sredstvima i đubrivima.<br/></p>",
-        "button_1_text": "pogledaj detaljno",
-        "button_1_link": "https://beobasta.rs/products/spargle",
-        "button_1_style": "solid",
-        "button_2_text": "",
-        "button_2_link": "",
-        "button_2_style": "solid"
-      }
-    },
     "multiple_media_with_text_jcJDGy": {
       "type": "multiple-media-with-text",
       "blocks": {
@@ -794,7 +757,6 @@
   },
   "order": [
     "slideshow",
-    "multiple_media_with_text_FGce7Q",
     "multiple_media_with_text_jcJDGy",
     "featured-collections-1",
     "featured_collections_HQ4pK6",

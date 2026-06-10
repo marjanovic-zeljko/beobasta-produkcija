@@ -8174,7 +8174,8 @@ div[data-rbrselector="addToCart"] {
 }
 
 line-item.line-item.line-item--sveze-ubrane-tresnje,
-line-item.line-item.line-item--sveze-ubrane-jagode {
+line-item.line-item.line-item--sveze-ubrane-jagode,
+line-item.line-item.line-item--sveze-ubrane-borovnice {
 
   compare-at-price,
   .discount-badge {

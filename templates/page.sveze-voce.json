@@ -324,6 +324,38 @@
     "image_testimonial_slider_n7B7Bj": {
       "type": "image-testimonial-slider",
       "blocks": {
+        "slide_pVtt3J": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Necemo_mi_drugi_ce_vam_reci_Sa_borovnicama_smo_poceli_i_vec_punih_5_godina_smo_prepoznatljivi.jpg",
+            "alt_text": "",
+            "link": ""
+          }
+        },
+        "slide_7j3T7g": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Necemo_mi_drugi_ce_vam_reci_Sa_borovnicama_smo_poceli_i_vec_punih_5_godina_smo_prepoznatljivi_1.jpg",
+            "alt_text": "",
+            "link": ""
+          }
+        },
+        "slide_pBLkjY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Nase_maline_isto_kao_i_drugo_sveze_ubrano_voce_dobijas_najkasnije_24_sata_nakon_branja_i_u_pu.webp",
+            "alt_text": "",
+            "link": ""
+          }
+        },
+        "slide_jcGrpc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Alergije_na_pesticide_manifestuju_se_kao_reakcije_imunog_sistema_na_hemijske_supstance_koje_se.webp",
+            "alt_text": "",
+            "link": ""
+          }
+        },
         "slide_AMDNHt": {
           "type": "slide",
           "settings": {
@@ -350,6 +382,10 @@
         }
       },
       "block_order": [
+        "slide_pVtt3J",
+        "slide_7j3T7g",
+        "slide_pBLkjY",
+        "slide_jcGrpc",
         "slide_AMDNHt",
         "slide_CKmzN7",
         "slide_fihBKr"

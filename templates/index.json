@@ -97,7 +97,7 @@
         "separate_section_with_border": true,
         "image": "shopify://shop_images/sveze-borovnice-plantaza.jpg",
         "reveal_on_scroll": true,
-        "image_position": "start",
+        "image_position": "end",
         "content_width": "sm",
         "remove_vertical_spacing": true
       }

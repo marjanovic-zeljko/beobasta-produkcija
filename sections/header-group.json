@@ -27,6 +27,12 @@
     "announcement_bar_Repe8b": {
       "type": "announcement-bar",
       "blocks": {
+        "message_hKPiwy": {
+          "type": "message",
+          "settings": {
+            "text": "🫐 <a href=\"https://beobasta.rs/products/sveze-ubrane-borovnice\" title=\"https://beobasta.rs/products/sveze-ubrane-borovnice\">BOROVNICE SU NA POPUSTU!</a>"
+          }
+        },
         "message_XxtWTN": {
           "type": "message",
           "settings": {
@@ -48,6 +54,7 @@
         }
       },
       "block_order": [
+        "message_hKPiwy",
         "message_XxtWTN",
         "message_WzNUdj",
         "message_4cTUg8"

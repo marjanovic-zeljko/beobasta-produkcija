@@ -315,11 +315,13 @@ Supported variables
                 {%- liquid
                   assign variant = product.selected_or_first_available_variant
                   assign quantity_rules = ''
+                  assign metafield_min = product.metafields.custom.minimalna_kolicina | default: 1 | times: 1
+                  assign display_min = metafield_min | at_least: variant.quantity_rule.min
 
                   render 'quantity-selector', variant: variant, form: product_form_id
 
-                  if variant.quantity_rule.min > 1
-                    assign rule = 'product.quantity.minimum_of' | t: min: variant.quantity_rule.min
+                  if display_min > 1
+                    assign rule = 'product.quantity.minimum_of' | t: min: display_min
                     assign quantity_rules = quantity_rules | append: ' / ' | append: rule
                   endif
 

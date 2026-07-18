@@ -255,7 +255,7 @@ Supported variables
                 <product-form>
                   {%- form 'product', product -%}
                     <input type="hidden" name="on_success" value="force_open_drawer">
-                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="quantity" value="{{ product.metafields.custom.minimalna_kolicina | default: 1 | times: 1 }}">
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
                     {%- liquid

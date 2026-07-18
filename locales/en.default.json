@@ -136,7 +136,7 @@
       "change_quantity": "Promeni količinu",
       "increase_quantity": "Povećaj količinu",
       "decrease_quantity": "Smanji količinu",
-      "minimum_of": "Minimum of {{ min }}",
+      "minimum_of": "Minimalna količina: {{ min }}",
       "maximum_of": "Maximum of {{ max }}",
       "increment_of": "Increment of {{ step }}",
       "cannot_add_more": "You cannot add more"

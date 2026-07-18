@@ -25,6 +25,12 @@ Supported variables
     assign max_quantity = ''
     assign variant = line_item.variant | default: variant
 
+    # Resolve minimum quantity from product metafield, falling back to variant quantity rule
+    assign product_for_min = line_item.product | default: variant.product
+    assign metafield_min = product_for_min.metafields.custom.minimalna_kolicina | default: 1 | times: 1
+    assign rule_min = variant.quantity_rule.min | default: 1 | times: 1
+    assign min_quantity = metafield_min | at_least: rule_min
+
     # When we don't have line_item (example: product page), we don't limit the quantity the buyer can choose
     if variant.inventory_management != blank and variant.inventory_policy == 'deny'
       if line_item != blank
@@ -50,22 +56,21 @@ Supported variables
       if quick_order
         assign quantity_value = cart | item_count_for_variant: variant.id
       else
-        assign quantity_value = variant.quantity_rule.min | default: 1
+        assign quantity_value = min_quantity
       endif
     endif
+
+    assign input_min = min_quantity
   -%}
 
   {%- if line_item == blank -%}
     {%- comment -%}For quick order, we want to always allow to press minus to go back to zero{%- endcomment -%}
-    <button type="button" class="quantity-selector__button" {% if quantity_value == 0 or quick_order != true and quantity_value <= variant.quantity_rule.min %}disabled{% endif %}>
+    <button type="button" class="quantity-selector__button" {% if quantity_value == 0 or quick_order != true and quantity_value <= min_quantity %}disabled{% endif %}>
       <span class="sr-only">{{ 'product.quantity.decrease_quantity' | t }}</span>
       {%- render 'icon' with 'minus', width: 10 -%}
     </button>
   {%- else -%}
     {%- liquid
-      # Get minimum quantity from product metafield, default to 1
-      assign min_quantity_raw = line_item.product.metafields.custom.minimalna_kolicina | default: 1
-      assign min_quantity = min_quantity_raw | times: 1
       assign current_quantity = line_item.quantity | times: 1
       assign is_at_minimum = false
 
@@ -87,14 +92,6 @@ Supported variables
     {%- endif -%}
   {%- endif -%}
 
-  {%- liquid
-    # Set input min attribute - use metafield minimum for cart items, variant rule for product page
-    if line_item != blank
-      assign input_min = line_item.product.metafields.custom.minimalna_kolicina | default: 1 | times: 1
-    else
-      assign input_min = variant.quantity_rule.min
-    endif
-  -%}
 
   <quantity-input class="quantity-selector__input-wrapper">
     {%- liquid

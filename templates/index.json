@@ -69,20 +69,20 @@
         "subheading_pYc7bw": {
           "type": "subheading",
           "settings": {
-            "text": "Akcija traje do isteka zaliha"
+            "text": "Novo u ponudi"
           }
         },
         "heading_nCLyeF": {
           "type": "heading",
           "settings": {
-            "text": "<a href=\"https://beobasta.rs/products/sveze-ubrane-borovnice\" title=\"https://beobasta.rs/products/sveze-ubrane-borovnice\">SVEŽE BOROVNICE SU NA SNIŽENJU!</a>",
+            "text": "<a href=\"/products/sveze-ubrane-kajsije\" title=\"Sveže ubrane kajsije (NOVO)\">KAJSIJE SU STIGLE!</a>",
             "heading_tag": "h1"
           }
         },
         "richtext_Wb8Gm7": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Isti kvalitet, ista svežina, MANJA CENA!.</p><p>Čim naručiš - beremo i dovozimo prvu klasu borovnica, bez ostataka pesticida, direktno na tvoju adresu.</p><p>🔥 Požuri i iskoristi popust dok traje!</p><h5><a href=\"https://beobasta.rs/products/sveze-ubrane-borovnice\" title=\"https://beobasta.rs/products/sveze-ubrane-borovnice\"><strong>Klikni OVDE i izaberi svoju količinu.<br/><br/></strong></a></h5>"
+            "content": "<p>Ako postoji voće koje ima “rok savršenstva”, onda su to kajsije. Samo par dana može da deli savršeno zrelu i prezrelu.<br/></p><p>Naše kajsije beremo tačno tada - kada ukus podseća na ono što pamtiš. Baš onako kako i treba.</p><p>🔥 Količine su ograničene!</p><h5><a href=\"https://beobasta.rs/products/sveze-ubrane-borovnice\" title=\"https://beobasta.rs/products/sveze-ubrane-borovnice\"><strong>Klikni OVDE i izaberi svoju količinu.<br/><br/></strong></a></h5>"
           }
         }
       },
@@ -95,7 +95,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/sveze-borovnice-plantaza.jpg",
+        "image": "shopify://shop_images/kajsija.jpg",
         "reveal_on_scroll": true,
         "image_position": "end",
         "content_width": "sm",

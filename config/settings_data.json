@@ -80,15 +80,18 @@
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
         "disabled": true,
         "settings": {
+          "greeting_message": "Zdravo, tu smo da ti pomognemo ako imaš neko pitanje ili nedoumicu",
           "button_color": "#000000",
-          "secondary_color": "#ffffff",
-          "ternary_color": "#6a6a6a",
           "button_icon": "chat_bubble",
           "button_text": "chat_with_us",
           "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "greeting_message": "Zdravo, tu smo da ti pomognemo ako imaš neko pitanje ili nedoumicu"
+          "button_vertical_position": "lowest"
         }
+      },
+      "8764476057892802672": {
+        "type": "shopify://apps/stoq/blocks/main/4bb73be2-b7c2-4870-949f-c528145452a3",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

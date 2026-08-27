@@ -29,6 +29,7 @@
       "blocks": {
         "message_XxtWTN": {
           "type": "message",
+          "disabled": true,
           "settings": {
             "text": "🔥 <strong>BESPLATNA DOSTAVA ZA PORUDŽBINE IZNAD 2.500 RSD DO 26. AVGUSTA</strong>"
           }
@@ -42,7 +43,6 @@
         },
         "message_4cTUg8": {
           "type": "message",
-          "disabled": true,
           "settings": {
             "text": "Besplatna dostava iznad 6.000 RSD u zonama naše isporuke"
           }

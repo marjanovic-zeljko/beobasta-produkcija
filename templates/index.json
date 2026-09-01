@@ -15,10 +15,10 @@
         "slide-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/20b539c6f3f515c8f912cce19203fcdbbe0085c4.png",
+            "image": "shopify://shop_images/Sokovi_cistaci_1_1c987851-f690-48ed-8f9c-b3bce6df8988.jpg",
             "mobile_image": "shopify://shop_images/20b539c6f3f515c8f912cce19203fcdbbe0085c4.png",
-            "subheading": "SEZONA SVEŽEG VOĆA JE POČELA!",
-            "title": "<strong>DOSTAVA </strong><em><strong>24 SATA NAKON BRANJA.</strong></em>",
+            "subheading": "",
+            "title": "<strong>Ti poručiš. </strong><em><strong>priroda isporuči.</strong></em>",
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
             "content_max_width": 600,
@@ -28,7 +28,7 @@
             "button_1_background": "#ddb957",
             "button_1_text_color": "#1c1c1c",
             "button_2_text": "",
-            "button_2_link": "",
+            "button_2_link": "https://beobasta.rs/collections",
             "button_2_style": "solid",
             "button_2_background": "#1c1c1c",
             "button_2_text_color": "#ffffff",

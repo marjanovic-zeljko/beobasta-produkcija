@@ -91,6 +91,7 @@
         "heading_nCLyeF",
         "richtext_Wb8Gm7"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
@@ -520,7 +521,7 @@
         "image-with-text-1": {
           "type": "image_with_text",
           "settings": {
-            "image": "shopify://shop_images/caj_ee8b676b-3321-4026-992e-a0ab2aaf26dd.png",
+            "image": "shopify://shop_images/caj_78be6390-9750-4332-8f18-92c85e045a4e.png",
             "subheading": "",
             "title": "Čaj Čistač",
             "content": "<p>Čaj Čistač je jedan od naših najtraženijih proizvoda i već godinama stoji u vrhu naše ponude.<br/></p><p>Mnogi ga biraju kao podršku laganijoj ishrani, urednijoj dnevnoj rutini i osećaju lakše probave tokom dana.<br/><br/>Kombinacija maslačka, peršuna, đumbira, cimeta, kurkume i karanfilića, razvijana uz stvarne utiske kupaca, što ga je i dovelo do toga da postane naš bestseller</p>",

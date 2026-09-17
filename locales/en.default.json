@@ -594,7 +594,8 @@
         "subtotal_label_with_quantity": {
           "one": "Ukupno {{count}} proizvod",
           "other": "Ukupno {{count}} proizvoda"
-        }
+        },
+        "cart_does_not_meet_discount_requirements_notice": "Ovaj kod ne važi za proizvod koji se nalazi u porudžbini"
       },
       "shipping": {
         "free_rate_label": "📦",

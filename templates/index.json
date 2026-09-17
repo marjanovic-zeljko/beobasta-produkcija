@@ -144,6 +144,16 @@
     "featured-collections-1": {
       "type": "featured-collections",
       "blocks": {
+        "collection_7gbX4L": {
+          "type": "collection",
+          "settings": {
+            "collection": "zimnica",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        },
         "collection_xrQKJy": {
           "type": "collection",
           "settings": {
@@ -151,16 +161,6 @@
             "products_count": 4,
             "title": "DETOKS",
             "link_url": "shopify://collections/detoks",
-            "link_text": "POGLEDAJ SVE"
-          }
-        },
-        "collection_YdQLrb": {
-          "type": "collection",
-          "settings": {
-            "collection": "sveze-voce-i-povrce",
-            "products_count": 8,
-            "title": "",
-            "link_url": "",
             "link_text": "POGLEDAJ SVE"
           }
         },
@@ -176,8 +176,8 @@
         }
       },
       "block_order": [
+        "collection_7gbX4L",
         "collection_xrQKJy",
-        "collection_YdQLrb",
         "collection-2"
       ],
       "settings": {

@@ -22,7 +22,7 @@
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
             "content_max_width": 600,
-            "button_1_text": "❄️ SMRZNUTO VOĆE I POVRĆE JE STIGLO! POGLEDAJ PONUDU",
+            "button_1_text": "❄️ SMRZNUTO JE STIGLO! POGLEDAJ PONUDU",
             "button_1_link": "shopify://collections/smrznuto-voce-i-povrce",
             "button_1_style": "solid",
             "button_1_background": "#ddb957",

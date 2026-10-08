@@ -144,16 +144,6 @@
     "featured-collections-1": {
       "type": "featured-collections",
       "blocks": {
-        "collection_7gbX4L": {
-          "type": "collection",
-          "settings": {
-            "collection": "zimnica",
-            "products_count": 8,
-            "title": "",
-            "link_url": "",
-            "link_text": "POGLEDAJ SVE"
-          }
-        },
         "collection_CcqnLg": {
           "type": "collection",
           "settings": {
@@ -162,6 +152,16 @@
             "title": "",
             "link_url": "",
             "link_text": "View all"
+          }
+        },
+        "collection_7gbX4L": {
+          "type": "collection",
+          "settings": {
+            "collection": "zimnica",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "POGLEDAJ SVE"
           }
         },
         "collection_xrQKJy": {
@@ -186,8 +186,8 @@
         }
       },
       "block_order": [
-        "collection_7gbX4L",
         "collection_CcqnLg",
+        "collection_7gbX4L",
         "collection_xrQKJy",
         "collection-2"
       ],

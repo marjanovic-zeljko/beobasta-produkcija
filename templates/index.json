@@ -15,15 +15,15 @@
         "slide-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/pexels-omerkayann-14909278.jpg",
+            "image": "shopify://shop_images/15071479-raspberries-5576401_1.jpg",
             "mobile_image": "shopify://shop_images/Neke_ukuse_ne_objasnjavas_samo_ih_namazes_Blagi_ajvar_napravljen_od_najkvalitetnijih_papr.jpg",
             "subheading": "",
             "title": "",
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-end-start sm:text-start",
             "content_max_width": 600,
-            "button_1_text": "Zimnica je stigla! POGLEDAJ PONUDU 🌶️",
-            "button_1_link": "https://beobasta.rs/collections/zimnica",
+            "button_1_text": "❄️ SMRZNUTO VOĆE I POVRĆE JE STIGLO! POGLEDAJ PONUDU",
+            "button_1_link": "shopify://collections/smrznuto-voce-i-povrce",
             "button_1_style": "solid",
             "button_1_background": "#ddb957",
             "button_1_text_color": "#1c1c1c",
@@ -154,6 +154,16 @@
             "link_text": "POGLEDAJ SVE"
           }
         },
+        "collection_CcqnLg": {
+          "type": "collection",
+          "settings": {
+            "collection": "smrznuto-voce-i-povrce",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        },
         "collection_xrQKJy": {
           "type": "collection",
           "settings": {
@@ -177,6 +187,7 @@
       },
       "block_order": [
         "collection_7gbX4L",
+        "collection_CcqnLg",
         "collection_xrQKJy",
         "collection-2"
       ],

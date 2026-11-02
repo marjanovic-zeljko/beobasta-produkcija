@@ -1,3 +1,5 @@
+import "bundle-labels";
+
 var __typeError = (msg) => {
   throw TypeError(msg);
 };

@@ -39,6 +39,7 @@ Supported variables
         {%- endif -%}
 
         {%- render 'price-list', line_item: line_item, context: 'line_item' -%}
+        <bundle-line-label hidden class="text-subdued" data-variant-id="{{ line_item.variant_id }}" data-quantity="{{ line_item.quantity }}"></bundle-line-label>
       </div>
 
       {%- capture secondary_information -%}

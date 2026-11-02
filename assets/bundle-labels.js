@@ -1,10 +1,11 @@
 // Variant IDs explicitly opt products into full, quantity-specific bundle names.
 let mappingPromise;
+let resolvedMapping;
 
 export function loadBundleLabels() {
   mappingPromise ??= fetch(window.themeVariables.bundleLabels.url, { cache: "no-cache" }).then((response) => {
     if (!response.ok) throw new Error("Unable to load bundle label mapping");
-    return response.json();
+    return response.json().then((mapping) => (resolvedMapping = mapping));
   }).catch((error) => {
     mappingPromise = undefined;
     throw error;
@@ -24,6 +25,65 @@ export function bundleLabelFor(mapping, variantId, quantity) {
     .filter((key) => /^[1-9]\d*\+$/.test(key) && Number(key.slice(0, -1)) <= count)
     .sort((a, b) => Number(b.slice(0, -1)) - Number(a.slice(0, -1)))[0];
   return typeof options[threshold] === "string" ? options[threshold] : "";
+}
+
+export function bundleLabelForForm(mapping, form) {
+  const variantId = form.elements.namedItem("id")?.value;
+  const options = mapping.variants[String(variantId)];
+  if (!options) return "";
+  const scope = form.closest(".shopify-section") || form;
+  const selected = scope.querySelector('[data-rbrselector="discountInfoV3RadioButton"]:checked');
+  if (selected) {
+    const description = selected.closest('[data-rbrselector="discountInfoV3"]')
+      ?.querySelector('[data-rbrselector="discountInfoV3Description"] span')?.textContent.trim();
+    // Resolve the actual app selection against the configured full names. A
+    // quantity field can still say 1 when the app will expand it into a bundle.
+    return Object.values(options).find((name) => name === description) || "";
+  }
+  return bundleLabelFor(mapping, variantId, form.elements.namedItem("quantity")?.value || 1);
+}
+
+function updateBundleForm(form, mapping) {
+  const name = bundleLabelForForm(mapping, form);
+  let input = form.querySelector("input[data-bundle-property]");
+  if (!name) {
+    input?.remove();
+    return "";
+  }
+  if (!input) {
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.setAttribute("data-bundle-property", "");
+    form.append(input);
+  }
+  input.name = `properties[${mapping.propertyName}]`;
+  if (input.value !== name) input.value = name;
+  return name;
+}
+
+export async function prepareBundleForm(form) {
+  return updateBundleForm(form, await loadBundleLabels());
+}
+
+// Seed real form properties on load and app rerenders. The formdata event also
+// resolves the live selection synchronously, before Fast Bundle intercepts it.
+document.addEventListener("formdata", (event) => {
+  if (!resolvedMapping || !event.target.matches('form[action*="/cart/add"]')) return;
+  const name = updateBundleForm(event.target, resolvedMapping);
+  if (name) event.formData.set(`properties[${resolvedMapping.propertyName}]`, name);
+});
+if (typeof MutationObserver !== "undefined") {
+  loadBundleLabels().then((mapping) => {
+    const refreshForms = () => document.querySelectorAll('form[action*="/cart/add"]')
+      .forEach((form) => updateBundleForm(form, mapping));
+    refreshForms();
+    new MutationObserver(refreshForms).observe(document.documentElement, {
+      childList: true, subtree: true, attributes: true, attributeFilter: ["checked"]
+    });
+    for (const type of ["click", "change", "variant:change"]) {
+      document.addEventListener(type, () => queueMicrotask(refreshForms), { capture: true });
+    }
+  }).catch(console.error);
 }
 
 // Serialize property writes and read the live cart again after every update.

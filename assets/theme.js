@@ -1,4 +1,4 @@
-import { synchronizeBundleProperties, showBundlePropertyError, runBundleCartUpdate } from "bundle-labels";
+import { synchronizeBundleProperties, showBundlePropertyError, runBundleCartUpdate, prepareBundleForm } from "bundle-labels";
 
 var __typeError = (msg) => {
   throw TypeError(msg);
@@ -2787,6 +2787,7 @@ onSubmit_fn = async function(event) {
   document.documentElement.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
   let sectionsToBundle = [];
   document.documentElement.dispatchEvent(new CustomEvent("cart:prepare-bundled-sections", { bubbles: true, detail: { sections: sectionsToBundle } }));
+  await prepareBundleForm(__privateGet(this, _ProductForm_instances, form_get2));
   const formData = new FormData(__privateGet(this, _ProductForm_instances, form_get2));
   formData.set("sections", sectionsToBundle.join(","));
   formData.set("sections_url", `${Shopify.routes.root}variants/${__privateGet(this, _ProductForm_instances, form_get2).id.value}`);

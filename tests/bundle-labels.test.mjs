@@ -47,7 +47,7 @@ globalThis.fetch = async (url, options = {}) => {
   return { ok: true, json: async () => view() };
 };
 
-const { bundleLabelFor, synchronizeBundleProperties } = await import("../assets/bundle-labels.js");
+const { bundleLabelFor, bundleLabelForForm, synchronizeBundleProperties } = await import("../assets/bundle-labels.js");
 const tea = (quantity, properties = { Paket: "4 čaja" }) => ({ id: 1, variant_id: 46782280401140, quantity, properties });
 
 test("exact names and explicit thresholds retain the tea's upper boundary", () => {
@@ -56,6 +56,22 @@ test("exact names and explicit thresholds retain the tea's upper boundary", () =
   for (const quantity of [5, 6, 100]) assert.equal(bundleLabelFor(mapping, 47143144915188, quantity), "🔥 5 kilograma (ili više)");
   for (const quantity of [0, -1, 1.5, NaN]) assert.equal(bundleLabelFor(mapping, 47143144915188, quantity), "");
   assert.equal(bundleLabelFor({ variants: { x: { "5+": "five", "10+": "ten", 12: "exact" } } }, "x", 12), "exact");
+});
+
+test("initial form properties follow the app selection even when its quantity field is still 1", () => {
+  let description = "1 čaj Čistač (21 dan)";
+  let selected = true;
+  const form = {
+    elements: { namedItem: (name) => ({ value: name === "id" ? "46782280401140" : "1" }) },
+    closest: () => ({ querySelector: () => selected ? { closest: () => ({ querySelector: () => ({ textContent: description }) }) } : null })
+  };
+  assert.equal(bundleLabelForForm(mapping, form), description);
+  description = "3 čaja";
+  assert.equal(bundleLabelForForm(mapping, form), description);
+  description = "2 čaja";
+  assert.equal(bundleLabelForForm(mapping, form), description);
+  selected = false;
+  assert.equal(bundleLabelForForm(mapping, form), "1 čaj Čistač (21 dan)");
 });
 
 test("shared 4+1 allocations become separate persisted lines with the same quantity and discount", async () => {

@@ -52,7 +52,8 @@ const tea = (quantity, properties = { Paket: "4 čaja" }) => ({ id: 1, variant_i
 
 test("exact names and explicit thresholds retain the tea's upper boundary", () => {
   assert.equal(bundleLabelFor(mapping, 46782280401140, 1), "1 čaj Čistač (21 dan)");
-  assert.equal(bundleLabelFor(mapping, 46782280401140, 5), "");
+  assert.equal(bundleLabelFor(mapping, 46782280401140, 5), "5 čajeva + 🎁 GRATIS TERMOS");
+  assert.equal(bundleLabelFor(mapping, 46782280401140, 6), "");
   for (const quantity of [5, 6, 100]) assert.equal(bundleLabelFor(mapping, 47143144915188, quantity), "🔥 5 kilograma (ili više)");
   for (const quantity of [0, -1, 1.5, NaN]) assert.equal(bundleLabelFor(mapping, 47143144915188, quantity), "");
   assert.equal(bundleLabelFor({ variants: { x: { "5+": "five", "10+": "ten", 12: "exact" } } }, "x", 12), "exact");
@@ -65,11 +66,12 @@ test("initial form properties follow the app selection even when its quantity fi
     elements: { namedItem: (name) => ({ value: name === "id" ? "46782280401140" : "1" }) },
     closest: () => ({ querySelector: () => selected ? { closest: () => ({ querySelector: () => ({ textContent: description }) }) } : null })
   };
-  assert.equal(bundleLabelForForm(mapping, form), description);
-  description = "3 čaja";
-  assert.equal(bundleLabelForForm(mapping, form), description);
-  description = "2 čaja";
-  assert.equal(bundleLabelForForm(mapping, form), description);
+  // Exercise every configured tea option in both directions, including gift copy.
+  const names = Object.values(mapping.variants["46782280401140"]);
+  for (const name of [...names, ...names.toReversed()]) {
+    description = name;
+    assert.equal(bundleLabelForForm(mapping, form), name);
+  }
   selected = false;
   assert.equal(bundleLabelForForm(mapping, form), "1 čaj Čistač (21 dan)");
 });

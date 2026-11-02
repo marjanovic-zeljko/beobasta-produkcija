@@ -1,0 +1,19 @@
+{
+  "propertyName": "Paket",
+  "errorMessage": "Naziv paketa nije sačuvan. Osveži korpu i pokušaj ponovo.",
+  "variants": {
+    "46782280401140": {
+      "1": "1 čaj Čistač (21 dan)",
+      "2": "2 čaja",
+      "3": "3 čaja",
+      "4": "4 čaja"
+    },
+    "47143144915188": {
+      "1": "1 kilogram",
+      "2": "2 kilograma",
+      "3": "3 kilograma",
+      "4": "4 kilograma",
+      "5+": "🔥 5 kilograma (ili više)"
+    }
+  }
+}

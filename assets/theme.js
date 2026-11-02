@@ -2780,6 +2780,12 @@ onSubmit_fn = async function(event) {
     __privateGet(this, _ProductForm_instances, form_get2).reportValidity();
     return;
   }
+  try {
+    await prepareBundleForm(__privateGet(this, _ProductForm_instances, form_get2));
+  } catch (error) {
+    await showBundlePropertyError(error);
+    return;
+  }
   const submitButtons = Array.from(__privateGet(this, _ProductForm_instances, form_get2).elements).filter((button) => button.type === "submit");
   submitButtons.forEach((submitButton) => {
     submitButton.setAttribute("aria-busy", "true");
@@ -2787,7 +2793,6 @@ onSubmit_fn = async function(event) {
   document.documentElement.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
   let sectionsToBundle = [];
   document.documentElement.dispatchEvent(new CustomEvent("cart:prepare-bundled-sections", { bubbles: true, detail: { sections: sectionsToBundle } }));
-  await prepareBundleForm(__privateGet(this, _ProductForm_instances, form_get2));
   const formData = new FormData(__privateGet(this, _ProductForm_instances, form_get2));
   formData.set("sections", sectionsToBundle.join(","));
   formData.set("sections_url", `${Shopify.routes.root}variants/${__privateGet(this, _ProductForm_instances, form_get2).id.value}`);

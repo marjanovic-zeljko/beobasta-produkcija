@@ -140,9 +140,12 @@ Load `~/.codex/learnings.md` and `.codex/learnings.md` during manual analysis an
 - Run `$shopify-analyze --deep` for reusable component-system discovery.
 - Run `$shopify-theme-context` to check staleness.
 
-## Bundle label mapping (2026-11-02)
+## Persisted bundle names (2026-11-02)
 
-- `assets/bundle-labels.json` is the manually maintained source for the label prefix and exact names by Shopify variant ID and actual cart-line quantity. Only mapped variants display labels; unknown quantities have no invented fallback.
-- `bundle-labels.js` defines `bundle-line-label`; `line-item.liquid` supplies each line's variant ID and quantity. The theme module imports it through the existing import map. Cart drawer and cart page share the snippet.
-- This is a display mapping, not a persisted public line-item property. Keep names in sync with Fast Bundle manually. No cart mutation/interception or checkout changes are included.
-- Browser tests: 3 -> 4 updates the label to 4 čaja (3,360 RSD); 4 -> 5 splits into 4 čaja plus 1 čaj Čistač (21 dan), total 4,350 RSD, original discount retained. Standalone cart rendering and app redistribution were also checked.
+- `assets/bundle-labels.json` is the manually maintained source for the public property name (`Paket`), localized failure message, and exact package names by Shopify variant ID and quantity. Exact keys win; explicit threshold keys such as `"5+"` apply at or above that quantity, with the highest qualifying threshold winning. Unmapped variants are untouched.
+- `assets/bundle-labels.js` writes the resolved name into real cart line properties. The existing `line-item.liquid` properties loop displays the saved value; there is no display-only replacement. The theme quantity and product-form handlers await synchronization, and checkout click/submit handling waits for pending cart updates and saved properties.
+- Fast Bundle integration uses `window.detectBundleDiscounts()` and its `X-Fastbundle-Request: yes` convention, verified against the loaded SDK 1.29.23 and cart script. This exposed integration must be rechecked if the app changes; it is not a documented versioned API.
+- Shopify can expose differently priced allocations with shared properties. When different package names are required, the affected variant/selling-plan/customization group is rebuilt as explicit lines, preserving total units and other properties. Full-price units are re-added first. Failed adds attempt to restore only missing units, based on a fresh cart read. Cart edits are guarded while synchronization runs.
+- Checkout can allocate a saved package across multiple price rows and repeat its property. The four-tea group was shown as 3 + 1 price allocations in checkout, both with `Paket: 4 čaja`, alongside the separate `Paket: 1 čaj Čistač (21 dan)` group. Total remained 4,350 RSD, with the 600 RSD discount. No order was submitted.
+- Browser evidence: tea selected 3 -> 4 -> 5; saved 4 + 1 package lines in cart and both names in checkout. Strawberry selected 3 -> 4 -> 5 -> 6; saved five-plus name in checkout at 5,712 RSD with the 1,428 RSD discount. Earlier display-only tests covered initial selection, quantities 1–6, downward threshold transitions, and standalone cart rendering.
+- `node --test tests/bundle-labels.test.mjs` covers threshold boundaries, shared allocation splitting, quantity/other-property preservation, settled no-op behavior, failed-add restoration, and retry recovery. Actual post-order Admin validation and accelerated checkout paths remain unverified.

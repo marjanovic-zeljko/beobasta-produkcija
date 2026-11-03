@@ -1,16 +1,11 @@
-// Names and quantity rules come from Fast Bundle's storefront offers, never a
-// merchant-maintained variant/quantity table. JSON contains presentation only.
+// Variant IDs explicitly opt products into full, quantity-specific bundle names.
 let mappingPromise;
 let resolvedMapping;
-const productRequests = new Map();
-const offerCacheMs = 30000;
-const selectedOptionSelector = '[data-rbrselector^="discountInfo"][data-rbrselector$="RadioButton"]:checked';
 
 export function loadBundleLabels() {
-  mappingPromise ??= fetch(window.themeVariables.bundleLabels.url, { cache: "no-cache" }).then(async (response) => {
-    if (!response.ok) throw new Error("Unable to load bundle label settings");
-    const settings = await response.json();
-    return (resolvedMapping = { ...settings, variants: {}, products: {} });
+  mappingPromise ??= fetch(window.themeVariables.bundleLabels.url, { cache: "no-cache" }).then((response) => {
+    if (!response.ok) throw new Error("Unable to load bundle label mapping");
+    return response.json().then((mapping) => (resolvedMapping = mapping));
   }).catch((error) => {
     mappingPromise = undefined;
     throw error;
@@ -18,118 +13,32 @@ export function loadBundleLabels() {
   return mappingPromise;
 }
 
-// This is the endpoint used by the installed Fast Bundle SDK's getBundles().
-export function bundleOffersUrl(productId, handle) {
-  const shop = Shopify.shop || window.FastBundleConf?.domain;
-  if (!shop) throw new Error("Shop identity is unavailable for bundle discovery");
-  const query = new URLSearchParams({
-    shop, product_id: String(productId), url: handle ? `${Shopify.routes.root}products/${handle}` : `${Shopify.routes.root}cart`,
-    is_preview: "false", lang: Shopify.locale || document.documentElement.lang || "en"
-  });
-  return `https://api.fastbundle.co/v3/product-bundles/?${query}`;
-}
-
-export function offersForProduct(bundles, productId) {
-  if (!Array.isArray(bundles)) throw new Error("Invalid Fast Bundle offer response");
-  const variants = {};
-  for (const bundle of bundles) {
-    // Quantity selectors use the app's bogo/volume model. Other bundle types
-    // don't describe a per-product quantity selection and must stay untouched.
-    if (bundle.enabled === false || bundle.type !== "bogo") continue;
-    const item = bundle.items?.find((entry) => String(entry.id) === String(productId));
-    if (!item || item.is_add_on) continue;
-    const discounts = [...(bundle.discounts || [])].sort((a, b) => a.quantity - b.quantity);
-    const rules = discounts.map((offer, index) => ({
-      ...offer, bundleId: String(bundle.id), productId: String(productId), productTitle: item.title,
-      min: Number(offer.quantity),
-      max: offer.max_quantity == null || (index === discounts.length - 1 && bundle.has_quantity_cap === false)
-        ? Infinity : Number(offer.max_quantity)
-    })).filter((offer) => Number.isSafeInteger(offer.min) && offer.min > 0 && offer.max >= offer.min &&
-      typeof offer.description === "string" && offer.description.trim());
-    const excluded = new Set((item.excluded_variants || []).map((value) => String(value.id ?? value)));
-    for (const variant of item.variants || []) {
-      if (excluded.has(String(variant.id))) continue;
-      (variants[String(variant.id)] ??= []).push(...rules);
-    }
-  }
-  return variants;
-}
-
-async function discoverProduct(mapping, productId, handle, refresh = false) {
-  if (!productId) return;
-  const key = `${Shopify.locale || ""}:${productId}`;
-  let request = productRequests.get(key);
-  if (!request || (refresh || Date.now() - request.time > offerCacheMs) && !request.pending) {
-    request = { time: Date.now(), pending: true };
-    request.promise = (async () => {
-      const response = await fetch(bundleOffersUrl(productId, handle), {
-        cache: "no-store", credentials: "omit", headers: { "FB-SHOP-DOMAIN": Shopify.shop || window.FastBundleConf?.domain }
-      });
-      if (!response.ok) throw new Error(`Unable to discover Fast Bundle offers (${response.status})`);
-      const variants = offersForProduct(await response.json(), productId);
-      for (const variantId of mapping.products[productId] || []) delete mapping.variants[variantId];
-      Object.assign(mapping.variants, variants);
-      mapping.products[productId] = Object.keys(variants);
-    })().catch((error) => {
-      productRequests.delete(key);
-      throw error;
-    }).finally(() => { request.pending = false; });
-    productRequests.set(key, request);
-  }
-  await request.promise;
-}
-
-export function offerLabel(offer, quantity) {
-  if (!offer) return "";
-  const values = {
-    quantity, discount: offer.value, x: quantity, y: offer.value,
-    "product name": offer.free_gift?.product?.title || offer.productTitle || "",
-    product_name: offer.free_gift?.product?.title || offer.productTitle || ""
-  };
-  return offer.description.replace(/\{(quantity|discount|x|y|product name|product_name)\}/g, (_, key) => values[key]).trim();
-}
-
 export function bundleLabelFor(mapping, variantId, quantity) {
+  const options = mapping.variants[String(variantId)];
   const count = Number(quantity);
-  if (!Number.isSafeInteger(count) || count < 1) return "";
-  const offers = (mapping.variants[String(variantId)] || []).filter((offer) => count >= offer.min && count <= offer.max);
-  if (new Set(offers.map((offer) => offer.bundleId)).size > 1) {
-    throw new Error("Multiple Fast Bundle quantity offers apply to the same product");
-  }
-  const offer = offers.sort((a, b) => b.min - a.min)[0];
-  return offerLabel(offer, count);
-}
+  if (!options || !Number.isSafeInteger(count) || count < 1) return "";
+  if (typeof options[String(count)] === "string") return options[String(count)];
 
-function productForForm(form) {
-  const productId = form.elements.namedItem("product-id")?.value;
-  // Product forms include their product ID on quick-buy/recommendation cards too.
-  return { productId, variantId: form.elements.namedItem("id")?.value };
-}
-
-async function discoverForm(mapping, form) {
-  const { productId, variantId } = productForForm(form);
-  if (!productId || !variantId) return;
-  const handle = String(window.FastBundleConf?.pid) === String(productId)
-    ? window.location.pathname.match(/\/products\/([^/]+)/)?.[1] : undefined;
-  const selected = form.closest(".shopify-section")?.querySelector(selectedOptionSelector);
-  const unknownSelection = selected &&
-    !(mapping.variants[String(variantId)] || []).some((offer) => String(offer.id) === String(selected.id));
-  return discoverProduct(mapping, productId, handle, Boolean(unknownSelection));
+  // An explicit "5+" entry applies to five or more units. Exact matches win;
+  // otherwise choose the highest configured threshold that the line qualifies for.
+  const threshold = Object.keys(options)
+    .filter((key) => /^[1-9]\d*\+$/.test(key) && Number(key.slice(0, -1)) <= count)
+    .sort((a, b) => Number(b.slice(0, -1)) - Number(a.slice(0, -1)))[0];
+  return typeof options[threshold] === "string" ? options[threshold] : "";
 }
 
 export function bundleLabelForForm(mapping, form) {
   const variantId = form.elements.namedItem("id")?.value;
   const options = mapping.variants[String(variantId)];
-  if (!options?.length) return "";
+  if (!options) return "";
   const scope = form.closest(".shopify-section") || form;
-  const selected = scope.querySelector(selectedOptionSelector);
+  const selected = scope.querySelector('[data-rbrselector="discountInfoV3RadioButton"]:checked');
   if (selected) {
-    const offer = options.find((entry) => String(entry.id) === String(selected.id));
-    if (!offer) throw new Error("Selected Fast Bundle option was not discovered");
-    const description = selected.closest('[data-rbrselector^="discountInfo"]:not([data-rbrselector$="RadioButton"]):not([data-rbrselector$="Radio"])')
-      ?.querySelector('[data-rbrselector^="discountInfo"][data-rbrselector$="Description"] span')?.textContent.trim();
-    // Preserve the app's rendered/localized wording, including warehouse gifts.
-    return description || offerLabel(offer, offer.min);
+    const description = selected.closest('[data-rbrselector="discountInfoV3"]')
+      ?.querySelector('[data-rbrselector="discountInfoV3Description"] span')?.textContent.trim();
+    // Resolve the actual app selection against the configured full names. A
+    // quantity field can still say 1 when the app will expand it into a bundle.
+    return Object.values(options).find((name) => name === description) || "";
   }
   return bundleLabelFor(mapping, variantId, form.elements.namedItem("quantity")?.value || 1);
 }
@@ -137,7 +46,10 @@ export function bundleLabelForForm(mapping, form) {
 function updateBundleForm(form, mapping) {
   const name = bundleLabelForForm(mapping, form);
   let input = form.querySelector("input[data-bundle-property]");
-  if (!name) { input?.remove(); return ""; }
+  if (!name) {
+    input?.remove();
+    return "";
+  }
   if (!input) {
     input = document.createElement("input");
     input.type = "hidden";
@@ -150,66 +62,28 @@ function updateBundleForm(form, mapping) {
 }
 
 export async function prepareBundleForm(form) {
-  const mapping = await loadBundleLabels();
-  await discoverForm(mapping, form);
-  return updateBundleForm(form, mapping);
+  return updateBundleForm(form, await loadBundleLabels());
 }
 
-// The app can handle a button click before the theme's submit handler. If the
-// catalog is still loading, resume that same click only after the property exists.
-const preparedClicks = new WeakSet();
-const pendingClicks = new WeakSet();
-document.addEventListener("click", async (event) => {
-  const button = event.target.closest('button[type="submit"], input[type="submit"]');
-  const form = button?.form;
-  if (!form?.matches('form[action*="/cart/add"]') || preparedClicks.has(button)) return;
-  if (pendingClicks.has(button)) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    return;
-  }
-  const { productId } = productForForm(form);
-  const selected = form.closest(".shopify-section")?.querySelector(selectedOptionSelector);
-  const variantId = form.elements.namedItem("id")?.value;
-  const knownSelection = !selected || resolvedMapping?.variants[String(variantId)]?.some((offer) => String(offer.id) === String(selected.id));
-  if (!productId || resolvedMapping?.products[productId] && knownSelection) return;
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  pendingClicks.add(button);
-  try {
-    await prepareBundleForm(form);
-    preparedClicks.add(button);
-    button.click();
-  } catch (error) {
-    await showBundlePropertyError(error);
-  } finally {
-    preparedClicks.delete(button);
-    pendingClicks.delete(button);
-  }
-}, { capture: true });
-
+// Seed real form properties on load and app rerenders. The formdata event also
+// resolves the live selection synchronously, before Fast Bundle intercepts it.
 document.addEventListener("formdata", (event) => {
   if (!resolvedMapping || !event.target.matches('form[action*="/cart/add"]')) return;
   const name = updateBundleForm(event.target, resolvedMapping);
   if (name) event.formData.set(`properties[${resolvedMapping.propertyName}]`, name);
-  else event.formData.delete(`properties[${resolvedMapping.propertyName}]`);
 });
 if (typeof MutationObserver !== "undefined") {
-  let scheduled = false;
-  const refreshForms = () => {
-    if (scheduled) return;
-    scheduled = true;
-    queueMicrotask(async () => {
-      scheduled = false;
-      const forms = [...document.querySelectorAll('form[action*="/cart/add"]')];
-      await Promise.allSettled(forms.map((form) => prepareBundleForm(form)));
+  loadBundleLabels().then((mapping) => {
+    const refreshForms = () => document.querySelectorAll('form[action*="/cart/add"]')
+      .forEach((form) => updateBundleForm(form, mapping));
+    refreshForms();
+    new MutationObserver(refreshForms).observe(document.documentElement, {
+      childList: true, subtree: true, attributes: true, attributeFilter: ["checked"]
     });
-  };
-  refreshForms();
-  new MutationObserver(refreshForms).observe(document.documentElement, {
-    childList: true, subtree: true, attributes: true, attributeFilter: ["checked"]
-  });
-  for (const type of ["click", "change", "variant:change"]) document.addEventListener(type, refreshForms, { capture: true });
+    for (const type of ["click", "change", "variant:change"]) {
+      document.addEventListener(type, () => queueMicrotask(refreshForms), { capture: true });
+    }
+  }).catch(console.error);
 }
 
 // Serialize property writes and read the live cart again after every update.
@@ -263,33 +137,72 @@ function sellingPlanId(item) {
   return item.selling_plan_allocation?.selling_plan?.id;
 }
 
-// The app can expose one package as several price allocations. Resolve its name
-// from total product quantity, never from the size of an individual allocation.
+function sameUnderlyingLine(a, b) {
+  return a.variant_id === b.variant_id && sellingPlanId(a) === sellingPlanId(b) &&
+    JSON.stringify(a.properties || {}) === JSON.stringify(b.properties || {});
+}
+
 function baseGroupKey(item, mapping) {
   const properties = { ...item.properties };
   delete properties[mapping.propertyName];
-  return JSON.stringify([item.product_id || item.variant_id, sellingPlanId(item),
-    Object.entries(properties).sort(([a], [b]) => a.localeCompare(b))]);
+  return JSON.stringify([item.variant_id, sellingPlanId(item), Object.entries(properties).sort(([a], [b]) => a.localeCompare(b))]);
 }
 
-export function namesForCart(cart, mapping) {
-  const groups = new Map();
-  for (const item of cart.items) {
-    if (!mapping.variants[String(item.variant_id)]?.length) continue;
-    const key = baseGroupKey(item, mapping);
-    groups.set(key, (groups.get(key) || 0) + item.quantity);
+function priceBuckets(cart, item, mapping) {
+  const key = baseGroupKey(item, mapping), buckets = new Map();
+  for (const line of cart.items.filter((entry) => baseGroupKey(entry, mapping) === key)) {
+    const price = line.final_price ?? line.discounted_price ?? line.price;
+    const bucket = buckets.get(price) || { item: line, price, quantity: 0, count: 0 };
+    bucket.quantity += line.quantity;
+    bucket.count++;
+    buckets.set(price, bucket);
   }
-  return cart.items.map((item) => {
-    if (mapping.variants[String(item.variant_id)]?.length) {
-      return bundleLabelFor(mapping, item.variant_id, groups.get(baseGroupKey(item, mapping)));
-    }
-    // A successfully discovered product with no current offer must not keep an
-    // obsolete warehouse instruction after the merchant removes that offer.
-    return mapping.products[item.product_id] && item.properties?.[mapping.propertyName] ? "" : undefined;
-  });
+  return [...buckets.values()];
 }
 
-export function synchronizeBundleProperties(cartContent, { refreshOffers = false } = {}) {
+function fragmentedPriceGroup(cart, mapping) {
+  return cart.items.find((item) => mapping.variants[String(item.variant_id)] && priceBuckets(cart, item, mapping)
+    .some((bucket) => bucket.count > 1 && bundleLabelFor(mapping, item.variant_id, bucket.quantity)));
+}
+
+// A discount may expose multiple price allocations sharing one properties object.
+// Rebuild only that variant/plan/customization group as distinct saved lines. Add
+// the full-price allocation first so the discounted package stays first in cart.
+async function separateDiscountAllocations(cart, item, mapping) {
+  const groupKey = baseGroupKey(item, mapping);
+  const groupItems = (state) => state.items.filter((line) => baseGroupKey(line, mapping) === groupKey);
+  const groupQuantity = (state) => groupItems(state).reduce((sum, line) => sum + line.quantity, 0);
+  const quantityBefore = groupQuantity(cart);
+  const buckets = priceBuckets(cart, item, mapping).sort((a, b) => b.price - a.price);
+  const add = (entry) => postCart("add", { items: [entry] }, { "X-Fastbundle-Request": "yes" });
+  const sellingPlan = sellingPlanId(item);
+  const asEntry = (quantity, properties) => ({ id: item.variant_id, quantity, properties, ...(sellingPlan ? { selling_plan: sellingPlan } : {}) });
+  try {
+    let current = cart;
+    for (let attempt = 0; groupItems(current).length; attempt++) {
+      if (attempt >= 30) throw new Error("Unable to separate discount allocations");
+      const before = groupQuantity(current);
+      await postCart("change", { id: groupItems(current)[0].key, quantity: 0 });
+      current = await readCart();
+      if (groupQuantity(current) >= before) throw new Error("Bundle allocation removal did not reduce quantity");
+    }
+    for (const bucket of buckets) {
+      await add(asEntry(bucket.quantity, {
+        ...bucket.item.properties,
+        [mapping.propertyName]: bundleLabelFor(mapping, item.variant_id, bucket.quantity)
+      }));
+    }
+    if (groupQuantity(await readCart()) !== quantityBefore) throw new Error("Bundle line quantities changed unexpectedly");
+  } catch (error) {
+    // Read first: a failed/ambiguous response must not blindly add duplicate units.
+    const missing = quantityBefore - groupQuantity(await readCart());
+    if (missing > 0) await add(asEntry(missing, { ...item.properties }));
+    await window.detectBundleDiscounts();
+    throw error;
+  }
+}
+
+export function synchronizeBundleProperties(cartContent) {
   const run = async () => {
     synchronizing = true;
     setBusy();
@@ -297,37 +210,52 @@ export function synchronizeBundleProperties(cartContent, { refreshOffers = false
     try {
       const mapping = await loadBundleLabels();
       let cart = await readCart();
-      const products = new Map(cart.items.map((item) => [item.product_id, item]));
-      await Promise.all([...products.values()].map((item) =>
-        discoverProduct(mapping, item.product_id, item.handle, refreshOffers)));
+      if (!cart.items.some((item) => mapping.variants[String(item.variant_id)])) {
+        if (cartContent?.sections) cart.sections = cartContent.sections;
+        return { cart, changed: false };
+      }
+      const needsUpdate = cart.items.some((item) => mapping.variants[String(item.variant_id)] &&
+        (item.properties?.[mapping.propertyName] || "") !== bundleLabelFor(mapping, item.variant_id, item.quantity));
+      if (!needsUpdate && !fragmentedPriceGroup(cart, mapping)) {
+        if (cartContent?.sections) cart.sections = cartContent.sections;
+        return { cart, changed: false };
+      }
+      if (typeof window.detectBundleDiscounts !== "function") {
+        throw new Error("Fast Bundle discount recalculation is not ready");
+      }
+      loading = true;
+      document.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
+      // This is the same recalculation entry point called by Fast Bundle's widget.
+      await window.detectBundleDiscounts();
+      cart = await readCart();
       let changed = false;
       const seen = new Set();
-      for (let attempt = 0; attempt < 50; attempt++) {
-        const names = namesForCart(cart, mapping);
-        const index = cart.items.findIndex((item, i) => names[i] !== undefined &&
-          (item.properties?.[mapping.propertyName] || "") !== names[i]);
-        if (index < 0) {
+      for (let attempt = 0; attempt < 30; attempt++) {
+        const index = cart.items.findIndex((item) => mapping.variants[String(item.variant_id)] &&
+          (item.properties?.[mapping.propertyName] || "") !== bundleLabelFor(mapping, item.variant_id, item.quantity));
+        const fragmented = fragmentedPriceGroup(cart, mapping);
+        if (index < 0 && !fragmented) {
           if (cartContent?.sections) {
-            if (changed) {
-              const sections = Object.keys(cartContent.sections).join(",");
-              const response = await fetch(`${Shopify.routes.root}?sections=${encodeURIComponent(sections)}`, { cache: "no-store" });
-              if (!response.ok) throw new Error("Unable to refresh cart sections");
-              cart.sections = await response.json();
-            } else cart.sections = cartContent.sections;
+            const sections = Object.keys(cartContent.sections).join(",");
+            const response = await fetch(`${Shopify.routes.root}?sections=${encodeURIComponent(sections)}`, { cache: "no-store" });
+            if (!response.ok) throw new Error("Unable to refresh cart sections");
+            cart.sections = await response.json();
           }
           return { cart, changed };
-        }
-        if (typeof window.detectBundleDiscounts !== "function") throw new Error("Fast Bundle discount recalculation is not ready");
-        if (!loading) {
-          loading = true;
-          document.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
         }
         const state = JSON.stringify(cart.items.map((item) => [item.key, item.quantity, item.properties]));
         if (seen.has(state)) throw new Error("Bundle property updates did not converge");
         seen.add(state);
-        const item = cart.items[index];
-        await postCart("change", { line: index + 1, quantity: item.quantity,
-          properties: { ...item.properties, [mapping.propertyName]: names[index] } });
+        const item = fragmented || cart.items[index];
+        const name = bundleLabelFor(mapping, item.variant_id, item.quantity);
+        const properties = { ...item.properties, [mapping.propertyName]: name };
+        const sharedProperties = cart.items.some((other) => other !== item && sameUnderlyingLine(item, other) &&
+          bundleLabelFor(mapping, other.variant_id, other.quantity) !== name);
+        if (sharedProperties || fragmented) {
+          await separateDiscountAllocations(cart, item, mapping);
+        } else {
+          await postCart("change", { line: index + 1, quantity: item.quantity, properties });
+        }
         await window.detectBundleDiscounts();
         cart = await readCart();
         changed = true;
@@ -382,7 +310,7 @@ document.addEventListener("click", async (event) => {
   submitter.setAttribute("aria-busy", "true");
   try {
     await updatePromise.catch(() => {});
-    await synchronizeBundleProperties(undefined, { refreshOffers: true });
+    await synchronizeBundleProperties();
     approvedCheckoutClicks.add(submitter);
     if (submitter.form) submittingForms.add(submitter.form);
     // Resume the app's original click/checkout handling after persistence.
@@ -403,7 +331,7 @@ document.addEventListener("submit", async (event) => {
   submitter.setAttribute("aria-busy", "true");
   try {
     await updatePromise.catch(() => {});
-    await synchronizeBundleProperties(undefined, { refreshOffers: true });
+    await synchronizeBundleProperties();
     submittingForms.add(form);
     form.requestSubmit(submitter);
   } catch (error) {

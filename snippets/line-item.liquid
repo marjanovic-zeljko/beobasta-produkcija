@@ -11,7 +11,6 @@ Supported variables
 
 * line_item: the line item to render (required)
 * show_quantity_selector: if set to true, the quantity selector is displayed (useful for instance of mini-cart)
-* hide_bundle_property: omit the public Paket property from cart presentation, preserving the saved property
 {%- endcomment -%}
 
 <line-item class="line-item line-item--{{ line_item.product.handle }}">
@@ -52,15 +51,11 @@ Supported variables
         {%- endif -%}
 
         {%- unless line_item.properties == empty -%}
-          {%- capture visible_properties -%}
+          <ul class="text-subdued">
             {%- for property in line_item.properties -%}
               {%- assign first_character_in_key = property.first | truncate: 1, '' -%}
 
               {%- if property.last == blank or first_character_in_key == '_' -%}
-                {%- continue -%}
-              {%- endif -%}
-
-              {%- if hide_bundle_property and property.first == 'Paket' -%}
                 {%- continue -%}
               {%- endif -%}
 
@@ -72,10 +67,7 @@ Supported variables
                 {%- endif -%}
               </li>
             {%- endfor -%}
-          {%- endcapture -%}
-          {%- if visible_properties != blank -%}
-            <ul class="text-subdued">{{- visible_properties -}}</ul>
-          {%- endif -%}
+          </ul>
         {%- endunless -%}
       {%- endcapture -%}
 

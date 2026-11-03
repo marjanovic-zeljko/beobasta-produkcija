@@ -1,9 +1,6 @@
 <script>
   // This allows to expose several variables to the global scope, to be used in scripts
   window.themeVariables = {
-    bundleLabels: {
-      url: {{ 'bundle-labels.json' | asset_url | json }}
-    },
     settings: {
       showPageTransition: {{ settings.show_page_transition | json }},
       pageType: {{ request.page_type | json }},

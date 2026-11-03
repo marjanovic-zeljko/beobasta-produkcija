@@ -1,5 +1,3 @@
-import { synchronizeBundleProperties, showBundlePropertyError, runBundleCartUpdate, prepareBundleForm } from "bundle-labels";
-
 var __typeError = (msg) => {
   throw TypeError(msg);
 };
@@ -1535,7 +1533,6 @@ onChangeLinkClicked_fn = function(event, target) {
   __privateMethod(this, _LineItemQuantity_instances, changeLineItemQuantity_fn).call(this, url.searchParams.get("id"), parseInt(url.searchParams.get("quantity")));
 };
 changeLineItemQuantity_fn = async function(lineKey, targetQuantity) {
-  return runBundleCartUpdate(async () => {
   document.documentElement.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
   const lineItem = this.closest("line-item");
   lineItem?.dispatchEvent(new CustomEvent("line-item:will-change", { bubbles: true, detail: { targetQuantity } }));
@@ -1563,14 +1560,7 @@ changeLineItemQuantity_fn = async function(lineKey, targetQuantity) {
     this.insertAdjacentHTML("afterend", `<p class="h-stack gap-2 justify-center text-xs" role="alert">${errorSvg} ${responseContent["description"]}</p>`);
     this.querySelector("quantity-selector")?.restoreDefaultValue();
   } else {
-    let cartContent = await response.json();
-    try {
-      cartContent = (await synchronizeBundleProperties(cartContent)).cart;
-    } catch (error) {
-      document.dispatchEvent(new CustomEvent("cart:refresh"));
-      await showBundlePropertyError(error);
-      return;
-    }
+    const cartContent = await response.json();
     if (window.themeVariables.settings.pageType === "cart") {
       window.location.reload();
     } else {
@@ -1591,7 +1581,6 @@ changeLineItemQuantity_fn = async function(lineKey, targetQuantity) {
       }));
     }
   }
-  });
 };
 if (!window.customElements.get("line-item-quantity")) {
   window.customElements.define("line-item-quantity", LineItemQuantity);
@@ -2771,8 +2760,6 @@ form_get2 = function() {
 };
 onSubmit_fn = async function(event) {
   event.preventDefault();
-  return runBundleCartUpdate(async () => {
-  event.preventDefault();
   if (event.submitter?.getAttribute("aria-busy") === "true") {
     return;
   }
@@ -2787,7 +2774,6 @@ onSubmit_fn = async function(event) {
   document.documentElement.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
   let sectionsToBundle = [];
   document.documentElement.dispatchEvent(new CustomEvent("cart:prepare-bundled-sections", { bubbles: true, detail: { sections: sectionsToBundle } }));
-  await prepareBundleForm(__privateGet(this, _ProductForm_instances, form_get2));
   const formData = new FormData(__privateGet(this, _ProductForm_instances, form_get2));
   formData.set("sections", sectionsToBundle.join(","));
   formData.set("sections_url", `${Shopify.routes.root}variants/${__privateGet(this, _ProductForm_instances, form_get2).id.value}`);
@@ -2805,13 +2791,6 @@ onSubmit_fn = async function(event) {
   const responseJson = await response.json();
   document.documentElement.dispatchEvent(new CustomEvent("theme:loading:end", { bubbles: true }));
   if (response.ok) {
-    try {
-      await synchronizeBundleProperties();
-    } catch (error) {
-      document.dispatchEvent(new CustomEvent("cart:refresh"));
-      await showBundlePropertyError(error);
-      return;
-    }
     if (window.themeVariables.settings.cartType === "page" || window.themeVariables.settings.pageType === "cart") {
       return window.location.href = `${Shopify.routes.root}cart`;
     }
@@ -2842,7 +2821,6 @@ onSubmit_fn = async function(event) {
     }));
     document.dispatchEvent(new CustomEvent("cart:refresh"));
   }
-  });
 };
 if (!window.customElements.get("product-form")) {
   window.customElements.define("product-form", ProductForm);

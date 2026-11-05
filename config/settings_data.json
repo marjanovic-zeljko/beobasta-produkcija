@@ -33,6 +33,7 @@
     "currency_code_enabled": false,
     "show_button_transition": true,
     "product_image_aspect_ratio": "natural",
+    "show_secondary_image": false,
     "product_card_text_font": "heading",
     "product_color_display": "swatch",
     "show_quick_buy": false,

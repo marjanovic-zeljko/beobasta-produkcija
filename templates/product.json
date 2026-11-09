@@ -86,6 +86,10 @@
             "liquid": "",
             "page": ""
           }
+        },
+        "bogos_io_free_gift_gift_thumbnail_view_VGbHaC": {
+          "type": "shopify://apps/bogos-io-free-gift/blocks/gift-thumbnail-view/0432bba6-720a-4e95-be5a-b868386f7aa6",
+          "settings": {}
         }
       },
       "block_order": [
@@ -99,7 +103,8 @@
         "description",
         "complementary_products",
         "liquid_WCKkLQ",
-        "accordion_zLBjyH"
+        "accordion_zLBjyH",
+        "bogos_io_free_gift_gift_thumbnail_view_VGbHaC"
       ],
       "custom_css": [
         "@media (max-width: 999px) {h1 {font-size: 24px; } .justify-items-start {justify-items: center; } .quantity-selector {border-radius: 40px; margin-bottom: -10px; border: solid gray 1px; }}"
